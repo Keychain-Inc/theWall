@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Seashell Generator</title>
+		<script type="text/javascript" src="seashell.js"></script>
+		<script type="text/javascript" src="three.js"></script>
+		<script type="text/javascript" src="webgl.js"></script>
+		<link rel="stylesheet" type="text/css" href="editor.css">
+	</head>
+
+<body onload="setupGraphics(); setupControls()" role="application"> <!-- TODO: may not be appropriate - see http://www.w3.org/TR/aria-in-html/#using-aria-role-application -->
+	<section id="graphics">		
+		<!-- main graphics window -->
+		<div id="graphicsDiv">
+		</div>
+	</section>
+
+	<!--- controls --->
+	<section id="controls">
+		<div id="controlsDiv">
+			<form>
+				<!-- helicospiral -->
+				<h2>Helicospiral</h2>
+				<section id="helicospiral">
+					<ul>
+						<li>r<sub>0</sub>: <input type="text" id="r0"/></li>
+						<li>z<sub>0</sub>: <input type="text" id="z0"/></li>
+						<li>chi<sub>r</sub>: <input type="text" id="chir"/></li>
+						<li>chi<sub>z</sub>: <input type="text" id="chiz"/></li>
+						<li>t<sub>0</sub>: <input type="text" id="t0"/></li>
+						<li>t<sub>max</sub>: <input type="text" id="tmax"/></li>
+					</ul>
+				</section>
+				<!-- generating curve -->
+				<!-- <h2>Generating Curve</h2>
+					<section id="bezier">
+						<object id="svg" width="300px" height="300px" type="image/svg+xml" data="cubic.svg.xml" class="C">Your browser does not support SVG</object>
+
+					</section> -->
+				<!-- seashell parameters -->
+				<h2>Seashell</h2>
+					<section id="seashell">
+						<ul>
+							<li>Initial generating curve scale: <input type="text" id="C0"/></li>
+							<li>Exponential scaling factor: <input type="text" id="Cscale"/></li>
+						</ul>
+					</section>
+				<!-- resolution parameters -->
+				<h2>Display</h2>
+					<section id="resolution">
+						<ul>
+							<li>Steps per shell revolution: <input type="text" id="tstep"/></li>
+							<li>Points on circumference: <input type="text" id="bezres"/></li>
+							<li>Camera distance: <input type="text" id="camera"/></li>
+						</ul>
+					</section>
+
+				<!-- texture -->
+				<h2>Resolution</h2>
+					<section id="Texture">
+					</section>
+			</div>
+		</section>
+	</body>
+</html> 
