@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Seashell Generator</title>
+		<script type="text/javascript" src="editor.js"></script>
 		<script type="text/javascript" src="seashell.js"></script>
 		<script type="text/javascript" src="three.js"></script>
 		<script type="text/javascript" src="webgl.js"></script>
@@ -24,10 +25,10 @@
 				<h2>Helicospiral</h2>
 				<section id="helicospiral">
 					<ul>
-						<li>r<sub>0</sub>: <input type="text" id="r0"/></li>
-						<li>z<sub>0</sub>: <input type="text" id="z0"/></li>
-						<li>chi<sub>r</sub>: <input type="text" id="chir"/></li>
-						<li>chi<sub>z</sub>: <input type="text" id="chiz"/></li>
+						<li id="r0">r<sub>0</sub>:</li>
+						<li id="z0">z<sub>0</sub>:</li>
+						<li id="chir">chi<sub>r</sub>:</li>
+						<li id="chiz">chi<sub>z</sub>:</li>
 						<li>t<sub>0</sub>: <input type="text" id="t0"/></li>
 						<li>t<sub>max</sub>: <input type="text" id="tmax"/></li>
 					</ul>
@@ -42,8 +43,8 @@
 				<h2>Seashell</h2>
 					<section id="seashell">
 						<ul>
-							<li>Initial generating curve scale: <input type="text" id="C0"/></li>
-							<li>Exponential scaling factor: <input type="text" id="Cscale"/></li>
+							<li id="C0">Initial generating curve scale: </li>
+							<li id="Cscale">Exponential scaling factor: </li>
 						</ul>
 					</section>
 				<!-- resolution parameters -->

@@ -9,6 +9,8 @@
 #controlsDiv {
     float: right;
     width: 300px;
+}
+
 
 #r0 {
 }
@@ -35,4 +37,13 @@
 }
 
 #bezres {
+}
+
+/* Overall classes */
+.limit {
+    width: 25px;
+}
+
+.slider {
+    display: inline-block;
 }
