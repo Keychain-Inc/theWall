@@ -378,27 +378,34 @@ function makeListener(input, v) {
 
 function setupControls() {
 
+	document.getElementById("r0").appendChild(makeSlider("r0", 0, 1))
+	document.getElementById("z0").appendChild(makeSlider("z0", 0, 1))
+	document.getElementById("chir").appendChild(makeSlider("chir", 1, 1.5))
+	document.getElementById("chiz").appendChild(makeSlider("chiz", 1, 1.5))
+	document.getElementById("C0").appendChild(makeSlider("C0", 0.01, 1))
+	document.getElementById("Cscale").appendChild(makeSlider("Cscale", 1, 1.001))
+	
 	//Sync values to the data model:
-	document.getElementById("r0").value = shell.r0
-	document.getElementById("z0").value = shell.z0
-	document.getElementById("chir").value = shell.chir
-	document.getElementById("chiz").value = shell.chiz
+	document.getElementById("r0widget").set(shell.r0)
+	document.getElementById("z0widget").set(shell.z0)
+	document.getElementById("chirwidget").set(shell.chir)
+	document.getElementById("chizwidget").set(shell.chiz)
 	document.getElementById("t0").value = shell.t0
 	document.getElementById("tmax").value = shell.tmax
-	document.getElementById("C0").value = shell.C0
-	document.getElementById("Cscale").value = shell.Cscale
+	document.getElementById("C0widget").set(shell.C0)
+	document.getElementById("Cscalewidget").set(shell.Cscale)
 	document.getElementById("tstep").value = shell.tstep
 	document.getElementById("bezres").value = shell.bezres
 	
 	// Add event listeners:
-	document.getElementById("r0").oninput = function() { shell.r0 = this.value; dirty = true;  }
-	document.getElementById("z0").oninput = function() { shell.z0 = this.value; dirty = true;  }
-	document.getElementById("chir").oninput = function() { shell.chir = this.value; dirty = true;  }
-	document.getElementById("chiz").oninput = function() { shell.chiz = this.value; dirty = true;  }
+	document.getElementById("r0slider").oninput = function() { shell.r0 = this.value; dirty = true;  }
+	document.getElementById("z0slider").oninput = function() { shell.z0 = this.value; dirty = true;  }
+	document.getElementById("chirslider").oninput = function() { shell.chir = this.value; dirty = true;  }
+	document.getElementById("chizslider").oninput = function() { shell.chiz = this.value; dirty = true;  }
 	document.getElementById("t0").oninput = function() { shell.t0 = this.value; dirty = true;  }
 	document.getElementById("tmax").oninput = function() { shell.tmax = this.value; dirty = true;  }
-	document.getElementById("C0").oninput = function() { shell.C0 = this.value; dirty = true;  }
-	document.getElementById("Cscale").oninput = function() { shell.Cscale = this.value; dirty = true;  }
+	document.getElementById("C0slider").oninput = function() { shell.C0 = this.value; dirty = true;  }
+	document.getElementById("Cscaleslider").oninput = function() { shell.Cscale = this.value; dirty = true;  }
 	document.getElementById("tstep").oninput = function() { shell.tstep = this.value; dirty = true;  }
 	document.getElementById("bezres").oninput = function() { shell.bezres = this.value; dirty = true;  }
 	

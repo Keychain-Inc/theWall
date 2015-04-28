@@ -1,5 +1,5 @@
 var renderer = new THREE.WebGLRenderer();
-
+renderer.setClearColor( 0xffffff, 1);
 
 function computeShellGeometry() {
 	var geometry = new THREE.Geometry();
@@ -26,13 +26,15 @@ function computeShellGeometry() {
 		geometry.faces.push( new THREE.Face3( i+1, i, i+shell.bezres ) );	
 		geometry.faces.push( new THREE.Face3( i+1, i+shell.bezres, i+shell.bezres+1 ) );
 	}
+	geometry.computeFaceNormals();
+	geometry.computeVertexNormals();
 	return geometry;
 }
 
 var scene = new THREE.Scene();
 
 // Create a material for our mesh
-var material = new THREE.MeshPhongMaterial( { color: 0xffffff, shininess: 0, shading: THREE.FlatShading, side:THREE.DoubleSide } )
+var material = new THREE.MeshPhongMaterial( { color: 0xffffff, shininess: 0, shading: THREE.SmoothShading, side:THREE.DoubleSide } )
 
 // Create the mesh, add it to the scene
 var shellMesh = new THREE.Mesh( computeShellGeometry(), material );
@@ -56,22 +58,28 @@ function render() {
 	if (dirty) {
 		scene = new THREE.Scene();
 		
-		// Create the mesh, add it to the scene
+		// Store the old mesh rotation variables:
+		
+		var oldX = shellMesh.rotation.x;
+		var oldY = shellMesh.rotation.y;
+		var oldZ = shellMesh.rotation.z;
+		
+		// Create a new mesh, add it to the scene
 		shellMesh = new THREE.Mesh( computeShellGeometry(), material );
-		shellMesh.rotation.y -=3.14
+		shellMesh.rotation.x = oldX;
+		shellMesh.rotation.y = oldY;
+		shellMesh.rotation.z = oldZ;
 		scene.add(shellMesh);
 		scene.add( directionalLight );
 		
 		dirty = false;
 	}
+	// Function callback for the browser to request the render function repeatedly
+	window.requestAnimationFrame(render)
 	renderer.render(scene, camera );
 }
 
 render();
-
-//Periodically refresh
-//I wanted to use window.requestAnimationFrame but my browser does not support it
-window.setInterval("render()", 1000/30)
 
 // Simple functions for rotating the geometry
 // Code taken from https://stackoverflow.com/questions/17015019/keylistener-in-javascript :
