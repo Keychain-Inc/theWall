@@ -24,10 +24,11 @@ function computeShellGeometry(noOfVerticesChanged) {
 	}
     
 	// Define faces using the allocated vertices
-    for (i = 0; i < geometry.vertices.length - (shell.bezres + 1) ; i++) { // we look ahead in the index, so we stop i before the end
+    var max = (+shell.bezres + 1) // shell.bezres can be a string when set by the form fields. Unary plus converts it to an int.
+    for (i = 0; i < geometry.vertices.length - max ; i++) { // we look ahead in the index, so we stop i before the end
         /* TODO - there is a bug in here which does not render the first and last face */
-        geometry.faces[2*i] = new THREE.Face3( i+1, i, i+shell.bezres );
-        geometry.faces[2*i+1] = new THREE.Face3( i+1, i+shell.bezres, i+shell.bezres + 1);
+        geometry.faces[2*i] = new THREE.Face3( i+1, i, i+max-1);
+        geometry.faces[2*i+1] = new THREE.Face3( i+1, i+max-1, i+max);
     }
     
     geometry.verticesNeedUpdate = true;

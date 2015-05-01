@@ -207,10 +207,8 @@ var shell = {
 	
 	C0 : 0.1, /* Initial scaling of the generating curve C */
 	Cscale : 1.0006, /* Subsequent scaling of C in each step */
-	bezres : 30, /* C.length */ /* No. of points on C */
-	//C : [],
-	
-	
+	bezres : 30, /* No. of points on C */
+		
 	getCylVector : function() {
 		var cv = []
 		
