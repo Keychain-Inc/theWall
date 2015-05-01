@@ -2,12 +2,27 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setClearColor( 0xffffff, 1);
 
 var geometry = new THREE.Geometry();
+geometry.dynamic = true;
 
 function computeShellGeometry() {
 	//Recomputes the geometry of the shell. Needed after e.g. changing parameters.
+    // TODO - do this in the GPU, which is the "proper" graphics way of doing things.
+    // TODO - learn GLSL...
 	
-    var c = shell.getCartCoords()
+    // Check if the vector length has changed
+    var verticesOnShell = shell.bezres * shell.tstep * (shell.tmax - shell.t0);
+    var  verticesInMesh = geometry.vertices.length;
     
+    console.log(verticesOnShell)
+    console.log(verticesInMesh)
+    
+    var c = shell.getCartCoords();
+    
+    if (verticesOnShell != verticesInMesh) {
+        geometry.vertices = [] // crashes
+    }
+
+        
 	// Allocate the seashell coordinates to the geometry's vertex array
 	var k = 0;
     for (i in c) {
