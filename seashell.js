@@ -206,7 +206,7 @@ var shell = {
 	tstep : 30, /* steps per revolution */
 	
 	C0 : 0.1, /* Initial scaling of the generating curve C */
-	Cscale : 1.0006, /* Subsequent scaling of C in each step */
+	Cscale : 1.15, /* Subsequent scaling of C in each step */
 	bezres : 30, /* No. of points on C */
 		
 	getCylVector : function() {
@@ -249,7 +249,7 @@ var shell = {
 			
 			for (ii in coordvec) {
 				//scale up the generating curve - previously used exponential scaling but this messes up when increasing the spiral curve resolution
-				var k = coordvec[ii].multiply(Math.pow(this.Cscale, (i*this.tstep)/2*Math.PI));  // k contains a scaled C coordinate
+				var k = coordvec[ii].multiply(Math.pow(this.Cscale, (i*2*Math.PI)/this.tstep));  // k contains a scaled C coordinate
 				//console.log(k)
 				//console.log(c)
 				//(TODO: allow for other scaling functions)
@@ -378,7 +378,7 @@ function setupControls() {
 	document.getElementById("chir").appendChild(makeSlider("chir", 1, 1.5))
 	document.getElementById("chiz").appendChild(makeSlider("chiz", 1, 1.5))
 	document.getElementById("C0").appendChild(makeSlider("C0", 0.01, 1))
-	document.getElementById("Cscale").appendChild(makeSlider("Cscale", 1, 1.001))
+	document.getElementById("Cscale").appendChild(makeSlider("Cscale", 1, 1.5))
 	
 	//Sync values to the data model:
 	document.getElementById("r0widget").set(shell.r0)
