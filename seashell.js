@@ -177,25 +177,21 @@ function Bezier(startPt, endPt, startCtrlPt, endCtrlPt) {
 
 //------------
 
-
 //placeholder function for the generating curve:
-function getGeneratingCurveCoordinates() {
+function getGeneratingCurveCoordinates(resolution) {
 	var vec = []
 	
-	//Code for a circular C - but the current rendering code bugs if C has more than 2 coordinates
-	var resolution = 30
-	
-	for (i = 0; i <= resolution; i++) {
+	for (i = 0; i < resolution; i++) {
 		vec.push( cartesian(	Math.cos(3.1415*2*(i/resolution)),
 							Math.sin(3.1415*2*(i/resolution))) )
 	}
-	/*
-	 vec.push( cartesian(1,1) )
-	 vec.push( cartesian(1,-1) )
-	 vec.push( cartesian(-1,-1) )
-	 vec.push( cartesian(-2,0) )
-	 vec.push( cartesian(-1,1) )
-	 */
+
+    // Square test curve
+    /*vec.push(cartesian(1, 1))
+    vec.push(cartesian(1, -1))
+    vec.push(cartesian(-1, -1))
+    vec.push(cartesian(-1, 1))*/
+    
 	return vec;
 }
 
@@ -209,11 +205,10 @@ var shell = {
 	tmax : 5, /* end value of parameter t in complete revolutions (angle given by t*2π) */
 	tstep : 30, /* steps per revolution */
 	
-	C : getGeneratingCurveCoordinates(), /* getGeneratingCurveCoordinates() */
 	C0 : 0.1, /* Initial scaling of the generating curve C */
 	Cscale : 1.0006, /* Subsequent scaling of C in each step */
-	bezres : 30, /* C.length */ /* No. of points on C */
-	
+	bezres : 30, /* No. of points on C */
+		
 	getCylVector : function() {
 		var cv = []
 		
@@ -238,12 +233,12 @@ var shell = {
 	getCartCoords : function() {
 		var spiralPoints = this.getCylVector()
 		var returnVector = [];
-		var noOfCoords = this.bezres
 		var coordvec = [];
 		
+        var C = getGeneratingCurveCoordinates(this.bezres)
 		//scale down C to initial size
-		for (c in this.C) {
-			coordvec[c] = this.C[c].multiply(this.C0)
+		for (c in C) {
+			coordvec[c] = C[c].multiply(this.C0)
 		}
 		
 		//start from the beginning
@@ -365,7 +360,7 @@ seashell.getCartCoords = function() {
 /* Set up listeners to the input fields */
 
 // Set to true whenever we change something 
-var dirty = false;
+var needsUpdate = false;
 
 /* Anonymous function to bind UI control "input" to the variable v */
 // TODO - fix this so it works - closures mean that a snapshot of v is stored,
@@ -373,7 +368,7 @@ var dirty = false;
 // (or something to that effect)
 function makeListener(input, v) {
 	var n = document.getElementById(input)
-	n.oninput = function() { v = this.value; dirty = true;  } 
+	n.oninput = function() { v = this.value; needsUpdate = true;  } 
 }
 
 function setupControls() {
@@ -398,16 +393,16 @@ function setupControls() {
 	document.getElementById("bezres").value = shell.bezres
 	
 	// Add event listeners:
-	document.getElementById("r0slider").oninput = function() { shell.r0 = this.value; dirty = true;  }
-	document.getElementById("z0slider").oninput = function() { shell.z0 = this.value; dirty = true;  }
-	document.getElementById("chirslider").oninput = function() { shell.chir = this.value; dirty = true;  }
-	document.getElementById("chizslider").oninput = function() { shell.chiz = this.value; dirty = true;  }
-	document.getElementById("t0").oninput = function() { shell.t0 = this.value; dirty = true;  }
-	document.getElementById("tmax").oninput = function() { shell.tmax = this.value; dirty = true;  }
-	document.getElementById("C0slider").oninput = function() { shell.C0 = this.value; dirty = true;  }
-	document.getElementById("Cscaleslider").oninput = function() { shell.Cscale = this.value; dirty = true;  }
-	document.getElementById("tstep").oninput = function() { shell.tstep = this.value; dirty = true;  }
-	document.getElementById("bezres").oninput = function() { shell.bezres = this.value; dirty = true;  }
+	document.getElementById("r0slider").oninput = function() { shell.r0 = this.value; needsUpdate = true;  }
+	document.getElementById("z0slider").oninput = function() { shell.z0 = this.value; needsUpdate = true;  }
+	document.getElementById("chirslider").oninput = function() { shell.chir = this.value; needsUpdate = true;  }
+	document.getElementById("chizslider").oninput = function() { shell.chiz = this.value; needsUpdate = true;  }
+	document.getElementById("t0").oninput = function() { shell.t0 = this.value; needsUpdate = true;  }
+	document.getElementById("tmax").oninput = function() { shell.tmax = this.value; needsUpdate = true;  }
+	document.getElementById("C0slider").oninput = function() { shell.C0 = this.value; needsUpdate = true;  }
+	document.getElementById("Cscaleslider").oninput = function() { shell.Cscale = this.value; needsUpdate = true;  }
+	document.getElementById("tstep").oninput = function() { shell.tstep = this.value; needsUpdate = true;  }
+	document.getElementById("bezres").oninput = function() { shell.bezres = this.value; needsUpdate = true;  }
 	
 /*	
 	makeListener("r0", seashell.h.r0)

@@ -1,43 +1,55 @@
 var renderer = new THREE.WebGLRenderer();
 renderer.setClearColor( 0xffffff, 1);
 
-function computeShellGeometry() {
-	var geometry = new THREE.Geometry();
-	
-	// Auxiliary function to push a Cartesian coordinate onto the three.js geometry
-	function pushCart(c) {
-		geometry.vertices.push( new THREE.Vector3(c.x, c.y, c.z) )
-	}
-	
-	
-	//TODO: Add a Bool "dirty" when changing the UI, and call this whenever the bool is dirty
-	//Look into using the three.js variable MeshNeedsUpdating
-	var c = shell.getCartCoords()
+var geometry = new THREE.Geometry();
 
-	// Push the seashell coordinates onto the geometry's vertex array
-	for (i in c) {
-		for (j in c[i] ){
-			pushCart(c[i][j])
-		}
+function computeShellGeometry(noOfVerticesChanged) {
+	//Recomputes the geometry of the shell. Needed after e.g. changing parameters.
+    // TODO - do this in the GPU, which is the "proper" graphics way of doing things.
+    // TODO - learn GLSL...
+    
+    var c = shell.getCartCoords();
+    
+    if (noOfVerticesChanged) {
+     geometry = new THREE.Geometry();   
+    }
+    
+	// Allocate the seashell coordinates to the geometry's vertex array
+	var k = 0;
+    for (i in c) {
+        for (j in c[i] ){
+			geometry.vertices[k] = new THREE.Vector3(c[i][j].x, c[i][j].y, c[i][j].z) 
+            k++;
+        }
 	}
-
-	// Define faces using the pushed vertices
-	for (i = 0; i < geometry.vertices.length - (shell.bezres+1) ; i++) { // we look ahead in the index, so we stop i before the end
-		geometry.faces.push( new THREE.Face3( i+1, i, i+shell.bezres ) );	
-		geometry.faces.push( new THREE.Face3( i+1, i+shell.bezres, i+shell.bezres+1 ) );
-	}
-	geometry.computeFaceNormals();
+    
+	// Define faces using the allocated vertices
+    var max = (+shell.bezres + 1) // shell.bezres can be a string when set by the form fields. Unary plus converts it to an int.
+    for (i = 0; i < geometry.vertices.length - max ; i++) { // we look ahead in the index, so we stop i before the end
+        /* TODO - there is a bug in here which does not render the first and last face */
+        geometry.faces[2*i] = new THREE.Face3( i+1, i, i+max-1);
+        geometry.faces[2*i+1] = new THREE.Face3( i+1, i+max-1, i+max);
+    }
+    
+    geometry.verticesNeedUpdate = true;
+    geometry.normalsNeedUpdate = true;
+    
+    geometry.computeFaceNormals();
 	geometry.computeVertexNormals();
-	return geometry;
+    
+    return geometry;
 }
 
 var scene = new THREE.Scene();
 
-// Create a material for our mesh
-var material = new THREE.MeshPhongMaterial( { color: 0xffffff, shininess: 0, shading: THREE.SmoothShading, side:THREE.DoubleSide } )
+var material = new THREE.MeshPhongMaterial( {color: 0xffffff,
+                                             shininess: 0,
+                                             shading: THREE.SmoothShading,
+                                             side:THREE.DoubleSide } )
 
 // Create the mesh, add it to the scene
-var shellMesh = new THREE.Mesh( computeShellGeometry(), material );
+
+var shellMesh = new THREE.Mesh( computeShellGeometry(true), material );
 shellMesh.rotation.y -=3.14
 scene.add(shellMesh);
 
@@ -55,24 +67,31 @@ camera.position.z = 15;
 
 //...action!
 function render() {
-	if (dirty) {
-		scene = new THREE.Scene();
-		
-		// Store the old mesh rotation variables:
-		
-		var oldX = shellMesh.rotation.x;
-		var oldY = shellMesh.rotation.y;
-		var oldZ = shellMesh.rotation.z;
-		
-		// Create a new mesh, add it to the scene
-		shellMesh = new THREE.Mesh( computeShellGeometry(), material );
-		shellMesh.rotation.x = oldX;
-		shellMesh.rotation.y = oldY;
-		shellMesh.rotation.z = oldZ;
-		scene.add(shellMesh);
-		scene.add( directionalLight );
-		
-		dirty = false;
+	if (needsUpdate) {
+        
+        // Check if the vector length has changed
+        var verticesOnShell = shell.bezres * shell.tstep * (shell.tmax - shell.t0);
+        var verticesInMesh = geometry.vertices.length;
+        
+        if (verticesOnShell != verticesInMesh) { // We must recompute the mesh
+            
+            var oldX = shellMesh.rotation.x;
+            var oldY = shellMesh.rotation.y;
+            var oldZ = shellMesh.rotation.z;
+            
+            scene.remove(shellMesh);
+            shellMesh = new THREE.Mesh( computeShellGeometry(true), material ); //Recompute shell
+            
+            shellMesh.rotation.x = oldX;
+            shellMesh.rotation.y = oldY;
+            shellMesh.rotation.z = oldZ;
+            
+            scene.add(shellMesh);            
+        } else { // else we just recompute the vertices
+         computeShellGeometry(false)   
+        }
+        
+		needsUpdate = false;
 	}
 	// Function callback for the browser to request the render function repeatedly
 	window.requestAnimationFrame(render)
@@ -98,17 +117,16 @@ document.onkeydown = function (e) {
 		shellMesh.rotation.x +=0.1
 		return false;
 	} else if (code === 107) { //plus key
-		camera.position.z -= 0.1
+		camera.position.z -= 0.5
 		return false;
 	} else if (code === 109) { //minus key
-		camera.position.z += 0.1
+		camera.position.z += 0.5
 		return false;
 	}
 };
 
 function setupGraphics() {
-	
-	
+		
 	//Get our display element:
 	var container = document.getElementById( "graphicsDiv" )
 	var width = container.offsetWidth;
