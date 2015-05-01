@@ -177,25 +177,21 @@ function Bezier(startPt, endPt, startCtrlPt, endCtrlPt) {
 
 //------------
 
-
 //placeholder function for the generating curve:
-function getGeneratingCurveCoordinates() {
+function getGeneratingCurveCoordinates(resolution) {
 	var vec = []
 	
-	//Code for a circular C - but the current rendering code bugs if C has more than 2 coordinates
-	var resolution = 30
-	
-	for (i = 0; i <= resolution; i++) {
+	for (i = 0; i < resolution; i++) {
 		vec.push( cartesian(	Math.cos(3.1415*2*(i/resolution)),
 							Math.sin(3.1415*2*(i/resolution))) )
 	}
-	/*
-	 vec.push( cartesian(1,1) )
-	 vec.push( cartesian(1,-1) )
-	 vec.push( cartesian(-1,-1) )
-	 vec.push( cartesian(-2,0) )
-	 vec.push( cartesian(-1,1) )
-	 */
+
+    // Square test curve
+    /*vec.push(cartesian(1, 1))
+    vec.push(cartesian(1, -1))
+    vec.push(cartesian(-1, -1))
+    vec.push(cartesian(-1, 1))*/
+    
 	return vec;
 }
 
@@ -209,10 +205,11 @@ var shell = {
 	tmax : 5, /* end value of parameter t in complete revolutions (angle given by t*2π) */
 	tstep : 30, /* steps per revolution */
 	
-	C : getGeneratingCurveCoordinates(), /* getGeneratingCurveCoordinates() */
 	C0 : 0.1, /* Initial scaling of the generating curve C */
 	Cscale : 1.0006, /* Subsequent scaling of C in each step */
 	bezres : 30, /* C.length */ /* No. of points on C */
+	//C : [],
+	
 	
 	getCylVector : function() {
 		var cv = []
@@ -238,12 +235,12 @@ var shell = {
 	getCartCoords : function() {
 		var spiralPoints = this.getCylVector()
 		var returnVector = [];
-		var noOfCoords = this.bezres
 		var coordvec = [];
 		
+        var C = getGeneratingCurveCoordinates(this.bezres)
 		//scale down C to initial size
-		for (c in this.C) {
-			coordvec[c] = this.C[c].multiply(this.C0)
+		for (c in C) {
+			coordvec[c] = C[c].multiply(this.C0)
 		}
 		
 		//start from the beginning

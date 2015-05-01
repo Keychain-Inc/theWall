@@ -12,8 +12,9 @@ function computeShellGeometry() {
 	
 	//TODO: Add a Bool "dirty" when changing the UI, and call this whenever the bool is dirty
 	//Look into using the three.js variable MeshNeedsUpdating
-	var c = shell.getCartCoords()
-
+	
+    var c = shell.getCartCoords()
+    
 	// Push the seashell coordinates onto the geometry's vertex array
 	for (i in c) {
 		for (j in c[i] ){
@@ -22,13 +23,13 @@ function computeShellGeometry() {
 	}
 
 	// Define faces using the pushed vertices
-	for (i = 0; i < geometry.vertices.length - (shell.bezres+1) ; i++) { // we look ahead in the index, so we stop i before the end
-		geometry.faces.push( new THREE.Face3( i+1, i, i+shell.bezres ) );	
+	for (i = 0; i < geometry.vertices.length - (shell.bezres + 1) ; i++) { // we look ahead in the index, so we stop i before the end
 		geometry.faces.push( new THREE.Face3( i+1, i+shell.bezres, i+shell.bezres+1 ) );
+        geometry.faces.push( new THREE.Face3( i+1, i, i+shell.bezres ) );	
 	}
-	geometry.computeFaceNormals();
+    geometry.computeFaceNormals();
 	geometry.computeVertexNormals();
-	return geometry;
+    return geometry;
 }
 
 var scene = new THREE.Scene();
@@ -56,8 +57,7 @@ camera.position.z = 15;
 //...action!
 function render() {
 	if (dirty) {
-		scene = new THREE.Scene();
-		
+        scene = new THREE.Scene();
 		// Store the old mesh rotation variables:
 		
 		var oldX = shellMesh.rotation.x;
@@ -66,10 +66,11 @@ function render() {
 		
 		// Create a new mesh, add it to the scene
 		shellMesh = new THREE.Mesh( computeShellGeometry(), material );
-		shellMesh.rotation.x = oldX;
+        shellMesh.rotation.x = oldX;
 		shellMesh.rotation.y = oldY;
 		shellMesh.rotation.z = oldZ;
-		scene.add(shellMesh);
+		
+        scene.add(shellMesh);
 		scene.add( directionalLight );
 		
 		dirty = false;
