@@ -17,6 +17,7 @@ function computeShellGeometry() {
         }
 	}
 
+    
 	// Define faces using the allocated vertices
     for (i = 0; i < geometry.vertices.length - (shell.bezres + 1) ; i++) { // we look ahead in the index, so we stop i before the end
         /* TODO - there is a bug in here which does not render the first and last face */
@@ -58,9 +59,9 @@ camera.position.z = 15;
 
 //...action!
 function render() {
-	if (dirty) {
+	if (needsUpdate) {
         computeShellGeometry() //Recompute shell
-		dirty = false;
+		needsUpdate = false;
 	}
 	// Function callback for the browser to request the render function repeatedly
 	window.requestAnimationFrame(render)
@@ -86,10 +87,10 @@ document.onkeydown = function (e) {
 		shellMesh.rotation.x +=0.1
 		return false;
 	} else if (code === 107) { //plus key
-		camera.position.z -= 0.1
+		camera.position.z -= 0.5
 		return false;
 	} else if (code === 109) { //minus key
-		camera.position.z += 0.1
+		camera.position.z += 0.5
 		return false;
 	}
 };

@@ -362,7 +362,7 @@ seashell.getCartCoords = function() {
 /* Set up listeners to the input fields */
 
 // Set to true whenever we change something 
-var dirty = false;
+var needsUpdate = false;
 
 /* Anonymous function to bind UI control "input" to the variable v */
 // TODO - fix this so it works - closures mean that a snapshot of v is stored,
@@ -370,7 +370,7 @@ var dirty = false;
 // (or something to that effect)
 function makeListener(input, v) {
 	var n = document.getElementById(input)
-	n.oninput = function() { v = this.value; dirty = true;  } 
+	n.oninput = function() { v = this.value; needsUpdate = true;  } 
 }
 
 function setupControls() {
@@ -395,16 +395,16 @@ function setupControls() {
 	document.getElementById("bezres").value = shell.bezres
 	
 	// Add event listeners:
-	document.getElementById("r0slider").oninput = function() { shell.r0 = this.value; dirty = true;  }
-	document.getElementById("z0slider").oninput = function() { shell.z0 = this.value; dirty = true;  }
-	document.getElementById("chirslider").oninput = function() { shell.chir = this.value; dirty = true;  }
-	document.getElementById("chizslider").oninput = function() { shell.chiz = this.value; dirty = true;  }
-	document.getElementById("t0").oninput = function() { shell.t0 = this.value; dirty = true;  }
-	document.getElementById("tmax").oninput = function() { shell.tmax = this.value; dirty = true;  }
-	document.getElementById("C0slider").oninput = function() { shell.C0 = this.value; dirty = true;  }
-	document.getElementById("Cscaleslider").oninput = function() { shell.Cscale = this.value; dirty = true;  }
-	document.getElementById("tstep").oninput = function() { shell.tstep = this.value; dirty = true;  }
-	document.getElementById("bezres").oninput = function() { shell.bezres = this.value; dirty = true;  }
+	document.getElementById("r0slider").oninput = function() { shell.r0 = this.value; needsUpdate = true;  }
+	document.getElementById("z0slider").oninput = function() { shell.z0 = this.value; needsUpdate = true;  }
+	document.getElementById("chirslider").oninput = function() { shell.chir = this.value; needsUpdate = true;  }
+	document.getElementById("chizslider").oninput = function() { shell.chiz = this.value; needsUpdate = true;  }
+	document.getElementById("t0").oninput = function() { shell.t0 = this.value; needsUpdate = true;  }
+	document.getElementById("tmax").oninput = function() { shell.tmax = this.value; needsUpdate = true;  }
+	document.getElementById("C0slider").oninput = function() { shell.C0 = this.value; needsUpdate = true;  }
+	document.getElementById("Cscaleslider").oninput = function() { shell.Cscale = this.value; needsUpdate = true;  }
+	document.getElementById("tstep").oninput = function() { shell.tstep = this.value; needsUpdate = true;  }
+	document.getElementById("bezres").oninput = function() { shell.bezres = this.value; needsUpdate = true;  }
 	
 /*	
 	makeListener("r0", seashell.h.r0)
