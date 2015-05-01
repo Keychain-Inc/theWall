@@ -2,27 +2,18 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setClearColor( 0xffffff, 1);
 
 var geometry = new THREE.Geometry();
-geometry.dynamic = true;
 
-function computeShellGeometry() {
+function computeShellGeometry(noOfVerticesChanged) {
 	//Recomputes the geometry of the shell. Needed after e.g. changing parameters.
     // TODO - do this in the GPU, which is the "proper" graphics way of doing things.
     // TODO - learn GLSL...
-	
-    // Check if the vector length has changed
-    var verticesOnShell = shell.bezres * shell.tstep * (shell.tmax - shell.t0);
-    var  verticesInMesh = geometry.vertices.length;
-    
-    console.log(verticesOnShell)
-    console.log(verticesInMesh)
     
     var c = shell.getCartCoords();
     
-    if (verticesOnShell != verticesInMesh) {
-        geometry.vertices = [] // crashes
+    if (noOfVerticesChanged) {
+     geometry = new THREE.Geometry();   
     }
-
-        
+    
 	// Allocate the seashell coordinates to the geometry's vertex array
 	var k = 0;
     for (i in c) {
@@ -31,7 +22,6 @@ function computeShellGeometry() {
             k++;
         }
 	}
-
     
 	// Define faces using the allocated vertices
     for (i = 0; i < geometry.vertices.length - (shell.bezres + 1) ; i++) { // we look ahead in the index, so we stop i before the end
@@ -45,6 +35,8 @@ function computeShellGeometry() {
     
     geometry.computeFaceNormals();
 	geometry.computeVertexNormals();
+    
+    return geometry;
 }
 
 var scene = new THREE.Scene();
@@ -55,8 +47,8 @@ var material = new THREE.MeshPhongMaterial( {color: 0xffffff,
                                              side:THREE.DoubleSide } )
 
 // Create the mesh, add it to the scene
-computeShellGeometry();
-var shellMesh = new THREE.Mesh( geometry, material );
+
+var shellMesh = new THREE.Mesh( computeShellGeometry(true), material );
 shellMesh.rotation.y -=3.14
 scene.add(shellMesh);
 
@@ -75,7 +67,29 @@ camera.position.z = 15;
 //...action!
 function render() {
 	if (needsUpdate) {
-        computeShellGeometry() //Recompute shell
+        
+        // Check if the vector length has changed
+        var verticesOnShell = shell.bezres * shell.tstep * (shell.tmax - shell.t0);
+        var verticesInMesh = geometry.vertices.length;
+        
+        if (verticesOnShell != verticesInMesh) { // We must recompute the mesh
+            
+            var oldX = shellMesh.rotation.x;
+            var oldY = shellMesh.rotation.y;
+            var oldZ = shellMesh.rotation.z;
+            
+            scene.remove(shellMesh);
+            shellMesh = new THREE.Mesh( computeShellGeometry(true), material ); //Recompute shell
+            
+            shellMesh.rotation.x = oldX;
+            shellMesh.rotation.y = oldY;
+            shellMesh.rotation.z = oldZ;
+            
+            scene.add(shellMesh);            
+        } else { // else we just recompute the vertices
+         computeShellGeometry(false)   
+        }
+        
 		needsUpdate = false;
 	}
 	// Function callback for the browser to request the render function repeatedly
