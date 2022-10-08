@@ -123,7 +123,7 @@ function tag0() {
       if (tags[n] != '') {
         t0[n] = (<div>
           <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-            From {artists[n]} #{sup - n} {Addrs(artists[n])}
+            From {artists[n]} #{sup - n}
           </h2>
           <div className="text-center light:text-white-600">
             {tags[n]}
@@ -160,7 +160,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   const callTag = async () => {
     try {
       wagmiClient.autoConnect();
-      await Contract.connect(signer).mint(Contract.address, sendMessage);
+      await Contract.mint(Contract.address, sendMessage);
     } catch (e) {
       console.log("LOL")
       // addToast({body: e.message, type: "error"});
