@@ -9,6 +9,11 @@ import Image from 'next/image'
 import { Toaster } from 'react-hot-toast'
 import AdminPanel from '../components/adminPanel'
 import Navbar from '../components/navbar'
+import { usePrepareContractWrite } from 'wagmi'
+import { useQuery, QueryClientProvider, QueryClient } from 'react-query'
+import React from 'react'
+
+const queryClient = new QueryClient()
 
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
@@ -156,10 +161,18 @@ const App = ({ Component, pageProps }: AppProps) => {
    const [sendMessage, setSendMessage] = useState("TT");
    const [unlocktext, set_unlocktext] = useState("Please Unlock Wallet");
   // notify function call
+
+  
   const callTag = async () => {
+    const { config } = usePrepareContractWrite({
+      addressOrName: '0x91fc82f5c588c00985aa264fc7b45ee680110703',
+      contractInterface: abi,
+      functionName: 'mint',
+      args: [sendMessage],
+    })
+    const { write } = useContractWrite(config)
     try {
-      wagmiClient.autoConnect();
-      await Contract.mint(Contract.address, sendMessage, { value: ethers.utils.parseUnits(".1", "ether") });
+      await write?.();
       setSendMessage("2");
     } catch (e) {
       console.log("LOL")
@@ -175,9 +188,12 @@ const App = ({ Component, pageProps }: AppProps) => {
     
     <ThemeProvider attribute="class">
       <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
+      
+  <QueryClientProvider client={queryClient}>
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
             <Component {...pageProps} />
+            
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
             <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
                 Tag the Wall! {sendMessage}
@@ -185,7 +201,6 @@ const App = ({ Component, pageProps }: AppProps) => {
               <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
         Send your message here
         </h2>
-
         <textarea className="m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 "
                                       onChange={e => handleChangeMessage(e)}/>
           
@@ -212,6 +227,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             </div>
           </RainbowKitProvider>
         </WagmiConfig>
+</QueryClientProvider>
       </div>
     </ThemeProvider>
   )
