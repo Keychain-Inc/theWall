@@ -17,9 +17,7 @@ import { publicProvider } from 'wagmi/providers/public'
 import config from '../config/env-vars'
 import { BigNumber, ethers} from 'ethers'
 import { RainbowKitChainProvider } from '@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitChainContext'
-import { Provider } from 'web3/providers'
 import Home from '.';
-import { useENSName } from 'use-ens-name';
 import AddressPill from '../components/addressPill';
 import { ChangeEvent } from 'react';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
