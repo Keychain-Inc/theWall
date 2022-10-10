@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import abi from '../contracts/theWall.json'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Toaster } from 'react-hot-toast'
-import AdminPanel from '../components/adminPanel'
 import Navbar from '../components/navbar'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
@@ -24,6 +22,7 @@ import { Provider } from 'web3/providers'
 import Home from '.';
 import { useENSName } from 'use-ens-name';
 import AddressPill from '../components/addressPill';
+import { ChangeEvent } from 'react';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
 
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
@@ -50,11 +49,11 @@ const wagmiClient = createClient({
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
 const signerw = wagmiClient.provider;
+const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg');
 
 // The MetaMask plugin also allows signing transactions to
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
-const signer = provider.getSigner()
 const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 
 // The ERC-20 Contract ABI, which is a common contract interface
@@ -71,12 +70,13 @@ const Abi = [
   "function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)",
 ];
 //format addresses in ui
-function format_address(address) {
+function format_address(address :string) {
   const new_address = address.substring(0, 5) + '...' + address.slice(-3)
   return new_address;
 }
 
-function tag0() {
+function useTtag0() {
+  
   const [tag, setTag] = useState("LOL");
   const [artist, setArtist] = useState("LOL");
   const [time, setTime] = useState("");
@@ -91,7 +91,7 @@ function tag0() {
       // set balance
       setTag(tagS);
       setArtist(artistS);
-      setTime(timeS);
+      setTime(timeS); 
       let s = (await Contract.totalSupply());
       s = ethers.utils.formatUnits(s,0);
       setSup(s)
@@ -108,7 +108,6 @@ function tag0() {
     // clearing interval
     return () => clearInterval(timer);
   },);
-
   
   function tag1() {
     let tags = []
@@ -137,7 +136,7 @@ function tag0() {
       </div>
       )}
     }
-    let t1 = [<div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>]
+    let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
     return (
       <>{t0}{t1}</>);
   }
@@ -147,18 +146,9 @@ function tag0() {
   )
 }
 
-// The Contract object
 const Contract = new ethers.Contract(contractaddrs, Abi, signerw);
 const App = ({ Component, pageProps }: AppProps) => {
-
-// A Web3Provider wraps a standard Web3 provider, which is
-// what MetaMask injects as window.ethereum into each page
-const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-
-// MetaMask requires requesting permission to connect users accounts
-await provider2.send("eth_requestAccounts", []);
-
-  function handleChangeMessage(event) {
+  function handleChangeMessage(event: ChangeEvent<HTMLTextAreaElement>) {
     const values = event.target.value;
     setSendMessage(values);
   }
@@ -167,21 +157,24 @@ await provider2.send("eth_requestAccounts", []);
    const [unlocktext, set_unlocktext] = useState("Please Unlock Wallet");
   // notify function call
 
+   // await // MetaMask requires requesting permission to connect users accounts
   
   const callTag = async () => {
+// A Web3Provider wraps a standard Web3 provider, which is
+// what MetaMask injects as window.ethereum into each page
 
+const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+await provider2.send("eth_requestAccounts", []);
     try {
-      await ;
-      setSendMessage("2");
+     // await // MetaMask requires requesting permission to connect users accounts
+     // await provider2.send("eth_requestAccounts", []);
+    //  let ttt = await provider3.lookupAddress('0x9D31e30003f253563Ff108BC60B16Fdf2c93abb5')
+      const signer = provider2.getSigner()
+      await Contract.connect(signer).mint(signer._address, sendMessage)
     } catch (e) {
       console.log("LOL")
        // addToast({body: e.message, type: "error"});
     }
-//const{isLoading,error, write} = useContractWrite({
-//  addressOrName:"0x91fc82f5c588c00985aa264fc7b45ee680110703",
-//  contractInterface:abi,
-//});
-    
   };
   return (
     
@@ -194,10 +187,10 @@ await provider2.send("eth_requestAccounts", []);
             
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
             <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
-                Tag the Wall! {sendMessage}
+                Tag the Wall!
               </h1>
               <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-        Send your message here
+        Send your message here 
         </h2>
         <textarea className="m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 "
                                       onChange={e => handleChangeMessage(e)}/>
@@ -205,6 +198,7 @@ await provider2.send("eth_requestAccounts", []);
                     <button style={{background: "#00ffff"}} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black" type="button"
                             onClick={callTag}> Send 
                             </button>
+                         
                             <div>
               
               </div>  
@@ -219,7 +213,7 @@ await provider2.send("eth_requestAccounts", []);
               </h1>
               <div>
                 
-                  {tag0()}
+                  {useTtag0()}
                 </div>
                 
             </div>
