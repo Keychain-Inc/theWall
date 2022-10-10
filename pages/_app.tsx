@@ -1,7 +1,6 @@
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
 import '@rainbow-me/rainbowkit/styles.css'
-import {useWeb3React} from "@web3-react/core";
 import { useEffect, useState } from "react";
 import abi from '../contracts/theWall.json'
 import Head from 'next/head'
