@@ -9,12 +9,6 @@ import Image from 'next/image'
 import { Toaster } from 'react-hot-toast'
 import AdminPanel from '../components/adminPanel'
 import Navbar from '../components/navbar'
-import { usePrepareContractWrite } from 'wagmi'
-import { useQuery, QueryClientProvider, QueryClient } from 'react-query'
-import React from 'react'
-
-const queryClient = new QueryClient()
-
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
 
@@ -57,6 +51,10 @@ const wagmiClient = createClient({
 // For this, you need the account signer...
 const signerw = wagmiClient.provider;
 
+// The MetaMask plugin also allows signing transactions to
+// send ether and pay to change state within the blockchain.
+// For this, you need the account signer...
+const signer = provider.getSigner()
 const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 
 // The ERC-20 Contract ABI, which is a common contract interface
@@ -153,6 +151,13 @@ function tag0() {
 const Contract = new ethers.Contract(contractaddrs, Abi, signerw);
 const App = ({ Component, pageProps }: AppProps) => {
 
+// A Web3Provider wraps a standard Web3 provider, which is
+// what MetaMask injects as window.ethereum into each page
+const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+
+// MetaMask requires requesting permission to connect users accounts
+await provider2.send("eth_requestAccounts", []);
+
   function handleChangeMessage(event) {
     const values = event.target.value;
     setSendMessage(values);
@@ -164,15 +169,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   
   const callTag = async () => {
-    const { config } = usePrepareContractWrite({
-      addressOrName: '0x91fc82f5c588c00985aa264fc7b45ee680110703',
-      contractInterface: abi,
-      functionName: 'mint',
-      args: [sendMessage],
-    })
-    const { write } = useContractWrite(config)
+
     try {
-      await write?.();
+      await ;
       setSendMessage("2");
     } catch (e) {
       console.log("LOL")
@@ -188,8 +187,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     
     <ThemeProvider attribute="class">
       <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
-      
-  <QueryClientProvider client={queryClient}>
+
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
             <Component {...pageProps} />
@@ -227,7 +225,6 @@ const App = ({ Component, pageProps }: AppProps) => {
             </div>
           </RainbowKitProvider>
         </WagmiConfig>
-</QueryClientProvider>
       </div>
     </ThemeProvider>
   )
