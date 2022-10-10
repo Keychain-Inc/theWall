@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
 import '@rainbow-me/rainbowkit/styles.css'
+import {useWeb3React} from "@web3-react/core";
 import { useEffect, useState } from "react";
 import abi from '../contracts/theWall.json'
 import Head from 'next/head'
@@ -17,7 +18,9 @@ import { publicProvider } from 'wagmi/providers/public'
 import config from '../config/env-vars'
 import { BigNumber, ethers} from 'ethers'
 import { RainbowKitChainProvider } from '@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitChainContext'
+import { Provider } from 'web3/providers'
 import Home from '.';
+import { useENSName } from 'use-ens-name';
 import AddressPill from '../components/addressPill';
 import { ChangeEvent } from 'react';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
@@ -46,7 +49,6 @@ const wagmiClient = createClient({
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
 const signerw = wagmiClient.provider;
-const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg');
 
 // The MetaMask plugin also allows signing transactions to
 // send ether and pay to change state within the blockchain.
@@ -88,7 +90,7 @@ function useTtag0() {
       // set balance
       setTag(tagS);
       setArtist(artistS);
-      setTime(timeS); 
+      setTime(timeS);
       let s = (await Contract.totalSupply());
       s = ethers.utils.formatUnits(s,0);
       setSup(s)
@@ -105,6 +107,7 @@ function useTtag0() {
     // clearing interval
     return () => clearInterval(timer);
   },);
+
   
   function tag1() {
     let tags = []
@@ -163,16 +166,16 @@ const App = ({ Component, pageProps }: AppProps) => {
 const provider2 = new ethers.providers.Web3Provider(window.ethereum)
 await provider2.send("eth_requestAccounts", []);
     try {
-     // await // MetaMask requires requesting permission to connect users accounts
-     // await provider2.send("eth_requestAccounts", []);
-    //  let ttt = await provider3.lookupAddress('0x9D31e30003f253563Ff108BC60B16Fdf2c93abb5')
+     // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
       const signer = provider2.getSigner()
-      await Contract.connect(signer).mint(signer._address, sendMessage)
+      let myAddress = await signer.getAddress()
+      await Contract.connect(signer).mint(myAddress,sendMessage)////signer._address, sendMessage)
     } catch (e) {
       console.log("LOL")
        // addToast({body: e.message, type: "error"});
     }
   };
+  
   return (
     
     <ThemeProvider attribute="class">
@@ -184,10 +187,10 @@ await provider2.send("eth_requestAccounts", []);
             
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
             <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
-                Tag the Wall!
+                Tag the Wall! {sendMessage}
               </h1>
               <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-        Send your message here 
+        Send your message here
         </h2>
         <textarea className="m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 "
                                       onChange={e => handleChangeMessage(e)}/>
