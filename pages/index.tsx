@@ -84,12 +84,19 @@ const Home: NextPage = () => {
       </div> */}
 
       <a
-        href="https://github.com/thewall"
+        href="https://github.com/keychain-inc/thewall"
         target="_blank"
         rel="noreferrer"
         className="fixed left-5 bottom-4 flex flex-col"
       >
         <Image className="bg-white rounded-full" src="/github.png" alt="Github Icon" width="35" height="35" />
+        </a><a
+        href="https://twitter.com/tagthewall"
+        target="_blank"
+        rel="noreferrer"
+        className="fixed left-16 bottom-4 flex flex-col"
+      >
+        <Image className="bg-white rounded-full" src="/twitter.png" alt="Github Icon" width="35" height="35" />
       </a>
       <style jsx>{`
         .rotating-hue {
