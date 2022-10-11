@@ -52,6 +52,7 @@ const signerw = wagmiClient.provider;
 // The MetaMask plugin also allows signing transactions to
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
+//const contractaddrs = "0x7557fCBEE64aF50AcdA1081301e751ea03ca5cf7";
 const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 // The ERC-20 Contract ABI, which is a common contract interface
 // for tokens (this is the Human-Readable ABI format)
@@ -99,7 +100,7 @@ function useTtag0() {
       setSup(s)
     };
     // fix for updatix1ng after wallet login
-    updateUIStates();
+    //updateUIStates();
 
     // schedule every 15 sec refresh
     const timer = setInterval(() => {

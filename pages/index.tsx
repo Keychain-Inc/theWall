@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 
 import { Toaster } from 'react-hot-toast'
-import AdminPanel from '../components/adminPanel'
+
 import Navbar from '../components/navbar'
 
 
