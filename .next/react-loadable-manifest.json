@@ -136,5 +136,17 @@
     "files": [
       "static/chunks/node_modules_walletconnect_ethereum-provider_dist_esm_index_js.js"
     ]
+  },
+  "..\\node_modules\\alchemy-sdk\\dist\\esm\\index-6fe17f1f.js -> ./alchemy-provider-3a21de51.js": {
+    "id": "..\\node_modules\\alchemy-sdk\\dist\\esm\\index-6fe17f1f.js -> ./alchemy-provider-3a21de51.js",
+    "files": [
+      "static/chunks/node_modules_alchemy-sdk_dist_esm_alchemy-provider-3a21de51_js.js"
+    ]
+  },
+  "..\\node_modules\\alchemy-sdk\\dist\\esm\\index-6fe17f1f.js -> ./alchemy-websocket-provider-2b8ab20b.js": {
+    "id": "..\\node_modules\\alchemy-sdk\\dist\\esm\\index-6fe17f1f.js -> ./alchemy-websocket-provider-2b8ab20b.js",
+    "files": [
+      "static/chunks/node_modules_alchemy-sdk_dist_esm_alchemy-websocket-provider-2b8ab20b_js.js"
+    ]
   }
 }
