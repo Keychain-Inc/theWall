@@ -27,8 +27,8 @@ const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
 
 const { chains, provider } = configureChains(
-  [chain.polygon],//, //chain.optimism, chain.arbitrum, chain.localhost],
-  [alchemyProvider({ apiKey: alchemyId }), publicProvider()],
+  [chain.polygon, chain.arbitrum],//, //chain.optimism, chain.arbitrum, chain.localhost],
+  [alchemyProvider({ apiKey: alchemyId }), alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
 )
 const { connectors } = getDefaultWallets({
   appName: 'the Wall',
@@ -51,8 +51,13 @@ const signerw = wagmiClient.provider;
 // The MetaMask plugin also allows signing transactions to
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
-//const contractaddrs = "0x7557fCBEE64aF50AcdA1081301e751ea03ca5cf7";
-const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
+let contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
+//const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
+if (signerw._network.chainId == 137){
+  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}
+  else if (signerw._network.chainId == 42161){
+    contractaddrs = "0x4766d8244d68874ed6499F085e194be3dC4152AA";
+}
 // The ERC-20 Contract ABI, which is a common contract interface
 // for tokens (this is the Human-Readable ABI format)
 const Abi = [
