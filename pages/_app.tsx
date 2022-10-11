@@ -9,7 +9,6 @@ import Navbar from '../components/navbar'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
 import { useRouter } from 'next/router'
-
 import { Network, Alchemy } from 'alchemy-sdk';
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { chain, configureChains, createClient, WagmiConfig, useContractWrite } from 'wagmi'

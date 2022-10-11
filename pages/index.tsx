@@ -98,6 +98,14 @@ const Home: NextPage = () => {
       >
         <Image className="bg-white rounded-full" src="/twitter.png" alt="Github Icon" width="35" height="35" />
       </a>
+      <a
+        href="https://https://discord.gg/gFtHRVCDPb"
+        target="_blank"
+        rel="noreferrer"
+        className="fixed left-5 bottom-14 flex flex-col"
+      >
+        <Image className="bg-white rounded-full" src="/discord.svg" alt="Github Icon" width="35" height="35" />
+      </a>
       <style jsx>{`
         .rotating-hue {
           background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
