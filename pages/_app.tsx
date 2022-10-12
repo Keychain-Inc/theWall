@@ -77,14 +77,15 @@ function format_address(address: string) {
   const new_address = address.substring(0, 5) + '...' + address.slice(-3)
   return new_address;
 }
-
+let addrs = []
 function useTtag0() {
 
   const [tag, setTag] = useState("LOL");
   const [artist, setArtist] = useState("LOL");
   const [time, setTime] = useState("");
   const [sup, setSup] = useState(2);
-  // let nm = []
+  // let addrs = []
+   let addrst = []
   useEffect(() => {
 
     // update the ui elements
@@ -94,12 +95,15 @@ function useTtag0() {
       setArtist(artistS);
       setTime(timeS);
       const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-      //   for (let n = 0; n < sup; n++) {
-      //    let tn = await provider3.lookupAddress(artistS[n])
-      //     if (tn != null){
-      //       nm[n] = tn 
-      //     }
-      //}
+         for (let n = 0; n < sup; n++) {
+          if (addrs[artistS[n]] ==null){
+          let tn = await provider3.lookupAddress(artistS[n])
+            if (tn != null){
+              addrs[artistS[n]] = tn } 
+              else{
+             addrs[artistS[n]] = artistS[n]
+           }}
+      }
       let s = (await Contract.totalSupply());
       s = ethers.utils.formatUnits(s, 0);
       setSup(s)
@@ -126,8 +130,13 @@ function useTtag0() {
     let i = "";
     for (let n = 0; n < sup; n++) {
       tags[n] = tag[n]
-      artists[n] = artist[n]
-      // artists = nm
+      artists[n] =artist[n]
+      if (addrs[artists[n]] == null){
+        artists[n] = artist[n]
+      }
+      else{
+      artists[n] = addrs[artists[n]]}//artist[n]
+   //  artists = nm
       times[n] = time[n]
       //ts[n] = ethers.utils.formatUnits(time[0]);
       // times[n] = ethers.utils.formatUnits(ts[n],0);
