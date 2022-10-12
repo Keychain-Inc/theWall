@@ -35,7 +35,6 @@ const { connectors } = getDefaultWallets({
   appName: 'the Wall',
   chains, 
 })
-
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
@@ -77,7 +76,7 @@ function format_address(address: string) {
   const new_address = address.substring(0, 5) + '...' + address.slice(-3)
   return new_address;
 }
-let addrs = []
+let addrs: string[] = []
 function useTtag0() {
 
   const [tag, setTag] = useState("LOL");
@@ -135,6 +134,7 @@ function useTtag0() {
         artists[n] = artist[n]
       }
       else{
+        // @ts-ignore
       artists[n] = addrs[artists[n]]}//artist[n]
    //  artists = nm
       times[n] = time[n]

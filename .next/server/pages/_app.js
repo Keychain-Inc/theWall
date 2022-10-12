@@ -1,143 +1,392 @@
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
+"use strict";
 (() => {
 var exports = {};
-exports.id = "pages/_app";
-exports.ids = ["pages/_app"];
+exports.id = 888;
+exports.ids = [888];
 exports.modules = {
 
-/***/ "./config/env-vars.ts":
-/*!****************************!*\
-  !*** ./config/env-vars.ts ***!
-  \****************************/
+/***/ 8344:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst envVars = {\n    API_URL: String(process.env.NEXT_PUBLIC_APIURL),\n    NEXT_PUBLIC_CONTRACT_ADDRESS: String(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS),\n    NEXT_PUBLIC_ALCHEMY_ID: \"ku_puX-vIFhnbZnC3xmpdT3jUico70LY\",\n    NEXT_PUBLIC_INFURA_ID: String(process.env.NEXT_PUBLIC_INFURA_ID),\n    NEXT_PUBLIC_ETHERSCAN_API_KEY: String(process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY)\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (envVars);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9jb25maWcvZW52LXZhcnMudHMuanMiLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE1BQU1BLE9BQU8sR0FBRztJQUNkQyxPQUFPLEVBQUVDLE1BQU0sQ0FBQ0MsT0FBTyxDQUFDQyxHQUFHLENBQUNDLGtCQUFrQixDQUFDO0lBQy9DQyw0QkFBNEIsRUFBRUosTUFBTSxDQUFDQyxPQUFPLENBQUNDLEdBQUcsQ0FBQ0UsNEJBQTRCLENBQUM7SUFDOUVDLHNCQUFzQixFQUFFLGtDQUFrQztJQUMxREMscUJBQXFCLEVBQUVOLE1BQU0sQ0FBQ0MsT0FBTyxDQUFDQyxHQUFHLENBQUNJLHFCQUFxQixDQUFDO0lBQ2hFQyw2QkFBNkIsRUFBRVAsTUFBTSxDQUFDQyxPQUFPLENBQUNDLEdBQUcsQ0FBQ0ssNkJBQTZCLENBQUM7Q0FDakY7QUFFRCxpRUFBZVQsT0FBTyIsInNvdXJjZXMiOlsid2VicGFjazovL2V0aC1zdGFydGVyLXByb2plY3QvLi9jb25maWcvZW52LXZhcnMudHM/ZTE3ZiJdLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBlbnZWYXJzID0ge1xyXG4gIEFQSV9VUkw6IFN0cmluZyhwcm9jZXNzLmVudi5ORVhUX1BVQkxJQ19BUElVUkwpLFxyXG4gIE5FWFRfUFVCTElDX0NPTlRSQUNUX0FERFJFU1M6IFN0cmluZyhwcm9jZXNzLmVudi5ORVhUX1BVQkxJQ19DT05UUkFDVF9BRERSRVNTKSxcclxuICBORVhUX1BVQkxJQ19BTENIRU1ZX0lEOiAna3VfcHVYLXZJRmhuYlpuQzN4bXBkVDNqVWljbzcwTFknLFxyXG4gIE5FWFRfUFVCTElDX0lORlVSQV9JRDogU3RyaW5nKHByb2Nlc3MuZW52Lk5FWFRfUFVCTElDX0lORlVSQV9JRCksXHJcbiAgTkVYVF9QVUJMSUNfRVRIRVJTQ0FOX0FQSV9LRVk6IFN0cmluZyhwcm9jZXNzLmVudi5ORVhUX1BVQkxJQ19FVEhFUlNDQU5fQVBJX0tFWSksXHJcbn1cclxuXHJcbmV4cG9ydCBkZWZhdWx0IGVudlZhcnNcclxuIl0sIm5hbWVzIjpbImVudlZhcnMiLCJBUElfVVJMIiwiU3RyaW5nIiwicHJvY2VzcyIsImVudiIsIk5FWFRfUFVCTElDX0FQSVVSTCIsIk5FWFRfUFVCTElDX0NPTlRSQUNUX0FERFJFU1MiLCJORVhUX1BVQkxJQ19BTENIRU1ZX0lEIiwiTkVYVF9QVUJMSUNfSU5GVVJBX0lEIiwiTkVYVF9QVUJMSUNfRVRIRVJTQ0FOX0FQSV9LRVkiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./config/env-vars.ts\n");
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const envVars = {
+    API_URL: String(process.env.NEXT_PUBLIC_APIURL),
+    NEXT_PUBLIC_CONTRACT_ADDRESS: String(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS),
+    NEXT_PUBLIC_ALCHEMY_ID: "ku_puX-vIFhnbZnC3xmpdT3jUico70LY",
+    NEXT_PUBLIC_INFURA_ID: String(process.env.NEXT_PUBLIC_INFURA_ID),
+    NEXT_PUBLIC_ETHERSCAN_API_KEY: String(process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY)
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (envVars);
+
 
 /***/ }),
 
-/***/ "./pages/_app.tsx":
-/*!************************!*\
-  !*** ./pages/_app.tsx ***!
-  \************************/
+/***/ 5656:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../styles/globals.css */ \"./styles/globals.css\");\n/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_css__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var tailwindcss_tailwind_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tailwindcss/tailwind.css */ \"./node_modules/tailwindcss/tailwind.css\");\n/* harmony import */ var tailwindcss_tailwind_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(tailwindcss_tailwind_css__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var next_themes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next-themes */ \"next-themes\");\n/* harmony import */ var next_themes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_themes__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var alchemy_sdk__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! alchemy-sdk */ \"alchemy-sdk\");\n/* harmony import */ var alchemy_sdk__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(alchemy_sdk__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @rainbow-me/rainbowkit */ \"@rainbow-me/rainbowkit\");\n/* harmony import */ var wagmi__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! wagmi */ \"wagmi\");\n/* harmony import */ var wagmi__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(wagmi__WEBPACK_IMPORTED_MODULE_7__);\n/* harmony import */ var wagmi_providers_alchemy__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! wagmi/providers/alchemy */ \"wagmi/providers/alchemy\");\n/* harmony import */ var wagmi_providers_alchemy__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(wagmi_providers_alchemy__WEBPACK_IMPORTED_MODULE_8__);\n/* harmony import */ var _config_env_vars__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../config/env-vars */ \"./config/env-vars.ts\");\n/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ethers */ \"ethers\");\n/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_10__);\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_6__]);\n_rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_6__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n\n\n\n\n\n\n\n\n\n\n\n\nconst { NEXT_PUBLIC_ALCHEMY_ID , NEXT_PUBLIC_INFURA_ID , NEXT_PUBLIC_ETHERSCAN_API_KEY  } = _config_env_vars__WEBPACK_IMPORTED_MODULE_9__[\"default\"];\nconst alchemyId = NEXT_PUBLIC_ALCHEMY_ID;\nconst etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY;\nconst { chains , provider  } = (0,wagmi__WEBPACK_IMPORTED_MODULE_7__.configureChains)([\n    wagmi__WEBPACK_IMPORTED_MODULE_7__.chain.polygon\n], [\n    (0,wagmi_providers_alchemy__WEBPACK_IMPORTED_MODULE_8__.alchemyProvider)({\n        apiKey: alchemyId\n    })\n]);\nconst { connectors  } = (0,_rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_6__.getDefaultWallets)({\n    appName: \"the Wall\",\n    chains\n});\nconst wagmiClient = (0,wagmi__WEBPACK_IMPORTED_MODULE_7__.createClient)({\n    autoConnect: true,\n    connectors,\n    provider\n});\n// MetaMask requires requesting permission to connect users accounts\n// The MetaMask plugin also allows signing transactions to\n// send ether and pay to change state within the blockchain.\n// For this, you need the account signer...\nconst signerw = wagmiClient.provider;\n// The MetaMask plugin also allows signing transactions to\n// send ether and pay to change state within the blockchain.\n// For this, you need the account signer...\nlet contractaddrs = \"0x91fc82f5c588c00985aa264fc7b45ee680110703\";\n//const contractaddrs = \"0x91fc82f5c588c00985aa264fc7b45ee680110703\";\n//if (signerw._network.chainId == 137){\n//  contractaddrs = \"0x91fc82f5c588c00985aa264fc7b45ee680110703\";}//\n//  else if (signerw._network.chainId == 42161){\n//    contractaddrs = \"0x4766d8244d68874ed6499F085e194be3dC4152AA\";\n//}\n// The ERC-20 Contract ABI, which is a common contract interface\n// for tokens (this is the Human-Readable ABI format)\nconst Abi = [\n    \"function name() view returns (string)\",\n    \"function symbol() view returns (string)\",\n    \"function totalSupply() view returns (uint256)\",\n    \"function price() view returns (uint256)\",\n    \"function getTag(uint256 id) view returns (string)\",\n    \"function latest(uint256) view returns (string[] tags,address[] addrs,uint256[] times)\",\n    \"function mint2(address to, string _tag) payable\",\n    \"function mint(address to, string _tag)\",\n    \"function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)\", \n];\n//format addresses in ui\nfunction format_address(address) {\n    const new_address = address.substring(0, 5) + \"...\" + address.slice(-3);\n    return new_address;\n}\nlet addrs = [];\nfunction useTtag0() {\n    const { 0: tag , 1: setTag  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(\"LOL\");\n    const { 0: artist , 1: setArtist  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(\"LOL\");\n    const { 0: time , 1: setTime  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(\"\");\n    const { 0: sup , 1: setSup  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(2);\n    // let addrs = []\n    let addrst = [];\n    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{\n        // update the ui elements\n        async function updateUIStates() {\n            const [tagS, artistS, timeS] = await Contract.latest(await Contract.totalSupply());\n            setTag(tagS);\n            setArtist(artistS);\n            setTime(timeS);\n            const provider3 = new ethers__WEBPACK_IMPORTED_MODULE_10__.ethers.providers.JsonRpcProvider(\"https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg\");\n            for(let n = 0; n < sup; n++){\n                if (addrs[artistS[n]] == null) {\n                    let tn = await provider3.lookupAddress(artistS[n]);\n                    if (tn != null) {\n                        addrs[artistS[n]] = tn;\n                    } else {\n                        addrs[artistS[n]] = artistS[n];\n                    }\n                }\n            }\n            let s = await Contract.totalSupply();\n            s = ethers__WEBPACK_IMPORTED_MODULE_10__.ethers.utils.formatUnits(s, 0);\n            setSup(s);\n        }\n        // fix for updatix1ng after wallet login\n        //updateUIStates();\n        // schedule every 15 sec refresh\n        const timer = setInterval(()=>{\n            updateUIStates();\n        }, 3000);\n        // clearing interval\n        return ()=>clearInterval(timer);\n    });\n    function tag1() {\n        let tags = [];\n        let artists = [];\n        let times = [];\n        let t0 = [];\n        let ts = [];\n        let i = \"\";\n        for(let n = 0; n < sup; n++){\n            tags[n] = tag[n];\n            artists[n] = artist[n];\n            if (addrs[artists[n]] == null) {\n                artists[n] = artist[n];\n            } else {\n                artists[n] = addrs[artists[n]];\n            } //artist[n]\n            //  artists = nm\n            times[n] = time[n];\n            //ts[n] = ethers.utils.formatUnits(time[0]);\n            // times[n] = ethers.utils.formatUnits(ts[n],0);\n            if (tags[n] != \"\") {\n                let t2 = \"https://etherscan.io/address/\" + artist[n];\n                t0[n] = /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"h2\", {\n                            className: \"text-1xl text-center font-bold justify-center light:text-gray-800 \",\n                            children: [\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                                    style: {\n                                        color: \"#4f86f7\"\n                                    },\n                                    children: [\n                                        \" # \",\n                                        sup - n\n                                    ]\n                                }, void 0, true, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 147,\n                                    columnNumber: 13\n                                }, this),\n                                \"  From   \",\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                                    href: t2,\n                                    target: \"_blank\",\n                                    rel: \"noreferrer\",\n                                    className: \"rotating-hue\",\n                                    style: {\n                                        color: \"#4f86f7\"\n                                    },\n                                    children: artists[n]\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 147,\n                                    columnNumber: 70\n                                }, this)\n                            ]\n                        }, void 0, true, {\n                            fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                            lineNumber: 146,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                            className: \"text-center light:text-white-600\",\n                            children: tags[n]\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                            lineNumber: 149,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                            className: \"text-center light:text-white-600\",\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                                style: {\n                                    color: \"#32353B\"\n                                },\n                                children: \"_____________________________________________________________________________________________\"\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                lineNumber: 152,\n                                columnNumber: 61\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                            lineNumber: 152,\n                            columnNumber: 11\n                        }, this)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                    lineNumber: 145,\n                    columnNumber: 18\n                }, this);\n            }\n        }\n        let t1 = /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n            className: \"text-1xl font-bold light:text-gray-800\",\n            children: [\n                \"Messages: \",\n                sup\n            ]\n        }, void 0, true, {\n            fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n            lineNumber: 159,\n            columnNumber: 14\n        }, this);\n        return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {\n            children: [\n                t0,\n                t1\n            ]\n        }, void 0, true);\n    }\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n        children: tag1()\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n        lineNumber: 165,\n        columnNumber: 5\n    }, this);\n}\nconst Contract = new ethers__WEBPACK_IMPORTED_MODULE_10__.ethers.Contract(contractaddrs, Abi, signerw);\nconst App = ({ Component , pageProps  })=>{\n    function handleChangeMessage(event) {\n        const values = event.target.value;\n        setSendMessage(values);\n    }\n    //notify\n    const { 0: sendMessage , 1: setSendMessage  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(\"\");\n    const { 0: unlocktext , 1: set_unlocktext  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(\"Please Unlock Wallet\");\n    // notify function call\n    // await // MetaMask requires requesting permission to connect users accounts\n    const callTag = async ()=>{\n        // A Web3Provider wraps a standard Web3 provider, which is\n        // what MetaMask injects as window.ethereum into each page\n        const provider2 = new ethers__WEBPACK_IMPORTED_MODULE_10__.ethers.providers.Web3Provider(window.ethereum);\n        const provider3 = new ethers__WEBPACK_IMPORTED_MODULE_10__.ethers.providers.JsonRpcProvider(\"https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg\");\n        // Setup\n        const settings = {\n            apiKey: \"ku_puX-vIFhnbZnC3xmpdT3jUico70LY\",\n            network: alchemy_sdk__WEBPACK_IMPORTED_MODULE_5__.Network.MATIC_MAINNET\n        };\n        await provider2.send(\"eth_requestAccounts\", []);\n        try {\n            // await provider2.send(\"eth_requestAccounts\", []);// await // MetaMask requires requesting permission to connect users accountsSS\n            const signer = provider2.getSigner();\n            let myAddress = await signer.getAddress();\n            await Contract.connect(signer).mint(myAddress, sendMessage) ////signer._address, sendMessage)\n            ;\n        } catch (e) {\n            console.log(\"LOL\");\n        // addToast({body: e.message, type: \"error\"});\n        }\n    };\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_themes__WEBPACK_IMPORTED_MODULE_4__.ThemeProvider, {\n        attribute: \"class\",\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n            className: \"m-auto bg-white dark:bg-gray-900 dark:text-white\",\n            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(wagmi__WEBPACK_IMPORTED_MODULE_7__.WagmiConfig, {\n                client: wagmiClient,\n                children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_6__.RainbowKitProvider, {\n                    chains: chains,\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(Component, {\n                            ...pageProps\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                            lineNumber: 212,\n                            columnNumber: 13\n                        }, undefined),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                            className: \"flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden\",\n                            children: [\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"h1\", {\n                                    className: \"m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue\",\n                                    children: \"Tag the Wall!\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 214,\n                                    columnNumber: 15\n                                }, undefined),\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"h2\", {\n                                    className: \"text-1xl text-center font-bold justify-center light:text-gray-800\",\n                                    children: \"Send your message here\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 217,\n                                    columnNumber: 15\n                                }, undefined),\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"textarea\", {\n                                    className: \"m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 light:text-gray-800 dark:text-black\",\n                                    onChange: (e)=>handleChangeMessage(e)\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 220,\n                                    columnNumber: 15\n                                }, undefined),\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"button\", {\n                                    style: {\n                                        background: \"#00ffff\"\n                                    },\n                                    className: \"btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black\",\n                                    type: \"button\",\n                                    onClick: callTag,\n                                    children: \" Send\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 223,\n                                    columnNumber: 15\n                                }, undefined),\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {}, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 227,\n                                    columnNumber: 15\n                                }, undefined),\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {}, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 230,\n                                    columnNumber: 15\n                                }, undefined)\n                            ]\n                        }, void 0, true, {\n                            fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                            lineNumber: 213,\n                            columnNumber: 13\n                        }, undefined),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                            className: \"flex flex-col space-y-6 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden\",\n                            children: [\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"h1\", {\n                                    className: \"m-auto text-center md:mt-8 text-4xl md:text-4xl font-extrabold rotating-hue\",\n                                    children: \"Chat\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 236,\n                                    columnNumber: 15\n                                }, undefined),\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                                    className: \"m-auto text-center w-3/4\",\n                                    children: useTtag0()\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                                    lineNumber: 239,\n                                    columnNumber: 15\n                                }, undefined)\n                            ]\n                        }, void 0, true, {\n                            fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                            lineNumber: 234,\n                            columnNumber: 13\n                        }, undefined)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                    lineNumber: 211,\n                    columnNumber: 11\n                }, undefined)\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n                lineNumber: 210,\n                columnNumber: 9\n            }, undefined)\n        }, void 0, false, {\n            fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n            lineNumber: 209,\n            columnNumber: 7\n        }, undefined)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\PR0_6\\\\Documents\\\\Sol\\\\thewall\\\\pages\\\\_app.tsx\",\n        lineNumber: 208,\n        columnNumber: 5\n    }, undefined);\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9wYWdlcy9fYXBwLnRzeC5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQUE4QjtBQUNHO0FBQ1M7QUFDRTtBQU1EO0FBR0k7QUFDK0I7QUFDYTtBQUNsQztBQUdsQjtBQUNHO0FBSzFDLE1BQU0sRUFBRWEsc0JBQXNCLEdBQUVDLHFCQUFxQixHQUFFQyw2QkFBNkIsR0FBRSxHQUFHSix3REFBTTtBQUUvRixNQUFNSyxTQUFTLEdBQUdILHNCQUFzQjtBQUN4QyxNQUFNSSxlQUFlLEdBQUdGLDZCQUE2QjtBQUVyRCxNQUFNLEVBQUVHLE1BQU0sR0FBRUMsUUFBUSxHQUFFLEdBQUdaLHNEQUFlLENBQzFDO0lBQUNELGdEQUFhO0NBQUMsRUFDZjtJQUFDSSx3RUFBZSxDQUFDO1FBQUVXLE1BQU0sRUFBRUwsU0FBUztLQUFFLENBQUM7Q0FBQyxDQUN6QztBQUNELE1BQU0sRUFBRU0sVUFBVSxHQUFFLEdBQUdsQix5RUFBaUIsQ0FBQztJQUN2Q21CLE9BQU8sRUFBRSxVQUFVO0lBQ25CTCxNQUFNO0NBQ1AsQ0FBQztBQUVGLE1BQU1NLFdBQVcsR0FBR2hCLG1EQUFZLENBQUM7SUFDL0JpQixXQUFXLEVBQUUsSUFBSTtJQUNqQkgsVUFBVTtJQUNWSCxRQUFRO0NBQ1QsQ0FBQztBQUVGLG9FQUFvRTtBQUVwRSwwREFBMEQ7QUFDMUQsNERBQTREO0FBQzVELDJDQUEyQztBQUMzQyxNQUFNTyxPQUFPLEdBQUdGLFdBQVcsQ0FBQ0wsUUFBUTtBQUVwQywwREFBMEQ7QUFDMUQsNERBQTREO0FBQzVELDJDQUEyQztBQUMzQyxJQUFJUSxhQUFhLEdBQUcsNENBQTRDO0FBQ2hFLHFFQUFxRTtBQUNyRSx1Q0FBdUM7QUFDdkMsb0VBQW9FO0FBQ3BFLGdEQUFnRDtBQUNoRCxtRUFBbUU7QUFDbkUsR0FBRztBQUNILGdFQUFnRTtBQUNoRSxxREFBcUQ7QUFDckQsTUFBTUMsR0FBRyxHQUFHO0lBQ1YsdUNBQXVDO0lBQ3ZDLHlDQUF5QztJQUN6QywrQ0FBK0M7SUFDL0MseUNBQXlDO0lBQ3pDLG1EQUFtRDtJQUNuRCx1RkFBdUY7SUFDdkYsaURBQWlEO0lBQ2pELHdDQUF3QztJQUN4QyxnR0FBZ0c7Q0FDakc7QUFDRCx3QkFBd0I7QUFDeEIsU0FBU0MsY0FBYyxDQUFDQyxPQUFlLEVBQUU7SUFDdkMsTUFBTUMsV0FBVyxHQUFHRCxPQUFPLENBQUNFLFNBQVMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEdBQUcsS0FBSyxHQUFHRixPQUFPLENBQUNHLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQztJQUN2RSxPQUFPRixXQUFXLENBQUM7Q0FDcEI7QUFDRCxJQUFJRyxLQUFLLEdBQUcsRUFBRTtBQUNkLFNBQVNDLFFBQVEsR0FBRztJQUVsQixNQUFNLEtBQUNDLEdBQUcsTUFBRUMsTUFBTSxNQUFJcEMsK0NBQVEsQ0FBQyxLQUFLLENBQUM7SUFDckMsTUFBTSxLQUFDcUMsTUFBTSxNQUFFQyxTQUFTLE1BQUl0QywrQ0FBUSxDQUFDLEtBQUssQ0FBQztJQUMzQyxNQUFNLEtBQUN1QyxJQUFJLE1BQUVDLE9BQU8sTUFBSXhDLCtDQUFRLENBQUMsRUFBRSxDQUFDO0lBQ3BDLE1BQU0sS0FBQ3lDLEdBQUcsTUFBRUMsTUFBTSxNQUFJMUMsK0NBQVEsQ0FBQyxDQUFDLENBQUM7SUFDakMsaUJBQWlCO0lBQ2hCLElBQUkyQyxNQUFNLEdBQUcsRUFBRTtJQUNoQjVDLGdEQUFTLENBQUMsSUFBTTtRQUVkLHlCQUF5QjtRQUN6QixlQUFlNkMsY0FBYyxHQUFHO1lBQzlCLE1BQU0sQ0FBQ0MsSUFBSSxFQUFFQyxPQUFPLEVBQUVDLEtBQUssQ0FBQyxHQUFHLE1BQU1DLFFBQVEsQ0FBQ0MsTUFBTSxDQUFDLE1BQU1ELFFBQVEsQ0FBQ0UsV0FBVyxFQUFFLENBQUM7WUFDbEZkLE1BQU0sQ0FBQ1MsSUFBSSxDQUFDLENBQUM7WUFDYlAsU0FBUyxDQUFDUSxPQUFPLENBQUMsQ0FBQztZQUNuQk4sT0FBTyxDQUFDTyxLQUFLLENBQUMsQ0FBQztZQUNmLE1BQU1JLFNBQVMsR0FBRyxJQUFJeEMscUVBQWdDLENBQUMsdUVBQXVFLENBQUM7WUFDNUgsSUFBSyxJQUFJMkMsQ0FBQyxHQUFHLENBQUMsRUFBRUEsQ0FBQyxHQUFHYixHQUFHLEVBQUVhLENBQUMsRUFBRSxDQUFFO2dCQUM3QixJQUFJckIsS0FBSyxDQUFDYSxPQUFPLENBQUNRLENBQUMsQ0FBQyxDQUFDLElBQUcsSUFBSSxFQUFDO29CQUM3QixJQUFJQyxFQUFFLEdBQUcsTUFBTUosU0FBUyxDQUFDSyxhQUFhLENBQUNWLE9BQU8sQ0FBQ1EsQ0FBQyxDQUFDLENBQUM7b0JBQ2hELElBQUlDLEVBQUUsSUFBSSxJQUFJLEVBQUM7d0JBQ2J0QixLQUFLLENBQUNhLE9BQU8sQ0FBQ1EsQ0FBQyxDQUFDLENBQUMsR0FBR0MsRUFBRTtxQkFBRSxNQUNwQjt3QkFDTHRCLEtBQUssQ0FBQ2EsT0FBTyxDQUFDUSxDQUFDLENBQUMsQ0FBQyxHQUFHUixPQUFPLENBQUNRLENBQUMsQ0FBQztxQkFDL0I7aUJBQUM7YUFDTjtZQUNELElBQUlHLENBQUMsR0FBSSxNQUFNVCxRQUFRLENBQUNFLFdBQVcsRUFBRTtZQUNyQ08sQ0FBQyxHQUFHOUMsNkRBQXdCLENBQUM4QyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDbkNmLE1BQU0sQ0FBQ2UsQ0FBQyxDQUFDO1NBQ1Y7UUFDRCx3Q0FBd0M7UUFDeEMsbUJBQW1CO1FBRW5CLGdDQUFnQztRQUNoQyxNQUFNRyxLQUFLLEdBQUdDLFdBQVcsQ0FBQyxJQUFNO1lBRTlCakIsY0FBYyxFQUFFO1NBRWpCLEVBQUUsSUFBSSxDQUFDO1FBQ1Isb0JBQW9CO1FBQ3BCLE9BQU8sSUFBTWtCLGFBQWEsQ0FBQ0YsS0FBSyxDQUFDLENBQUM7S0FDbkMsQ0FBRSxDQUFDO0lBRUosU0FBU0csSUFBSSxHQUFHO1FBQ2QsSUFBSUMsSUFBSSxHQUFHLEVBQUU7UUFDYixJQUFJQyxPQUFPLEdBQUcsRUFBRTtRQUNoQixJQUFJQyxLQUFLLEdBQUcsRUFBRTtRQUNkLElBQUlDLEVBQUUsR0FBRyxFQUFFO1FBQ1gsSUFBSUMsRUFBRSxHQUFHLEVBQUU7UUFDWCxJQUFJQyxDQUFDLEdBQUcsRUFBRTtRQUNWLElBQUssSUFBSWYsQ0FBQyxHQUFHLENBQUMsRUFBRUEsQ0FBQyxHQUFHYixHQUFHLEVBQUVhLENBQUMsRUFBRSxDQUFFO1lBQzVCVSxJQUFJLENBQUNWLENBQUMsQ0FBQyxHQUFHbkIsR0FBRyxDQUFDbUIsQ0FBQyxDQUFDO1lBQ2hCVyxPQUFPLENBQUNYLENBQUMsQ0FBQyxHQUFFakIsTUFBTSxDQUFDaUIsQ0FBQyxDQUFDO1lBQ3JCLElBQUlyQixLQUFLLENBQUNnQyxPQUFPLENBQUNYLENBQUMsQ0FBQyxDQUFDLElBQUksSUFBSSxFQUFDO2dCQUM1QlcsT0FBTyxDQUFDWCxDQUFDLENBQUMsR0FBR2pCLE1BQU0sQ0FBQ2lCLENBQUMsQ0FBQzthQUN2QixNQUNHO2dCQUNKVyxPQUFPLENBQUNYLENBQUMsQ0FBQyxHQUFHckIsS0FBSyxDQUFDZ0MsT0FBTyxDQUFDWCxDQUFDLENBQUMsQ0FBQzthQUFDLFlBQVc7WUFDN0MsZ0JBQWdCO1lBQ2JZLEtBQUssQ0FBQ1osQ0FBQyxDQUFDLEdBQUdmLElBQUksQ0FBQ2UsQ0FBQyxDQUFDO1lBQ2xCLDRDQUE0QztZQUM1QyxnREFBZ0Q7WUFDaEQsSUFBSVUsSUFBSSxDQUFDVixDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7Z0JBQ2pCLElBQUlnQixFQUFFLEdBQUcsK0JBQStCLEdBQUdqQyxNQUFNLENBQUNpQixDQUFDLENBQUM7Z0JBQ3BEYSxFQUFFLENBQUNiLENBQUMsQ0FBQyxpQkFBSSw4REFBQ2lCLEtBQUc7O3NDQUNYLDhEQUFDQyxJQUFFOzRCQUFDQyxTQUFTLEVBQUMsb0VBQW9FOzs4Q0FDaEYsOERBQUNDLEdBQUM7b0NBQUNDLEtBQUssRUFBRTt3Q0FBRUMsS0FBSyxFQUFFLFNBQVM7cUNBQUU7O3dDQUFFLEtBQUc7d0NBQUNuQyxHQUFHLEdBQUdhLENBQUM7Ozs7Ozt3Q0FBSztnQ0FBQSxXQUFTOzhDQUFBLDhEQUFDb0IsR0FBQztvQ0FBQ0csSUFBSSxFQUFFUCxFQUFFO29DQUFFUSxNQUFNLEVBQUMsUUFBUTtvQ0FBQ0MsR0FBRyxFQUFDLFlBQVk7b0NBQUNOLFNBQVMsRUFBQyxjQUFjO29DQUFDRSxLQUFLLEVBQUU7d0NBQUVDLEtBQUssRUFBRSxTQUFTO3FDQUFFOzhDQUFHWCxPQUFPLENBQUNYLENBQUMsQ0FBQzs7Ozs7d0NBQUs7Ozs7OztnQ0FDMUs7c0NBQ0wsOERBQUNpQixLQUFHOzRCQUFDRSxTQUFTLEVBQUMsa0NBQWtDO3NDQUM5Q1QsSUFBSSxDQUFDVixDQUFDLENBQUM7Ozs7O2dDQUNKO3NDQUNOLDhEQUFDaUIsS0FBRzs0QkFBQ0UsU0FBUyxFQUFDLGtDQUFrQztzQ0FBQyw0RUFBQ0MsR0FBQztnQ0FBQ0MsS0FBSyxFQUFFO29DQUFFQyxLQUFLLEVBQUUsU0FBUztpQ0FBRTswQ0FBRSwrRkFFbEY7Ozs7O29DQUFJOzs7OztnQ0FBTTs7Ozs7O3dCQUNOO2FBRVA7U0FDRjtRQUNELElBQUlJLEVBQUUsaUJBQUcsOERBQUNULEtBQUc7WUFBQ0UsU0FBUyxFQUFDLHdDQUF3Qzs7Z0JBQUMsWUFBVTtnQkFBQ2hDLEdBQUc7Ozs7OztnQkFBTztRQUN0RixxQkFDRTs7Z0JBQUcwQixFQUFFO2dCQUFFYSxFQUFFOzt3QkFBSSxDQUFFO0tBQ2xCO0lBRUQscUJBQ0UsOERBQUNULEtBQUc7a0JBQUVSLElBQUksRUFBRTs7Ozs7WUFBTyxDQUNwQjtDQUNGO0FBRUQsTUFBTWYsUUFBUSxHQUFHLElBQUlyQyxvREFBZSxDQUFDZSxhQUFhLEVBQUVDLEdBQUcsRUFBRUYsT0FBTyxDQUFDO0FBQ2pFLE1BQU13RCxHQUFHLEdBQUcsQ0FBQyxFQUFFQyxTQUFTLEdBQUVDLFNBQVMsR0FBWSxHQUFLO0lBQ2xELFNBQVNDLG1CQUFtQixDQUFDQyxLQUF1QyxFQUFFO1FBQ3BFLE1BQU1DLE1BQU0sR0FBR0QsS0FBSyxDQUFDUCxNQUFNLENBQUNTLEtBQUs7UUFDakNDLGNBQWMsQ0FBQ0YsTUFBTSxDQUFDLENBQUM7S0FDeEI7SUFFRCxRQUFRO0lBQ1IsTUFBTSxLQUFDRyxXQUFXLE1BQUVELGNBQWMsTUFBSXhGLCtDQUFRLENBQUMsRUFBRSxDQUFDO0lBQ2xELE1BQU0sS0FBQzBGLFVBQVUsTUFBRUMsY0FBYyxNQUFJM0YsK0NBQVEsQ0FBQyxzQkFBc0IsQ0FBQztJQUNyRSx1QkFBdUI7SUFFdkIsNkVBQTZFO0lBRTdFLE1BQU00RixPQUFPLEdBQUcsVUFBWTtRQUMxQiwwREFBMEQ7UUFDMUQsMERBQTBEO1FBQzFELE1BQU1DLFNBQVMsR0FBRyxJQUFJbEYsa0VBQTZCLENBQUNvRixNQUFNLENBQUNDLFFBQVEsQ0FBQztRQUNwRSxNQUFNN0MsU0FBUyxHQUFHLElBQUl4QyxxRUFBZ0MsQ0FBQyx1RUFBdUUsQ0FBQztRQUMvSCxRQUFRO1FBQ1IsTUFBTXNGLFFBQVEsR0FBRztZQUNmN0UsTUFBTSxFQUFFLGtDQUFrQztZQUMxQzhFLE9BQU8sRUFBRWhHLDhEQUFxQjtTQUMvQjtRQUVELE1BQU0yRixTQUFTLENBQUNPLElBQUksQ0FBQyxxQkFBcUIsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUNoRCxJQUFJO1lBQ0Ysa0lBQWtJO1lBQ2xJLE1BQU1DLE1BQU0sR0FBR1IsU0FBUyxDQUFDUyxTQUFTLEVBQUU7WUFDcEMsSUFBSUMsU0FBUyxHQUFHLE1BQU1GLE1BQU0sQ0FBQ0csVUFBVSxFQUFFO1lBQ3pDLE1BQU14RCxRQUFRLENBQUN5RCxPQUFPLENBQUNKLE1BQU0sQ0FBQyxDQUFDSyxJQUFJLENBQUNILFNBQVMsRUFBRWQsV0FBVyxDQUFDLGtDQUFpQztZQUFqQztTQUM1RCxDQUFDLE9BQU9rQixDQUFDLEVBQUU7WUFDVkMsT0FBTyxDQUFDQyxHQUFHLENBQUMsS0FBSyxDQUFDO1FBQ2xCLDhDQUE4QztTQUMvQztLQUNGO0lBRUQscUJBRUUsOERBQUM1RyxzREFBYTtRQUFDNkcsU0FBUyxFQUFDLE9BQU87a0JBQzlCLDRFQUFDdkMsS0FBRztZQUFDRSxTQUFTLEVBQUMsa0RBQWtEO3NCQUMvRCw0RUFBQ2pFLDhDQUFXO2dCQUFDdUcsTUFBTSxFQUFFeEYsV0FBVzswQkFDOUIsNEVBQUNuQixzRUFBa0I7b0JBQUNhLE1BQU0sRUFBRUEsTUFBTTs7c0NBQ2hDLDhEQUFDaUUsU0FBUzs0QkFBRSxHQUFHQyxTQUFTOzs7OztxQ0FBSTtzQ0FDNUIsOERBQUNaLEtBQUc7NEJBQUNFLFNBQVMsRUFBQyxnTUFBZ007OzhDQUM3TSw4REFBQ3VDLElBQUU7b0NBQUN2QyxTQUFTLEVBQUMsNkVBQTZFOzhDQUFDLGVBRTVGOzs7Ozs2Q0FBSzs4Q0FDTCw4REFBQ0QsSUFBRTtvQ0FBQ0MsU0FBUyxFQUFDLG1FQUFtRTs4Q0FBQyx3QkFFbEY7Ozs7OzZDQUFLOzhDQUNMLDhEQUFDd0MsVUFBUTtvQ0FBQ3hDLFNBQVMsRUFBQyx1SkFBdUo7b0NBQ3pLeUMsUUFBUSxFQUFFUCxDQUFBQSxDQUFDLEdBQUl2QixtQkFBbUIsQ0FBQ3VCLENBQUMsQ0FBQzs7Ozs7NkNBQUk7OENBRTNDLDhEQUFDUSxRQUFNO29DQUFDeEMsS0FBSyxFQUFFO3dDQUFFeUMsVUFBVSxFQUFFLFNBQVM7cUNBQUU7b0NBQUUzQyxTQUFTLEVBQUMsMkhBQTJIO29DQUFDNEMsSUFBSSxFQUFDLFFBQVE7b0NBQzNMQyxPQUFPLEVBQUUxQixPQUFPOzhDQUFFLE9BQ3BCOzs7Ozs2Q0FBUzs4Q0FFVCw4REFBQ3JCLEtBQUc7Ozs7NkNBRUU7OENBQ04sOERBQUNBLEtBQUc7Ozs7NkNBRUU7Ozs7OztxQ0FDRjtzQ0FDTiw4REFBQ0EsS0FBRzs0QkFBQ0UsU0FBUyxFQUFDLGlNQUFrTTs7OENBRS9NLDhEQUFDdUMsSUFBRTtvQ0FBQ3ZDLFNBQVMsRUFBQyw2RUFBNkU7OENBQUMsTUFFNUY7Ozs7OzZDQUFLOzhDQUNMLDhEQUFDRixLQUFHO29DQUFDRSxTQUFTLEVBQUMsMEJBQTBCOzhDQUV0Q3ZDLFFBQVEsRUFBRTs7Ozs7NkNBQ1A7Ozs7OztxQ0FFRjs7Ozs7OzZCQUNhOzs7Ozt5QkFDVDs7Ozs7cUJBQ1Y7Ozs7O2lCQUNRLENBQ2pCO0NBQ0Y7QUFDRCxpRUFBZStDLEdBQUciLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9ldGgtc3RhcnRlci1wcm9qZWN0Ly4vcGFnZXMvX2FwcC50c3g/MmZiZSJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJy4uL3N0eWxlcy9nbG9iYWxzLmNzcydcclxuaW1wb3J0ICd0YWlsd2luZGNzcy90YWlsd2luZC5jc3MnXHJcbmltcG9ydCAnQHJhaW5ib3ctbWUvcmFpbmJvd2tpdC9zdHlsZXMuY3NzJ1xyXG5pbXBvcnQgeyB1c2VFZmZlY3QsIHVzZVN0YXRlIH0gZnJvbSBcInJlYWN0XCI7XHJcbmltcG9ydCBhYmkgZnJvbSAnLi4vY29udHJhY3RzL3RoZVdhbGwuanNvbidcclxuaW1wb3J0IEhlYWQgZnJvbSAnbmV4dC9oZWFkJ1xyXG5pbXBvcnQgSW1hZ2UgZnJvbSAnbmV4dC9pbWFnZSdcclxuaW1wb3J0IE5hdmJhciBmcm9tICcuLi9jb21wb25lbnRzL25hdmJhcidcclxuaW1wb3J0IHR5cGUgeyBBcHBQcm9wcyB9IGZyb20gJ25leHQvYXBwJ1xyXG5pbXBvcnQgeyBUaGVtZVByb3ZpZGVyIH0gZnJvbSAnbmV4dC10aGVtZXMnXHJcbmltcG9ydCBEYXJrTW9kZVRvZ2dsZSBmcm9tICcuLi9jb21wb25lbnRzL2RhcmtNb2RlVG9nZ2xlJztcclxuaW1wb3J0IHsgdXNlUm91dGVyIH0gZnJvbSAnbmV4dC9yb3V0ZXInXHJcbmltcG9ydCB7IE5ldHdvcmssIEFsY2hlbXkgfSBmcm9tICdhbGNoZW15LXNkayc7XHJcbmltcG9ydCB7IGdldERlZmF1bHRXYWxsZXRzLCBSYWluYm93S2l0UHJvdmlkZXIgfSBmcm9tICdAcmFpbmJvdy1tZS9yYWluYm93a2l0J1xyXG5pbXBvcnQgeyBjaGFpbiwgY29uZmlndXJlQ2hhaW5zLCBjcmVhdGVDbGllbnQsIFdhZ21pQ29uZmlnLCB1c2VDb250cmFjdFdyaXRlIH0gZnJvbSAnd2FnbWknXHJcbmltcG9ydCB7IGFsY2hlbXlQcm92aWRlciB9IGZyb20gJ3dhZ21pL3Byb3ZpZGVycy9hbGNoZW15J1xyXG5pbXBvcnQgeyBwdWJsaWNQcm92aWRlciB9IGZyb20gJ3dhZ21pL3Byb3ZpZGVycy9wdWJsaWMnXHJcblxyXG5pbXBvcnQgY29uZmlnIGZyb20gJy4uL2NvbmZpZy9lbnYtdmFycydcclxuaW1wb3J0IHsgQmlnTnVtYmVyLCBldGhlcnMgfSBmcm9tICdldGhlcnMnXHJcbmltcG9ydCB7IFJhaW5ib3dLaXRDaGFpblByb3ZpZGVyIH0gZnJvbSAnQHJhaW5ib3ctbWUvcmFpbmJvd2tpdC9kaXN0L2NvbXBvbmVudHMvUmFpbmJvd0tpdFByb3ZpZGVyL1JhaW5ib3dLaXRDaGFpbkNvbnRleHQnXHJcbmltcG9ydCBIb21lIGZyb20gJy4nO1xyXG5pbXBvcnQgQWRkcmVzc1BpbGwgZnJvbSAnLi4vY29tcG9uZW50cy9hZGRyZXNzUGlsbCc7XHJcbmltcG9ydCB7IENoYW5nZUV2ZW50IH0gZnJvbSAncmVhY3QnO1xyXG5jb25zdCB7IE5FWFRfUFVCTElDX0FMQ0hFTVlfSUQsIE5FWFRfUFVCTElDX0lORlVSQV9JRCwgTkVYVF9QVUJMSUNfRVRIRVJTQ0FOX0FQSV9LRVkgfSA9IGNvbmZpZ1xyXG5cclxuY29uc3QgYWxjaGVteUlkID0gTkVYVF9QVUJMSUNfQUxDSEVNWV9JRFxyXG5jb25zdCBldGhlcnNjYW5BcGlLZXkgPSBORVhUX1BVQkxJQ19FVEhFUlNDQU5fQVBJX0tFWVxyXG5cclxuY29uc3QgeyBjaGFpbnMsIHByb3ZpZGVyIH0gPSBjb25maWd1cmVDaGFpbnMoXHJcbiAgW2NoYWluLnBvbHlnb25dLC8vLCBjaGFpbi5hcmJpdHJ1bV0sLy8sIC8vY2hhaW4ub3B0aW1pc20sIGNoYWluLmFyYml0cnVtLCBjaGFpbi5sb2NhbGhvc3RdLFxyXG4gIFthbGNoZW15UHJvdmlkZXIoeyBhcGlLZXk6IGFsY2hlbXlJZCB9KV0sLy8sLy8gYWxjaGVteVByb3ZpZGVyKHsgYXBpS2V5OiBcImw3REJ4N3RMbFIteF9YOF8zaXQ4SnByOXU5eWlxcm44XCIgfSldLFxyXG4pXHJcbmNvbnN0IHsgY29ubmVjdG9ycyB9ID0gZ2V0RGVmYXVsdFdhbGxldHMoe1xyXG4gIGFwcE5hbWU6ICd0aGUgV2FsbCcsXHJcbiAgY2hhaW5zLCBcclxufSlcclxuXHJcbmNvbnN0IHdhZ21pQ2xpZW50ID0gY3JlYXRlQ2xpZW50KHtcclxuICBhdXRvQ29ubmVjdDogdHJ1ZSxcclxuICBjb25uZWN0b3JzLFxyXG4gIHByb3ZpZGVyLFxyXG59KVxyXG5cclxuLy8gTWV0YU1hc2sgcmVxdWlyZXMgcmVxdWVzdGluZyBwZXJtaXNzaW9uIHRvIGNvbm5lY3QgdXNlcnMgYWNjb3VudHNcclxuXHJcbi8vIFRoZSBNZXRhTWFzayBwbHVnaW4gYWxzbyBhbGxvd3Mgc2lnbmluZyB0cmFuc2FjdGlvbnMgdG9cclxuLy8gc2VuZCBldGhlciBhbmQgcGF5IHRvIGNoYW5nZSBzdGF0ZSB3aXRoaW4gdGhlIGJsb2NrY2hhaW4uXHJcbi8vIEZvciB0aGlzLCB5b3UgbmVlZCB0aGUgYWNjb3VudCBzaWduZXIuLi5cclxuY29uc3Qgc2lnbmVydyA9IHdhZ21pQ2xpZW50LnByb3ZpZGVyO1xyXG5cclxuLy8gVGhlIE1ldGFNYXNrIHBsdWdpbiBhbHNvIGFsbG93cyBzaWduaW5nIHRyYW5zYWN0aW9ucyB0b1xyXG4vLyBzZW5kIGV0aGVyIGFuZCBwYXkgdG8gY2hhbmdlIHN0YXRlIHdpdGhpbiB0aGUgYmxvY2tjaGFpbi5cclxuLy8gRm9yIHRoaXMsIHlvdSBuZWVkIHRoZSBhY2NvdW50IHNpZ25lci4uLlxyXG5sZXQgY29udHJhY3RhZGRycyA9IFwiMHg5MWZjODJmNWM1ODhjMDA5ODVhYTI2NGZjN2I0NWVlNjgwMTEwNzAzXCI7XHJcbi8vY29uc3QgY29udHJhY3RhZGRycyA9IFwiMHg5MWZjODJmNWM1ODhjMDA5ODVhYTI2NGZjN2I0NWVlNjgwMTEwNzAzXCI7XHJcbi8vaWYgKHNpZ25lcncuX25ldHdvcmsuY2hhaW5JZCA9PSAxMzcpe1xyXG4vLyAgY29udHJhY3RhZGRycyA9IFwiMHg5MWZjODJmNWM1ODhjMDA5ODVhYTI2NGZjN2I0NWVlNjgwMTEwNzAzXCI7fS8vXHJcbi8vICBlbHNlIGlmIChzaWduZXJ3Ll9uZXR3b3JrLmNoYWluSWQgPT0gNDIxNjEpe1xyXG4vLyAgICBjb250cmFjdGFkZHJzID0gXCIweDQ3NjZkODI0NGQ2ODg3NGVkNjQ5OUYwODVlMTk0YmUzZEM0MTUyQUFcIjtcclxuLy99XHJcbi8vIFRoZSBFUkMtMjAgQ29udHJhY3QgQUJJLCB3aGljaCBpcyBhIGNvbW1vbiBjb250cmFjdCBpbnRlcmZhY2VcclxuLy8gZm9yIHRva2VucyAodGhpcyBpcyB0aGUgSHVtYW4tUmVhZGFibGUgQUJJIGZvcm1hdClcclxuY29uc3QgQWJpID0gW1xyXG4gIFwiZnVuY3Rpb24gbmFtZSgpIHZpZXcgcmV0dXJucyAoc3RyaW5nKVwiLFxyXG4gIFwiZnVuY3Rpb24gc3ltYm9sKCkgdmlldyByZXR1cm5zIChzdHJpbmcpXCIsXHJcbiAgXCJmdW5jdGlvbiB0b3RhbFN1cHBseSgpIHZpZXcgcmV0dXJucyAodWludDI1NilcIixcclxuICBcImZ1bmN0aW9uIHByaWNlKCkgdmlldyByZXR1cm5zICh1aW50MjU2KVwiLFxyXG4gIFwiZnVuY3Rpb24gZ2V0VGFnKHVpbnQyNTYgaWQpIHZpZXcgcmV0dXJucyAoc3RyaW5nKVwiLFxyXG4gIFwiZnVuY3Rpb24gbGF0ZXN0KHVpbnQyNTYpIHZpZXcgcmV0dXJucyAoc3RyaW5nW10gdGFncyxhZGRyZXNzW10gYWRkcnMsdWludDI1NltdIHRpbWVzKVwiLFxyXG4gIFwiZnVuY3Rpb24gbWludDIoYWRkcmVzcyB0bywgc3RyaW5nIF90YWcpIHBheWFibGVcIixcclxuICBcImZ1bmN0aW9uIG1pbnQoYWRkcmVzcyB0bywgc3RyaW5nIF90YWcpXCIsXHJcbiAgXCJmdW5jdGlvbiBsYXRlc3QodWludDI1NiBsYXN0KSB2aWV3IHJldHVybnMgKHN0cmluZ1tdIG1lbW9yeSxhZGRyZXNzW10gbWVtb3J5LHVpbnQyNTZbXSBtZW1vcnkpXCIsXHJcbl07XHJcbi8vZm9ybWF0IGFkZHJlc3NlcyBpbiB1aVxyXG5mdW5jdGlvbiBmb3JtYXRfYWRkcmVzcyhhZGRyZXNzOiBzdHJpbmcpIHtcclxuICBjb25zdCBuZXdfYWRkcmVzcyA9IGFkZHJlc3Muc3Vic3RyaW5nKDAsIDUpICsgJy4uLicgKyBhZGRyZXNzLnNsaWNlKC0zKVxyXG4gIHJldHVybiBuZXdfYWRkcmVzcztcclxufVxyXG5sZXQgYWRkcnMgPSBbXVxyXG5mdW5jdGlvbiB1c2VUdGFnMCgpIHtcclxuXHJcbiAgY29uc3QgW3RhZywgc2V0VGFnXSA9IHVzZVN0YXRlKFwiTE9MXCIpO1xyXG4gIGNvbnN0IFthcnRpc3QsIHNldEFydGlzdF0gPSB1c2VTdGF0ZShcIkxPTFwiKTtcclxuICBjb25zdCBbdGltZSwgc2V0VGltZV0gPSB1c2VTdGF0ZShcIlwiKTtcclxuICBjb25zdCBbc3VwLCBzZXRTdXBdID0gdXNlU3RhdGUoMik7XHJcbiAgLy8gbGV0IGFkZHJzID0gW11cclxuICAgbGV0IGFkZHJzdCA9IFtdXHJcbiAgdXNlRWZmZWN0KCgpID0+IHtcclxuXHJcbiAgICAvLyB1cGRhdGUgdGhlIHVpIGVsZW1lbnRzXHJcbiAgICBhc3luYyBmdW5jdGlvbiB1cGRhdGVVSVN0YXRlcygpIHtcclxuICAgICAgY29uc3QgW3RhZ1MsIGFydGlzdFMsIHRpbWVTXSA9IGF3YWl0IENvbnRyYWN0LmxhdGVzdChhd2FpdCBDb250cmFjdC50b3RhbFN1cHBseSgpKTtcclxuICAgICAgc2V0VGFnKHRhZ1MpO1xyXG4gICAgICBzZXRBcnRpc3QoYXJ0aXN0Uyk7XHJcbiAgICAgIHNldFRpbWUodGltZVMpO1xyXG4gICAgICBjb25zdCBwcm92aWRlcjMgPSBuZXcgZXRoZXJzLnByb3ZpZGVycy5Kc29uUnBjUHJvdmlkZXIoJ2h0dHBzOi8vZXRoLW1haW5uZXQuZy5hbGNoZW15LmNvbS92Mi9aLWlmWExtWjlUMy1uZlhpQTBCOHdwNVpVUFhUa1dsZycpXHJcbiAgICAgICAgIGZvciAobGV0IG4gPSAwOyBuIDwgc3VwOyBuKyspIHtcclxuICAgICAgICAgIGlmIChhZGRyc1thcnRpc3RTW25dXSA9PW51bGwpe1xyXG4gICAgICAgICAgbGV0IHRuID0gYXdhaXQgcHJvdmlkZXIzLmxvb2t1cEFkZHJlc3MoYXJ0aXN0U1tuXSlcclxuICAgICAgICAgICAgaWYgKHRuICE9IG51bGwpe1xyXG4gICAgICAgICAgICAgIGFkZHJzW2FydGlzdFNbbl1dID0gdG4gfSBcclxuICAgICAgICAgICAgICBlbHNle1xyXG4gICAgICAgICAgICAgYWRkcnNbYXJ0aXN0U1tuXV0gPSBhcnRpc3RTW25dXHJcbiAgICAgICAgICAgfX1cclxuICAgICAgfVxyXG4gICAgICBsZXQgcyA9IChhd2FpdCBDb250cmFjdC50b3RhbFN1cHBseSgpKTtcclxuICAgICAgcyA9IGV0aGVycy51dGlscy5mb3JtYXRVbml0cyhzLCAwKTtcclxuICAgICAgc2V0U3VwKHMpXHJcbiAgICB9O1xyXG4gICAgLy8gZml4IGZvciB1cGRhdGl4MW5nIGFmdGVyIHdhbGxldCBsb2dpblxyXG4gICAgLy91cGRhdGVVSVN0YXRlcygpO1xyXG5cclxuICAgIC8vIHNjaGVkdWxlIGV2ZXJ5IDE1IHNlYyByZWZyZXNoXHJcbiAgICBjb25zdCB0aW1lciA9IHNldEludGVydmFsKCgpID0+IHtcclxuXHJcbiAgICAgIHVwZGF0ZVVJU3RhdGVzKClcclxuXHJcbiAgICB9LCAzMDAwKTtcclxuICAgIC8vIGNsZWFyaW5nIGludGVydmFsXHJcbiAgICByZXR1cm4gKCkgPT4gY2xlYXJJbnRlcnZhbCh0aW1lcik7XHJcbiAgfSwpO1xyXG5cclxuICBmdW5jdGlvbiB0YWcxKCkge1xyXG4gICAgbGV0IHRhZ3MgPSBbXVxyXG4gICAgbGV0IGFydGlzdHMgPSBbXVxyXG4gICAgbGV0IHRpbWVzID0gW11cclxuICAgIGxldCB0MCA9IFtdXHJcbiAgICBsZXQgdHMgPSBbXVxyXG4gICAgbGV0IGkgPSBcIlwiO1xyXG4gICAgZm9yIChsZXQgbiA9IDA7IG4gPCBzdXA7IG4rKykge1xyXG4gICAgICB0YWdzW25dID0gdGFnW25dXHJcbiAgICAgIGFydGlzdHNbbl0gPWFydGlzdFtuXVxyXG4gICAgICBpZiAoYWRkcnNbYXJ0aXN0c1tuXV0gPT0gbnVsbCl7XHJcbiAgICAgICAgYXJ0aXN0c1tuXSA9IGFydGlzdFtuXVxyXG4gICAgICB9XHJcbiAgICAgIGVsc2V7XHJcbiAgICAgIGFydGlzdHNbbl0gPSBhZGRyc1thcnRpc3RzW25dXX0vL2FydGlzdFtuXVxyXG4gICAvLyAgYXJ0aXN0cyA9IG5tXHJcbiAgICAgIHRpbWVzW25dID0gdGltZVtuXVxyXG4gICAgICAvL3RzW25dID0gZXRoZXJzLnV0aWxzLmZvcm1hdFVuaXRzKHRpbWVbMF0pO1xyXG4gICAgICAvLyB0aW1lc1tuXSA9IGV0aGVycy51dGlscy5mb3JtYXRVbml0cyh0c1tuXSwwKTtcclxuICAgICAgaWYgKHRhZ3Nbbl0gIT0gJycpIHtcclxuICAgICAgICBsZXQgdDIgPSAnaHR0cHM6Ly9ldGhlcnNjYW4uaW8vYWRkcmVzcy8nICsgYXJ0aXN0W25dXHJcbiAgICAgICAgdDBbbl0gPSAoPGRpdiA+XHJcbiAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwidGV4dC0xeGwgdGV4dC1jZW50ZXIgZm9udC1ib2xkIGp1c3RpZnktY2VudGVyIGxpZ2h0OnRleHQtZ3JheS04MDAgXCI+XHJcbiAgICAgICAgICAgIDxhIHN0eWxlPXt7IGNvbG9yOiAnIzRmODZmNycgfX0+ICMge3N1cCAtIG59PC9hPiAgRnJvbSAgIDxhIGhyZWY9e3QyfSB0YXJnZXQ9XCJfYmxhbmtcIiByZWw9XCJub3JlZmVycmVyXCIgY2xhc3NOYW1lPVwicm90YXRpbmctaHVlXCIgc3R5bGU9e3sgY29sb3I6ICcjNGY4NmY3JyB9fT57YXJ0aXN0c1tuXX08L2E+XHJcbiAgICAgICAgICA8L2gyPlxyXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlciBsaWdodDp0ZXh0LXdoaXRlLTYwMFwiID5cclxuICAgICAgICAgICAge3RhZ3Nbbl19XHJcbiAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgbGlnaHQ6dGV4dC13aGl0ZS02MDBcIj48YSBzdHlsZT17eyBjb2xvcjogJyMzMjM1M0InIH19PlxyXG4gICAgICAgICAgICBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19cclxuICAgICAgICAgIDwvYT48L2Rpdj5cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgICApXHJcbiAgICAgIH1cclxuICAgIH1cclxuICAgIGxldCB0MSA9IDxkaXYgY2xhc3NOYW1lPVwidGV4dC0xeGwgZm9udC1ib2xkIGxpZ2h0OnRleHQtZ3JheS04MDBcIj5NZXNzYWdlczoge3N1cH08L2Rpdj5cclxuICAgIHJldHVybiAoXHJcbiAgICAgIDw+e3QwfXt0MX08Lz4pO1xyXG4gIH1cclxuXHJcbiAgcmV0dXJuIChcclxuICAgIDxkaXY+e3RhZzEoKX08L2Rpdj5cclxuICApXHJcbn1cclxuXHJcbmNvbnN0IENvbnRyYWN0ID0gbmV3IGV0aGVycy5Db250cmFjdChjb250cmFjdGFkZHJzLCBBYmksIHNpZ25lcncpO1xyXG5jb25zdCBBcHAgPSAoeyBDb21wb25lbnQsIHBhZ2VQcm9wcyB9OiBBcHBQcm9wcykgPT4ge1xyXG4gIGZ1bmN0aW9uIGhhbmRsZUNoYW5nZU1lc3NhZ2UoZXZlbnQ6IENoYW5nZUV2ZW50PEhUTUxUZXh0QXJlYUVsZW1lbnQ+KSB7XHJcbiAgICBjb25zdCB2YWx1ZXMgPSBldmVudC50YXJnZXQudmFsdWU7XHJcbiAgICBzZXRTZW5kTWVzc2FnZSh2YWx1ZXMpO1xyXG4gIH1cclxuXHJcbiAgLy9ub3RpZnlcclxuICBjb25zdCBbc2VuZE1lc3NhZ2UsIHNldFNlbmRNZXNzYWdlXSA9IHVzZVN0YXRlKFwiXCIpO1xyXG4gIGNvbnN0IFt1bmxvY2t0ZXh0LCBzZXRfdW5sb2NrdGV4dF0gPSB1c2VTdGF0ZShcIlBsZWFzZSBVbmxvY2sgV2FsbGV0XCIpO1xyXG4gIC8vIG5vdGlmeSBmdW5jdGlvbiBjYWxsXHJcblxyXG4gIC8vIGF3YWl0IC8vIE1ldGFNYXNrIHJlcXVpcmVzIHJlcXVlc3RpbmcgcGVybWlzc2lvbiB0byBjb25uZWN0IHVzZXJzIGFjY291bnRzXHJcblxyXG4gIGNvbnN0IGNhbGxUYWcgPSBhc3luYyAoKSA9PiB7XHJcbiAgICAvLyBBIFdlYjNQcm92aWRlciB3cmFwcyBhIHN0YW5kYXJkIFdlYjMgcHJvdmlkZXIsIHdoaWNoIGlzXHJcbiAgICAvLyB3aGF0IE1ldGFNYXNrIGluamVjdHMgYXMgd2luZG93LmV0aGVyZXVtIGludG8gZWFjaCBwYWdlXHJcbiAgICBjb25zdCBwcm92aWRlcjIgPSBuZXcgZXRoZXJzLnByb3ZpZGVycy5XZWIzUHJvdmlkZXIod2luZG93LmV0aGVyZXVtKVxyXG4gICAgY29uc3QgcHJvdmlkZXIzID0gbmV3IGV0aGVycy5wcm92aWRlcnMuSnNvblJwY1Byb3ZpZGVyKCdodHRwczovL2V0aC1tYWlubmV0LmcuYWxjaGVteS5jb20vdjIvWi1pZlhMbVo5VDMtbmZYaUEwQjh3cDVaVVBYVGtXbGcnKVxyXG4gICAgLy8gU2V0dXBcclxuICAgIGNvbnN0IHNldHRpbmdzID0ge1xyXG4gICAgICBhcGlLZXk6IFwia3VfcHVYLXZJRmhuYlpuQzN4bXBkVDNqVWljbzcwTFlcIixcclxuICAgICAgbmV0d29yazogTmV0d29yay5NQVRJQ19NQUlOTkVULFxyXG4gICAgfTtcclxuXHJcbiAgICBhd2FpdCBwcm92aWRlcjIuc2VuZChcImV0aF9yZXF1ZXN0QWNjb3VudHNcIiwgW10pO1xyXG4gICAgdHJ5IHtcclxuICAgICAgLy8gYXdhaXQgcHJvdmlkZXIyLnNlbmQoXCJldGhfcmVxdWVzdEFjY291bnRzXCIsIFtdKTsvLyBhd2FpdCAvLyBNZXRhTWFzayByZXF1aXJlcyByZXF1ZXN0aW5nIHBlcm1pc3Npb24gdG8gY29ubmVjdCB1c2VycyBhY2NvdW50c1NTXHJcbiAgICAgIGNvbnN0IHNpZ25lciA9IHByb3ZpZGVyMi5nZXRTaWduZXIoKVxyXG4gICAgICBsZXQgbXlBZGRyZXNzID0gYXdhaXQgc2lnbmVyLmdldEFkZHJlc3MoKVxyXG4gICAgICBhd2FpdCBDb250cmFjdC5jb25uZWN0KHNpZ25lcikubWludChteUFkZHJlc3MsIHNlbmRNZXNzYWdlKS8vLy9zaWduZXIuX2FkZHJlc3MsIHNlbmRNZXNzYWdlKVxyXG4gICAgfSBjYXRjaCAoZSkge1xyXG4gICAgICBjb25zb2xlLmxvZyhcIkxPTFwiKVxyXG4gICAgICAvLyBhZGRUb2FzdCh7Ym9keTogZS5tZXNzYWdlLCB0eXBlOiBcImVycm9yXCJ9KTtcclxuICAgIH1cclxuICB9O1xyXG5cclxuICByZXR1cm4gKFxyXG5cclxuICAgIDxUaGVtZVByb3ZpZGVyIGF0dHJpYnV0ZT1cImNsYXNzXCI+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwibS1hdXRvIGJnLXdoaXRlIGRhcms6YmctZ3JheS05MDAgZGFyazp0ZXh0LXdoaXRlXCI+XHJcbiAgICAgICAgPFdhZ21pQ29uZmlnIGNsaWVudD17d2FnbWlDbGllbnR9PlxyXG4gICAgICAgICAgPFJhaW5ib3dLaXRQcm92aWRlciBjaGFpbnM9e2NoYWluc30+XHJcbiAgICAgICAgICAgIDxDb21wb25lbnQgey4uLnBhZ2VQcm9wc30gLz5cclxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGZsZXgtY29sIHNwYWNlLXktMiBqdXN0aWZ5LWNlbnRlciBtdC02IG1kOm10LTIgcHgtNCB4czpweC0wIG0tYXV0byBtYXgtdy00eGwgbWluLXctODAgc2hhZG93LW1kIHJvdW5kZWQtbWQgYm9yZGVyIGJvcmRlci1zb2xpZCBsaWdodDpib3JkZXItZ3JheS0yMDAgZGFyazpib3JkZXItZ3JheS01MDAgb3ZlcmZsb3ctaGlkZGVuXCI+XHJcbiAgICAgICAgICAgICAgPGgxIGNsYXNzTmFtZT1cIm0tYXV0byB0ZXh0LWNlbnRlciBtZDptdC04IHRleHQtMnhsIG1kOnRleHQtNHhsIGZvbnQtZXh0cmFib2xkIHJvdGF0aW5nLWh1ZVwiPlxyXG4gICAgICAgICAgICAgICAgVGFnIHRoZSBXYWxsIVxyXG4gICAgICAgICAgICAgIDwvaDE+XHJcbiAgICAgICAgICAgICAgPGgyIGNsYXNzTmFtZT1cInRleHQtMXhsIHRleHQtY2VudGVyIGZvbnQtYm9sZCBqdXN0aWZ5LWNlbnRlciBsaWdodDp0ZXh0LWdyYXktODAwXCI+XHJcbiAgICAgICAgICAgICAgICBTZW5kIHlvdXIgbWVzc2FnZSBoZXJlXHJcbiAgICAgICAgICAgICAgPC9oMj5cclxuICAgICAgICAgICAgICA8dGV4dGFyZWEgY2xhc3NOYW1lPVwibS1hdXRvIHRleHQtY2VudGVyIHctMy80IGp1c3RpZnktY2VudGVyIHJvdW5kZWQtbWQgYm9yZGVyIGJvcmRlci1zb2xpZCBsaWdodDpib3JkZXItZ3JheS0yMDAgZGFyazpib3JkZXItZ3JheS01MDAgbGlnaHQ6dGV4dC1ncmF5LTgwMCBkYXJrOnRleHQtYmxhY2tcIlxyXG4gICAgICAgICAgICAgICAgb25DaGFuZ2U9e2UgPT4gaGFuZGxlQ2hhbmdlTWVzc2FnZShlKX0gLz5cclxuXHJcbiAgICAgICAgICAgICAgPGJ1dHRvbiBzdHlsZT17eyBiYWNrZ3JvdW5kOiBcIiMwMGZmZmZcIiB9fSBjbGFzc05hbWU9XCJidG4gdy02LzEyIG0tYXV0byByb3VuZGVkLW1kIGJvcmRlciBib3JkZXItc29saWQgbGlnaHQ6Ym9yZGVyLWJsYWNrIGRhcms6Ym9yZGVyLWJsYWNrIGxpZ2h0OnRleHQtZ3JheS04MDAgZGFyazp0ZXh0LWJsYWNrXCIgdHlwZT1cImJ1dHRvblwiXHJcbiAgICAgICAgICAgICAgICBvbkNsaWNrPXtjYWxsVGFnfT4gU2VuZFxyXG4gICAgICAgICAgICAgIDwvYnV0dG9uPlxyXG5cclxuICAgICAgICAgICAgICA8ZGl2PlxyXG5cclxuICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgICA8ZGl2PlxyXG5cclxuICAgICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBmbGV4LWNvbCAgc3BhY2UteS02IGp1c3RpZnktY2VudGVyIG10LTYgbWQ6bXQtMTIgcHgtNCB4czpweC0wIG0tYXV0byBtYXgtdy00eGwgbWluLXctODAgc2hhZG93LW1kIHJvdW5kZWQtbWQgYm9yZGVyIGJvcmRlci1zb2xpZCBsaWdodDpib3JkZXItZ3JheS0yMDAgZGFyazpib3JkZXItZ3JheS01MDAgb3ZlcmZsb3ctaGlkZGVuXCI+XHJcblxyXG4gICAgICAgICAgICAgIDxoMSBjbGFzc05hbWU9XCJtLWF1dG8gdGV4dC1jZW50ZXIgbWQ6bXQtOCB0ZXh0LTR4bCBtZDp0ZXh0LTR4bCBmb250LWV4dHJhYm9sZCByb3RhdGluZy1odWVcIj5cclxuICAgICAgICAgICAgICAgIENoYXRcclxuICAgICAgICAgICAgICA8L2gxPlxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibS1hdXRvIHRleHQtY2VudGVyIHctMy80XCI+XHJcblxyXG4gICAgICAgICAgICAgICAge3VzZVR0YWcwKCl9XHJcbiAgICAgICAgICAgICAgPC9kaXY+XHJcblxyXG4gICAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICAgIDwvUmFpbmJvd0tpdFByb3ZpZGVyPlxyXG4gICAgICAgIDwvV2FnbWlDb25maWc+XHJcbiAgICAgIDwvZGl2PlxyXG4gICAgPC9UaGVtZVByb3ZpZGVyPlxyXG4gIClcclxufVxyXG5leHBvcnQgZGVmYXVsdCBBcHBcclxuIl0sIm5hbWVzIjpbInVzZUVmZmVjdCIsInVzZVN0YXRlIiwiVGhlbWVQcm92aWRlciIsIk5ldHdvcmsiLCJnZXREZWZhdWx0V2FsbGV0cyIsIlJhaW5ib3dLaXRQcm92aWRlciIsImNoYWluIiwiY29uZmlndXJlQ2hhaW5zIiwiY3JlYXRlQ2xpZW50IiwiV2FnbWlDb25maWciLCJhbGNoZW15UHJvdmlkZXIiLCJjb25maWciLCJldGhlcnMiLCJORVhUX1BVQkxJQ19BTENIRU1ZX0lEIiwiTkVYVF9QVUJMSUNfSU5GVVJBX0lEIiwiTkVYVF9QVUJMSUNfRVRIRVJTQ0FOX0FQSV9LRVkiLCJhbGNoZW15SWQiLCJldGhlcnNjYW5BcGlLZXkiLCJjaGFpbnMiLCJwcm92aWRlciIsInBvbHlnb24iLCJhcGlLZXkiLCJjb25uZWN0b3JzIiwiYXBwTmFtZSIsIndhZ21pQ2xpZW50IiwiYXV0b0Nvbm5lY3QiLCJzaWduZXJ3IiwiY29udHJhY3RhZGRycyIsIkFiaSIsImZvcm1hdF9hZGRyZXNzIiwiYWRkcmVzcyIsIm5ld19hZGRyZXNzIiwic3Vic3RyaW5nIiwic2xpY2UiLCJhZGRycyIsInVzZVR0YWcwIiwidGFnIiwic2V0VGFnIiwiYXJ0aXN0Iiwic2V0QXJ0aXN0IiwidGltZSIsInNldFRpbWUiLCJzdXAiLCJzZXRTdXAiLCJhZGRyc3QiLCJ1cGRhdGVVSVN0YXRlcyIsInRhZ1MiLCJhcnRpc3RTIiwidGltZVMiLCJDb250cmFjdCIsImxhdGVzdCIsInRvdGFsU3VwcGx5IiwicHJvdmlkZXIzIiwicHJvdmlkZXJzIiwiSnNvblJwY1Byb3ZpZGVyIiwibiIsInRuIiwibG9va3VwQWRkcmVzcyIsInMiLCJ1dGlscyIsImZvcm1hdFVuaXRzIiwidGltZXIiLCJzZXRJbnRlcnZhbCIsImNsZWFySW50ZXJ2YWwiLCJ0YWcxIiwidGFncyIsImFydGlzdHMiLCJ0aW1lcyIsInQwIiwidHMiLCJpIiwidDIiLCJkaXYiLCJoMiIsImNsYXNzTmFtZSIsImEiLCJzdHlsZSIsImNvbG9yIiwiaHJlZiIsInRhcmdldCIsInJlbCIsInQxIiwiQXBwIiwiQ29tcG9uZW50IiwicGFnZVByb3BzIiwiaGFuZGxlQ2hhbmdlTWVzc2FnZSIsImV2ZW50IiwidmFsdWVzIiwidmFsdWUiLCJzZXRTZW5kTWVzc2FnZSIsInNlbmRNZXNzYWdlIiwidW5sb2NrdGV4dCIsInNldF91bmxvY2t0ZXh0IiwiY2FsbFRhZyIsInByb3ZpZGVyMiIsIldlYjNQcm92aWRlciIsIndpbmRvdyIsImV0aGVyZXVtIiwic2V0dGluZ3MiLCJuZXR3b3JrIiwiTUFUSUNfTUFJTk5FVCIsInNlbmQiLCJzaWduZXIiLCJnZXRTaWduZXIiLCJteUFkZHJlc3MiLCJnZXRBZGRyZXNzIiwiY29ubmVjdCIsIm1pbnQiLCJlIiwiY29uc29sZSIsImxvZyIsImF0dHJpYnV0ZSIsImNsaWVudCIsImgxIiwidGV4dGFyZWEiLCJvbkNoYW5nZSIsImJ1dHRvbiIsImJhY2tncm91bmQiLCJ0eXBlIiwib25DbGljayJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./pages/_app.tsx\n");
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_themes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1162);
+/* harmony import */ var next_themes__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_themes__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var alchemy_sdk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3796);
+/* harmony import */ var alchemy_sdk__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(alchemy_sdk__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6921);
+/* harmony import */ var wagmi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8906);
+/* harmony import */ var wagmi__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(wagmi__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var wagmi_providers_alchemy__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9770);
+/* harmony import */ var wagmi_providers_alchemy__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(wagmi_providers_alchemy__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _config_env_vars__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8344);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1982);
+/* harmony import */ var ethers__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(ethers__WEBPACK_IMPORTED_MODULE_8__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_4__]);
+_rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_4__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
+
+
+
+
+
+
+
+
+
+
+
+const { NEXT_PUBLIC_ALCHEMY_ID , NEXT_PUBLIC_INFURA_ID , NEXT_PUBLIC_ETHERSCAN_API_KEY  } = _config_env_vars__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z;
+const alchemyId = NEXT_PUBLIC_ALCHEMY_ID;
+const etherscanApiKey = (/* unused pure expression or super */ null && (NEXT_PUBLIC_ETHERSCAN_API_KEY));
+const { chains , provider  } = (0,wagmi__WEBPACK_IMPORTED_MODULE_5__.configureChains)([
+    wagmi__WEBPACK_IMPORTED_MODULE_5__.chain.polygon
+], [
+    (0,wagmi_providers_alchemy__WEBPACK_IMPORTED_MODULE_6__.alchemyProvider)({
+        apiKey: alchemyId
+    })
+]);
+const { connectors  } = (0,_rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_4__.getDefaultWallets)({
+    appName: "the Wall",
+    chains
+});
+const wagmiClient = (0,wagmi__WEBPACK_IMPORTED_MODULE_5__.createClient)({
+    autoConnect: true,
+    connectors,
+    provider
+});
+// MetaMask requires requesting permission to connect users accounts
+// The MetaMask plugin also allows signing transactions to
+// send ether and pay to change state within the blockchain.
+// For this, you need the account signer...
+const signerw = wagmiClient.provider;
+// The MetaMask plugin also allows signing transactions to
+// send ether and pay to change state within the blockchain.
+// For this, you need the account signer...
+let contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
+//const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
+//if (signerw._network.chainId == 137){
+//  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}//
+//  else if (signerw._network.chainId == 42161){
+//    contractaddrs = "0x4766d8244d68874ed6499F085e194be3dC4152AA";
+//}
+// The ERC-20 Contract ABI, which is a common contract interface
+// for tokens (this is the Human-Readable ABI format)
+const Abi = [
+    "function name() view returns (string)",
+    "function symbol() view returns (string)",
+    "function totalSupply() view returns (uint256)",
+    "function price() view returns (uint256)",
+    "function getTag(uint256 id) view returns (string)",
+    "function latest(uint256) view returns (string[] tags,address[] addrs,uint256[] times)",
+    "function mint2(address to, string _tag) payable",
+    "function mint(address to, string _tag)",
+    "function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)", 
+];
+//format addresses in ui
+function format_address(address) {
+    const new_address = address.substring(0, 5) + "..." + address.slice(-3);
+    return new_address;
+}
+let addrs = [];
+function useTtag0() {
+    const { 0: tag , 1: setTag  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("LOL");
+    const { 0: artist , 1: setArtist  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("LOL");
+    const { 0: time , 1: setTime  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+    const { 0: sup , 1: setSup  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2);
+    // let addrs = []
+    let addrst = [];
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        // update the ui elements
+        async function updateUIStates() {
+            const [tagS, artistS, timeS] = await Contract.latest(await Contract.totalSupply());
+            setTag(tagS);
+            setArtist(artistS);
+            setTime(timeS);
+            const provider3 = new ethers__WEBPACK_IMPORTED_MODULE_8__.ethers.providers.JsonRpcProvider("https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg");
+            for(let n = 0; n < sup; n++){
+                if (addrs[artistS[n]] == null) {
+                    let tn = await provider3.lookupAddress(artistS[n]);
+                    if (tn != null) {
+                        addrs[artistS[n]] = tn;
+                    } else {
+                        addrs[artistS[n]] = artistS[n];
+                    }
+                }
+            }
+            let s = await Contract.totalSupply();
+            s = ethers__WEBPACK_IMPORTED_MODULE_8__.ethers.utils.formatUnits(s, 0);
+            setSup(s);
+        }
+        // fix for updatix1ng after wallet login
+        //updateUIStates();
+        // schedule every 15 sec refresh
+        const timer = setInterval(()=>{
+            updateUIStates();
+        }, 3000);
+        // clearing interval
+        return ()=>clearInterval(timer);
+    });
+    function tag1() {
+        let tags = [];
+        let artists = [];
+        let times = [];
+        let t0 = [];
+        let ts = [];
+        let i = "";
+        for(let n = 0; n < sup; n++){
+            tags[n] = tag[n];
+            artists[n] = artist[n];
+            if (addrs[artists[n]] == null) {
+                artists[n] = artist[n];
+            } else {
+                // @ts-ignore
+                artists[n] = addrs[artists[n]];
+            } //artist[n]
+            //  artists = nm
+            times[n] = time[n];
+            //ts[n] = ethers.utils.formatUnits(time[0]);
+            // times[n] = ethers.utils.formatUnits(ts[n],0);
+            if (tags[n] != "") {
+                let t2 = "https://etherscan.io/address/" + artist[n];
+                t0[n] = /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    children: [
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h2", {
+                            className: "text-1xl text-center font-bold justify-center light:text-gray-800 ",
+                            children: [
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", {
+                                    style: {
+                                        color: "#4f86f7"
+                                    },
+                                    children: [
+                                        " # ",
+                                        sup - n
+                                    ]
+                                }),
+                                "  From   ",
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                    href: t2,
+                                    target: "_blank",
+                                    rel: "noreferrer",
+                                    className: "rotating-hue",
+                                    style: {
+                                        color: "#4f86f7"
+                                    },
+                                    children: artists[n]
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: "text-center light:text-white-600",
+                            children: tags[n]
+                        }),
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: "text-center light:text-white-600",
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                style: {
+                                    color: "#32353B"
+                                },
+                                children: "_____________________________________________________________________________________________"
+                            })
+                        })
+                    ]
+                });
+            }
+        }
+        let t1 = /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            className: "text-1xl font-bold light:text-gray-800",
+            children: [
+                "Messages: ",
+                sup
+            ]
+        });
+        return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+            children: [
+                t0,
+                t1
+            ]
+        });
+    }
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+        children: tag1()
+    });
+}
+const Contract = new ethers__WEBPACK_IMPORTED_MODULE_8__.ethers.Contract(contractaddrs, Abi, signerw);
+const App = ({ Component , pageProps  })=>{
+    function handleChangeMessage(event) {
+        const values = event.target.value;
+        setSendMessage(values);
+    }
+    //notify
+    const { 0: sendMessage , 1: setSendMessage  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+    const { 0: unlocktext , 1: set_unlocktext  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("Please Unlock Wallet");
+    // notify function call
+    // await // MetaMask requires requesting permission to connect users accounts
+    const callTag = async ()=>{
+        // A Web3Provider wraps a standard Web3 provider, which is
+        // what MetaMask injects as window.ethereum into each page
+        const provider2 = new ethers__WEBPACK_IMPORTED_MODULE_8__.ethers.providers.Web3Provider(window.ethereum);
+        const provider3 = new ethers__WEBPACK_IMPORTED_MODULE_8__.ethers.providers.JsonRpcProvider("https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg");
+        // Setup
+        const settings = {
+            apiKey: "ku_puX-vIFhnbZnC3xmpdT3jUico70LY",
+            network: alchemy_sdk__WEBPACK_IMPORTED_MODULE_3__.Network.MATIC_MAINNET
+        };
+        await provider2.send("eth_requestAccounts", []);
+        try {
+            // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
+            const signer = provider2.getSigner();
+            let myAddress = await signer.getAddress();
+            await Contract.connect(signer).mint(myAddress, sendMessage) ////signer._address, sendMessage)
+            ;
+        } catch (e) {
+            console.log("LOL");
+        // addToast({body: e.message, type: "error"});
+        }
+    };
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_themes__WEBPACK_IMPORTED_MODULE_2__.ThemeProvider, {
+        attribute: "class",
+        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+            className: "m-auto bg-white dark:bg-gray-900 dark:text-white",
+            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(wagmi__WEBPACK_IMPORTED_MODULE_5__.WagmiConfig, {
+                client: wagmiClient,
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_rainbow_me_rainbowkit__WEBPACK_IMPORTED_MODULE_4__.RainbowKitProvider, {
+                    chains: chains,
+                    children: [
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Component, {
+                            ...pageProps
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                    className: "m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue",
+                                    children: "Tag the Wall!"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
+                                    className: "text-1xl text-center font-bold justify-center light:text-gray-800",
+                                    children: "Send your message here"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("textarea", {
+                                    className: "m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 light:text-gray-800 dark:text-black",
+                                    onChange: (e)=>handleChangeMessage(e)
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                    style: {
+                                        background: "#00ffff"
+                                    },
+                                    className: "btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black",
+                                    type: "button",
+                                    onClick: callTag,
+                                    children: " Send"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {})
+                            ]
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "flex flex-col space-y-6 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                    className: "m-auto text-center md:mt-8 text-4xl md:text-4xl font-extrabold rotating-hue",
+                                    children: "Chat"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    className: "m-auto text-center w-3/4",
+                                    children: useTtag0()
+                                })
+                            ]
+                        })
+                    ]
+                })
+            })
+        })
+    });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
-/***/ "./node_modules/tailwindcss/tailwind.css":
-/*!***********************************************!*\
-  !*** ./node_modules/tailwindcss/tailwind.css ***!
-  \***********************************************/
-/***/ (() => {
-
-
-
-/***/ }),
-
-/***/ "./styles/globals.css":
-/*!****************************!*\
-  !*** ./styles/globals.css ***!
-  \****************************/
-/***/ (() => {
-
-
-
-/***/ }),
-
-/***/ "alchemy-sdk":
-/*!******************************!*\
-  !*** external "alchemy-sdk" ***!
-  \******************************/
+/***/ 3796:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("alchemy-sdk");
 
 /***/ }),
 
-/***/ "ethers":
-/*!*************************!*\
-  !*** external "ethers" ***!
-  \*************************/
+/***/ 1982:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("ethers");
 
 /***/ }),
 
-/***/ "next-themes":
-/*!******************************!*\
-  !*** external "next-themes" ***!
-  \******************************/
+/***/ 1162:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("next-themes");
 
 /***/ }),
 
-/***/ "react":
-/*!************************!*\
-  !*** external "react" ***!
-  \************************/
+/***/ 6689:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("react");
 
 /***/ }),
 
-/***/ "react/jsx-dev-runtime":
-/*!****************************************!*\
-  !*** external "react/jsx-dev-runtime" ***!
-  \****************************************/
+/***/ 997:
 /***/ ((module) => {
 
-"use strict";
-module.exports = require("react/jsx-dev-runtime");
+module.exports = require("react/jsx-runtime");
 
 /***/ }),
 
-/***/ "wagmi":
-/*!************************!*\
-  !*** external "wagmi" ***!
-  \************************/
+/***/ 8906:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("wagmi");
 
 /***/ }),
 
-/***/ "wagmi/providers/alchemy":
-/*!******************************************!*\
-  !*** external "wagmi/providers/alchemy" ***!
-  \******************************************/
+/***/ 9770:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("wagmi/providers/alchemy");
 
 /***/ }),
 
-/***/ "@rainbow-me/rainbowkit":
-/*!*****************************************!*\
-  !*** external "@rainbow-me/rainbowkit" ***!
-  \*****************************************/
+/***/ 6921:
 /***/ ((module) => {
 
-"use strict";
 module.exports = import("@rainbow-me/rainbowkit");;
 
 /***/ })
@@ -149,7 +398,7 @@ module.exports = import("@rainbow-me/rainbowkit");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__("./pages/_app.tsx"));
+var __webpack_exports__ = (__webpack_exec__(5656));
 module.exports = __webpack_exports__;
 
 })();
