@@ -67,7 +67,7 @@ const Home: NextPage = () => {
 
       <h1 className="m-auto text-center md:mt-8 text-4xl md:text-6xl font-extrabold">
         Welcome to{' '}
-        <a href="https://theWall.org" target="_blank" rel="noreferrer" className="rotating-hue">
+        <a href="https://tagtheWall.org" target="_blank" rel="noreferrer" className="rotating-hue">
           the Wall
         </a>
       </h1>
@@ -99,7 +99,7 @@ const Home: NextPage = () => {
         <Image className="bg-white rounded-full" src="/twitter.png" alt="Github Icon" width="35" height="35" />
       </a>
       <a
-        href="https://https://discord.gg/gFtHRVCDPb"
+        href="https://discord.gg/gFtHRVCDPb"
         target="_blank"
         rel="noreferrer"
         className="fixed left-6 bottom-14 flex flex-col"
