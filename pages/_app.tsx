@@ -8,6 +8,7 @@ import Image from 'next/image'
 import Navbar from '../components/navbar'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
+import DarkModeToggle from '../components/darkModeToggle';
 import { useRouter } from 'next/router'
 import { Network, Alchemy } from 'alchemy-sdk';
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
@@ -32,7 +33,7 @@ const { chains, provider } = configureChains(
 )
 const { connectors } = getDefaultWallets({
   appName: 'the Wall',
-  chains,
+  chains, 
 })
 
 const wagmiClient = createClient({
@@ -173,7 +174,6 @@ const App = ({ Component, pageProps }: AppProps) => {
   const callTag = async () => {
     // A Web3Provider wraps a standard Web3 provider, which is
     // what MetaMask injects as window.ethereum into each page
-
     const provider2 = new ethers.providers.Web3Provider(window.ethereum)
     const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
     // Setup
@@ -198,11 +198,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 
     <ThemeProvider attribute="class">
       <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
-
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
             <Component {...pageProps} />
-
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
               <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
                 Tag the Wall!
@@ -210,10 +208,10 @@ const App = ({ Component, pageProps }: AppProps) => {
               <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
                 Send your message here
               </h2>
-              <textarea className="m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 "
+              <textarea className="m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 light:text-gray-800 dark:text-black"
                 onChange={e => handleChangeMessage(e)} />
 
-              <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black" type="button"
+              <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                 onClick={callTag}> Send
               </button>
 

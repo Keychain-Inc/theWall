@@ -43,7 +43,7 @@ export const WalletConnectSection: React.FC<{}> = () => {
       bgColorOverride="bg-blue-500"
     >
       
-      <div className="p-4 md:px-8 shadow-md bg-white rounded-md">
+      <div className="p-4 md:px-8 shadow-md bg-white rounded-md light:text-gray-800 dark:text-black">
         <h2 className="text-1xl text-center font-bold mb-2 justify-center light:text-gray-800"> 
       0x9D31e30...2c93abb5 @ 21:21 9/2</h2>
       <div className="text-center light:text-white-600">First</div></div> </FeatureSection>
@@ -102,7 +102,7 @@ const Home: NextPage = () => {
         href="https://https://discord.gg/gFtHRVCDPb"
         target="_blank"
         rel="noreferrer"
-        className="fixed left-5 bottom-14 flex flex-col"
+        className="fixed left-6 bottom-14 flex flex-col"
       >
         <Image className="bg-white rounded-full" src="/discord.svg" alt="Github Icon" width="35" height="35" />
       </a>
