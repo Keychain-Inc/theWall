@@ -102,7 +102,7 @@ const Home: NextPage = () => {
         href="https://discord.gg/gFtHRVCDPb"
         target="_blank"
         rel="noreferrer"
-        className="fixed left-6 bottom-14 flex flex-col"
+        className="fixed left-5 bottom-14 flex flex-col"
       >
         <Image className="bg-white rounded-full" src="/discord.svg" alt="Github Icon" width="35" height="35" />
       </a>
