@@ -70,7 +70,7 @@ const signerw = wagmiClient.provider;
 // For this, you need the account signer...
 
 let contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
-let createaddrs = "0x723CdDd68125FF45D18F0cCf38a02497e06a9562";
+let createaddrs = "0x43032A04711d239662E3F7da69507CfeE699Dd7b";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
 //  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}//
@@ -89,6 +89,7 @@ const Abi = [
   "function mint2(address to, string _tag) payable",
   "function mint(address to, string _tag)",
   "function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)",
+  "event newWall(address,string)",
   "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange) returns (address)",
 
 ];
@@ -114,14 +115,14 @@ function useTtag0() {
   const [sup, setSup] = useState(2);
   // let addrs = []
   let addrst = 0
-    const router = useRouter()
-    const { walladdrs } = router.query
-    if (walladdrs != null && addrst == 0) {
-      // @ts-ignore
-      contractaddrs = walladdrs
-      Contract = new ethers.Contract(contractaddrs, Abi, signerw);
-      addrst = 1
-    }
+  const router = useRouter()
+  const { walladdrs } = router.query
+  if (walladdrs != null && addrst == 0) {
+    // @ts-ignore
+    contractaddrs = walladdrs
+    Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+    addrst = 1
+  }
 
   useEffect(() => {
     // update the ui elements
@@ -275,11 +276,15 @@ const App = ({ Component, pageProps }: AppProps) => {
       const signer = provider2.getSigner()
       let myAddress = await signer.getAddress()
       await CreateWall.connect(signer).createWall(_name, _symbol, 0, _mod, _edit)////signer._address, sendMessage)
+      
     } catch (e) {
       console.log("LOL")
       // addToast({body: e.message, type: "error"});
     }
   };
+  CreateWall.on("newWall", (address, name) => {
+    window.location.replace('./' + '?walladdrs=' + address)
+  });
   const callTag = async () => {
     // A Web3Provider wraps a standard Web3 provider, which is
     // what MetaMask injects as window.ethereum into each page
@@ -308,28 +313,28 @@ const App = ({ Component, pageProps }: AppProps) => {
       <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
-          <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
-      <Grid container spacing={1}>
-        <Grid xs={2} className="left-6 top-10 m-auto">
-            <FormControl>
-                <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
-                <Select
-                  labelId="select-label"
-                  id="simple-select"
-                  value={contractaddrs}
-                  label="Choose wall"
-                  onChange={handleChangeWall}
-                  className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
-                >
-                  <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>Main</MenuItem>
-                  <MenuItem value={'0x23037218ca2c785cdb8cda64c82662cc5d81d441'}>Weebs</MenuItem>
-                  <MenuItem value={'0x0000000000000000000000000000000000000000'}>LOL2</MenuItem>
-                </Select>
-              </FormControl>
-              </Grid>
-              
-              <Grid  xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
-              </Grid><Grid  xs={8}><Navbar /></Grid></Grid></Box>
+            <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
+              <Grid container spacing={1}>
+                <Grid xs={2} className="left-6 top-10 m-auto">
+                  <FormControl>
+                    <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
+                    <Select
+                      labelId="select-label"
+                      id="simple-select"
+                      value={contractaddrs}
+                      label="Choose wall"
+                      onChange={handleChangeWall}
+                      className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
+                    >
+                      <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>Main</MenuItem>
+                      <MenuItem value={'0x23037218ca2c785cdb8cda64c82662cc5d81d441'}>Weebs</MenuItem>
+                      <MenuItem value={'0x0000000000000000000000000000000000000000'}>LOL2</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
+                </Grid><Grid xs={8}><Navbar /></Grid></Grid></Box>
             <Component {...pageProps} />
             <Dialog
               open={open}
