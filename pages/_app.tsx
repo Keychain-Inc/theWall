@@ -117,6 +117,7 @@ function useTtag0() {
     const router = useRouter()
     const { walladdrs } = router.query
     if (walladdrs != null && addrst == 0) {
+      // @ts-ignore
       contractaddrs = walladdrs
       Contract = new ethers.Contract(contractaddrs, Abi, signerw);
       addrst = 1
