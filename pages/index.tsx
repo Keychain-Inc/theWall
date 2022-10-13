@@ -63,7 +63,6 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster />
-      <Navbar />
 
       <h1 className="m-auto text-center md:mt-8 text-4xl md:text-6xl font-extrabold">
         Welcome to{' '}
