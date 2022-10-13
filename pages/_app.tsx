@@ -8,6 +8,16 @@ import Image from 'next/image'
 import Navbar from '../components/navbar'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
+import Button from '@mui/material/Button'
+import Modal from '@mui/material/Modal'
+import Card from '@mui/material/Card'
+import Dialog from '@mui/material/Dialog'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import Checkbox  from  '@mui/material/Checkbox'
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import DarkModeToggle from '../components/darkModeToggle';
 import { useRouter } from 'next/router'
 import { Network, Alchemy } from 'alchemy-sdk';
@@ -15,7 +25,6 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { chain, configureChains, createClient, WagmiConfig, useContractWrite } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
-
 import config from '../config/env-vars'
 import { BigNumber, ethers } from 'ethers'
 import { RainbowKitChainProvider } from '@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitChainContext'
@@ -180,6 +189,13 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   // await // MetaMask requires requesting permission to connect users accounts
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const [open, setOpen] = useState(false);
   const callTag = async () => {
     // A Web3Provider wraps a standard Web3 provider, which is
     // what MetaMask injects as window.ethereum into each page
@@ -205,11 +221,43 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
 
-    <ThemeProvider attribute="class">
+    <ThemeProvider attribute="class"> 
       <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
+          <Button onClick={handleOpen}variant="outlined"className="m-auto left-2 text-center md:mt-2">Create wall</Button>
             <Component {...pageProps} />
+            <Dialog
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="modal-modal-title"
+  aria-describedby="modal-modal-description"
+>
+  <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto">
+<Typography id="modal-modal-title" variant="h6" component="h2"className="m-auto text-center w-3/4 justify-center rounded-md dark:text-black">
+      Create your own wall!
+    </Typography>
+    <Typography id="modal-modal-description" sx={{ mt: 2 }}className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+     You can create your own immutable community here.
+    </Typography>
+    <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+               Wall name
+              </h2>
+              <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
+                onChange={e => handleChangeMessage(e)} />
+                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+               Wall description
+              </h2>
+              <TextField className="m-auto text-center w-3/4 justify-center light:text-gray-800 dark:text-black"
+                onChange={e => handleChangeMessage(e)} />
+ <FormControlLabel control={<Switch defaultChecked />} label="Mods can delete messages" />
+ <FormControlLabel control={<Switch defaultChecked />} label="Users can edit messages" />
+              <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
+                onClick={callTag}> Create Wall
+              </button>
+
+              </div>
+</Dialog>
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
               <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
                 Tag the Wall!
