@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 
 import { Toaster } from 'react-hot-toast'
-import AdminPanel from '../components/adminPanel'
+
 import Navbar from '../components/navbar'
 
 
@@ -43,7 +43,7 @@ export const WalletConnectSection: React.FC<{}> = () => {
       bgColorOverride="bg-blue-500"
     >
       
-      <div className="p-4 md:px-8 shadow-md bg-white rounded-md">
+      <div className="p-4 md:px-8 shadow-md bg-white rounded-md light:text-gray-800 dark:text-black">
         <h2 className="text-1xl text-center font-bold mb-2 justify-center light:text-gray-800"> 
       0x9D31e30...2c93abb5 @ 21:21 9/2</h2>
       <div className="text-center light:text-white-600">First</div></div> </FeatureSection>
@@ -63,11 +63,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster />
-      <Navbar />
 
       <h1 className="m-auto text-center md:mt-8 text-4xl md:text-6xl font-extrabold">
         Welcome to{' '}
-        <a href="https://theWall.org" target="_blank" rel="noreferrer" className="rotating-hue">
+        <a href="https://tagtheWall.org" target="_blank" rel="noreferrer" className="rotating-hue">
           the Wall
         </a>
       </h1>
@@ -84,12 +83,27 @@ const Home: NextPage = () => {
       </div> */}
 
       <a
-        href="https://github.com/thewall"
+        href="https://github.com/keychain-inc/thewall"
         target="_blank"
         rel="noreferrer"
         className="fixed left-5 bottom-4 flex flex-col"
       >
         <Image className="bg-white rounded-full" src="/github.png" alt="Github Icon" width="35" height="35" />
+        </a><a
+        href="https://twitter.com/tagthewall"
+        target="_blank"
+        rel="noreferrer"
+        className="fixed left-16 bottom-4 flex flex-col"
+      >
+        <Image className="bg-white rounded-full" src="/twitter.png" alt="Github Icon" width="35" height="35" />
+      </a>
+      <a
+        href="https://discord.gg/gFtHRVCDPb"
+        target="_blank"
+        rel="noreferrer"
+        className="fixed left-5 bottom-14 flex flex-col"
+      >
+        <Image className="bg-white rounded-full" src="/discord.svg" alt="Github Icon" width="35" height="35" />
       </a>
       <style jsx>{`
         .rotating-hue {
