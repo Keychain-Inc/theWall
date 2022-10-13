@@ -23,6 +23,8 @@ import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Unstable_Grid2';
 import DarkModeToggle from '../components/darkModeToggle';
 import Router, { useRouter } from 'next/router'
 import { Network, Alchemy } from 'alchemy-sdk';
@@ -305,25 +307,28 @@ const App = ({ Component, pageProps }: AppProps) => {
       <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
-            <Navbar />
-            <div className="space-x-6">
-              <FormControl>
+          <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
+      <Grid container spacing={1}>
+        <Grid xs={2} className="left-6 top-10 m-auto">
+            <FormControl>
                 <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
                 <Select
                   labelId="select-label"
                   id="simple-select"
-                  value={wallAddrs}
+                  value={contractaddrs}
                   label="Choose wall"
                   onChange={handleChangeWall}
                   className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
                 >
                   <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>Main</MenuItem>
-                  <MenuItem value={'0x23037218ca2c785cdb8cda64c82662cc5d81d441'}>LOL</MenuItem>
-                  <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>LOL2</MenuItem>
+                  <MenuItem value={'0x23037218ca2c785cdb8cda64c82662cc5d81d441'}>Weebs</MenuItem>
+                  <MenuItem value={'0x0000000000000000000000000000000000000000'}>LOL2</MenuItem>
                 </Select>
               </FormControl>
-              <Button onClick={handleOpen} variant="outlined" className="left-6">Create wall</Button>
-            </div>
+              </Grid>
+              
+              <Grid  xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
+              </Grid><Grid  xs={8}><Navbar /></Grid></Grid></Box>
             <Component {...pageProps} />
             <Dialog
               open={open}
@@ -359,7 +364,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
 
               <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
-                Tag the Wall!{contractaddrs}
+                Tag the Wall!
               </h1>
               <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
                 Send your message here
