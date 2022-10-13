@@ -115,7 +115,7 @@ function useTtag0() {
     const router = useRouter()
     const { walladdrs } = router.query
     if (walladdrs != null && addrst == 0) {
-      contractaddrs = walladdrs[0]
+      contractaddrs = walladdrs
       Contract = new ethers.Contract(contractaddrs, Abi, signerw);
       addrst = 1
     }
@@ -359,7 +359,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
 
               <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
-                Tag the Wall!{wallAddrs}
+                Tag the Wall!{contractaddrs}
               </h1>
               <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
                 Send your message here
