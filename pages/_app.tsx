@@ -89,7 +89,7 @@ const Abi = [
   "function mint2(address to, string _tag) payable",
   "function mint(address to, string _tag)",
   "function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)",
-  "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange)",
+  "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange) returns (address)",
 
 ];
 //format addresses in ui
