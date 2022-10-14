@@ -90,6 +90,7 @@ const Abi = [
   "function mint(address to, string _tag)",
   "function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)",
   "event newWall(address,string)",
+  "function balanceOf(address) view returns (uint256)",
   "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange) returns (address)",
 
 ];
@@ -108,6 +109,7 @@ let addrs: string[] = []
 //     console.log('in router')
 let ut = 0
 let contracturl = ''
+let balances = []
 function useT1() {
   const [wallT, setwallT] = useState("");
   useEffect(() => {
@@ -115,319 +117,325 @@ function useT1() {
     update()
     async function update() {
       if (ut == 0 && contractaddrs != '0x91fc82f5c588c00985aa264fc7b45ee680110703') {
-contracturl = 'https://tagthewall.org/' + contractaddrs
+        contracturl = 'https://tagthewall.org/' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
         ut = 1;
       }
     }
-  },);return (<><h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue" >{wallT}</h1><div className="m-auto text-center"style={{ color: '#4f86f7' }}>{contracturl}</div></>) }//      contractaddrs = (router.query.new_nft_address);
+  },); return (<><h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue" >{wallT}</h1><div className="m-auto text-center" style={{ color: '#4f86f7' }}>{contracturl}</div></>)
+}//      contractaddrs = (router.query.new_nft_address);
 function useTtag0() {
 
-      const [tag, setTag] = useState("LOL");
-      const [artist, setArtist] = useState("LOL");
-      const [time, setTime] = useState("");
-      const [sup, setSup] = useState(2);
-      // let addrs = []
-      const [wallT, setwallT] = useState("");
-      const [symbol, setSymbol] = useState("LOL");
-      let addrst = 0
-      const router = useRouter()
-      const { walladdrs } = router.query
-      if (walladdrs != null && addrst == 0) {
-        // @ts-ignore
-        contractaddrs = walladdrs
-        Contract = new ethers.Contract(contractaddrs, Abi, signerw);
-        addrst = 1
+  const [tag, setTag] = useState("LOL");
+  const [artist, setArtist] = useState("LOL");
+  const [time, setTime] = useState("");
+  const [sup, setSup] = useState(2);
+  // let addrs = []
+  const [wallT, setwallT] = useState("");
+  const [symbol, setSymbol] = useState("LOL");
+  let addrst = 0
+  const router = useRouter()
+  const { walladdrs } = router.query
+  if (walladdrs != null && addrst == 0) {
+    // @ts-ignore
+    contractaddrs = walladdrs
+    Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+    addrst = 1
+  }
+
+  useEffect(() => {
+    // update the ui elements
+    async function updateUIStates() {
+      const [tagS, artistS, timeS] = await Contract.latest(await Contract.totalSupply());
+      if (wallT == 'LOL') {
+        setwallT(await Contract.name() + 'LOLOL')
       }
-
-      useEffect(() => {
-        // update the ui elements
-        async function updateUIStates() {
-          const [tagS, artistS, timeS] = await Contract.latest(await Contract.totalSupply());
-          if (wallT == 'LOL') {
-            setwallT(await Contract.name() + 'LOLOL')
-          }
-          setTag(tagS);
-          setArtist(artistS);
-          setTime(timeS);
-          const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-          for (let n = 0; n < sup; n++) {
-            if (addrs[artistS[n]] == null) {
-              let tn = await provider3.lookupAddress(artistS[n])
-              if (tn != null) {
-                addrs[artistS[n]] = tn
-              }
-              else {
-                addrs[artistS[n]] = artistS[n]
-              }
-            }
-          }
-          let s = (await Contract.totalSupply());
-          s = ethers.utils.formatUnits(s, 0);
-          setSup(s)
-        };
-        // fix for updatix1ng after wallet login
-        //updateUIStates();
-
-        // schedule every 15 sec refresh
-        const timer = setInterval(() => {
-
-          updateUIStates()
-
-        }, 3000);
-        // clearing interval
-        return () => clearInterval(timer);
-      },);
-
-      function tag1() {
-        let tags = []
-        let artists = []
-        let times = []
-        let t0 = []
-        let ts = []
-        let i = "";
-        for (let n = 0; n < sup; n++) {
-          tags[n] = tag[n]
-          artists[n] = artist[n]
-          if (addrs[artists[n]] == null) {
-            artists[n] = artist[n]
+      setTag(tagS);
+      setArtist(artistS);
+      setTime(timeS);
+      const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
+      for (let n = 0; n < sup; n++) {
+        if (addrs[artistS[n]] == null) {
+          let tn = await provider3.lookupAddress(artistS[n])
+         if (balances[artistS[n]]==null){
+          balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]) //}
+            )}
+          
+          if (tn != null) {
+            addrs[artistS[n]] = tn
           }
           else {
-            // @ts-ignore
-            artists[n] = addrs[artists[n]]
-          }//artist[n]
-          //  artists = nm
-          times[n] = time[n]
-          //ts[n] = ethers.utils.formatUnits(time[0]);
-          // times[n] = ethers.utils.formatUnits(ts[n],0);
-          if (tags[n] != '') {
-            let t2 = 'https://etherscan.io/address/' + artist[n]
-            t0[n] = (<div >
-              <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 ">
-                <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a>
-              </h2>
-              <div className="text-center light:text-white-600" >
-                {tags[n]}
-              </div>
-              <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
-                _____________________________________________________________________________________________
-              </a></div>
-            </div>
-            )
+            addrs[artistS[n]] = artistS[n]
           }
         }
-        let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
-        return (
-          <>{t0}{t1}</>);
       }
-
-      return (
-        <div>{tag1()}</div>
-      )
-    }
-let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
-  //const Contract = new ethers.Contract(contractaddrs, Abi, signerw);
-  const CreateWall = new ethers.Contract(createaddrs, Abi, signerw);
-  const App = ({ Component, pageProps }: AppProps) => {
-    function handleChangeMessage(event: ChangeEvent<HTMLTextAreaElement>) {
-      const values = event.target.value;
-      setSendMessage(values);
-    }
-    function handleChangeWall(event: SelectChangeEvent<string>) {
-      const values = event.target.value;
-      setWall(values);
-
-        window.location.replace('./' + '?walladdrs=' + values)
-
-    }
-    function handleChangeName(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-      const values = event.target.value;
-      set_name(values);
-    }
-    function handleChangeSymbol(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-      const values = event.target.value;
-      set_symbol(values);
-    }
-    function handleChangeedit(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-
-      if (_edit == 0) {
-        set_edit(1);
-      }
-      else { set_edit(0); }
-    }
-    function handleChangeMod(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-      if (_mod == 0) {
-        set_mod(1);
-      }
-      else { set_mod(0) }
-    }
-
-    //notify
-    const [sendMessage, setSendMessage] = useState("");
-    const [_name, set_name] = useState("LOL");
-    const [_symbol, set_symbol] = useState("LOL");
-    const [_edit, set_edit] = useState(0);
-    const [_mod, set_mod] = useState(0);
-    const [unlocktext, set_unlocktext] = useState("Please Unlock Wallet");
-    // notify function call
-
-    // await // MetaMask requires requesting permission to connect users accounts
-
-    const handleOpen = () => {
-      setOpen(true);
+      let s = (await Contract.totalSupply());
+      s = ethers.utils.formatUnits(s, 0);
+      setSup(s)
     };
-    const handleClose = () => {
-      setOpen(false);
-    };
-    const [open, setOpen] = useState(false);
-    const [wallAddrs, setWall] = useState('0x91fc82f5c588c00985aa264fc7b45ee680110703');
-    const createWallT = async () => {
-      // A Web3Provider wraps a standard Web3 provider, which is
-      // what MetaMask injects as window.ethereum into each page
-      const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-      // Setup
+    // fix for updatix1ng after wallet login
+    //updateUIStates();
 
+    // schedule every 15 sec refresh
+    const timer = setInterval(() => {
 
-      await provider2.send("eth_requestAccounts", []);
-      try {
-        Router.pathname
+      updateUIStates()
 
-        // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
-        const signer = provider2.getSigner()
-        let myAddress = await signer.getAddress()
-        await CreateWall.connect(signer).createWall(_name, _symbol, 0, _mod, _edit)////signer._address, sendMessage)
-        CreateWall.on("newWall", (address, name) => {
-          setTimeout(() => {
-          window.location.replace('./' + '?walladdrs=' + address) }, 3000);
-        });
-      } catch (e) {
-        console.log("LOL")
-        // addToast({body: e.message, type: "error"});
+    }, 3000);
+    // clearing interval
+    return () => clearInterval(timer);
+  },);
+
+  function tag1() {
+    let tags = []
+    let artists = []
+    let times = []
+    let t0 = []
+    let ts = []
+    let i = "";
+    for (let n = 0; n < sup; n++) {
+      tags[n] = tag[n]
+      artists[n] = artist[n]
+      if (addrs[artists[n]] == null) {
+        artists[n] = artist[n]
       }
-    };//}
-    //CreateWall.on("newWall", (address, name) => {
-    //  window.location.replace('./' + '?walladdrs=' + address)
-    //);
-    const callTag = async () => {
-      // A Web3Provider wraps a standard Web3 provider, which is
-      // what MetaMask injects as window.ethereum into each page
-      const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-      const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-      // Setup
-      const settings = {
-        apiKey: "ku_puX-vIFhnbZnC3xmpdT3jUico70LY",
-        network: Network.MATIC_MAINNET,
-      };
-
-      await provider2.send("eth_requestAccounts", []);
-      try {
-        // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
-        const signer = provider2.getSigner()
-        let myAddress = await signer.getAddress()
-        await Contract.connect(signer).mint(myAddress, sendMessage)////signer._address, sendMessage)
-      } catch (e) {
-        console.log("LOL")
-        // addToast({body: e.message, type: "error"});
+      else {
+        // @ts-ignore
+        artists[n] = addrs[artists[n]]
+      }//artist[n]
+      //  artists = nm
+      times[n] = time[n]
+      //ts[n] = ethers.utils.formatUnits(time[0]);
+      // times[n] = ethers.utils.formatUnits(ts[n],0);
+      if (tags[n] != '') {
+        let t2 = 'https://etherscan.io/address/' + artist[n]
+        t0[n] = (<div >
+          <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 ">
+            <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]}
+          </h2>
+          <div className="text-center light:text-white-600" >
+            {tags[n]}
+          </div>
+          <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
+            _____________________________________________________________________________________________
+          </a></div>
+        </div>
+        )
       }
-    };
+    }
+    let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
     return (
+      <>{t0}{t1}</>);
+  }
 
-      <ThemeProvider attribute="class">
-        <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
-          <WagmiConfig client={wagmiClient}>
-            <RainbowKitProvider chains={chains}>
-              <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
-                <Grid container spacing={1}>
-                  <Grid xs={2} className="left-6 top-10 m-auto">
-                    <FormControl>
-                      <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
-                      <Select
-                        labelId="select-label"
-                        id="simple-select"
-                        value={contractaddrs}
-                        label="Choose wall"
-                        onChange={handleChangeWall}
-                        className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
-                      >
-                        <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>Main</MenuItem>
-                        <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>
-                        <MenuItem value={'0x7526fA323C65cc1F84589BEf10cA27B660Fce137'}>LOL2</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
+  return (
+    <div>{tag1()}</div>
+  )
+}
+let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+//const Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+const CreateWall = new ethers.Contract(createaddrs, Abi, signerw);
+const App = ({ Component, pageProps }: AppProps) => {
+  function handleChangeMessage(event: ChangeEvent<HTMLTextAreaElement>) {
+    const values = event.target.value;
+    setSendMessage(values);
+  }
+  function handleChangeWall(event: SelectChangeEvent<string>) {
+    const values = event.target.value;
+    setWall(values);
 
-                  <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
-                  </Grid><Grid xs={8}><Navbar /></Grid></Grid></Box>
-              <Component {...pageProps} />
-              <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto">
-                  <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
-                    Create your own wall!
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                    You can create your own immutable community here.
-                  </Typography>
-                  <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                    Wall name
-                  </h2>
-                  <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
-                    onChange={e => handleChangeName(e)} />
-                  <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                    Wall symbol
-                  </h2>
-                  <TextField className="m-auto text-center w-3/4 justify-center light:text-gray-800 dark:text-black"
-                    onChange={e => handleChangeSymbol(e)} />
-                  <FormControlLabel control={<Switch onChange={handleChangeMod} />} label="Mods can delete messages" />
-                  <FormControlLabel control={<Switch onChange={handleChangeedit} />} label="Users can edit messages" />
-                  <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                    onClick={createWallT}> Create Wall
-                  </button>
+    window.location.replace('./' + '?walladdrs=' + values)
 
-                </div>
-              </Dialog>
-              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
-                <div>
-                  {useT1()}
-                </div>
-                <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
-                  Tag the Wall!
-                </h1>
+  }
+  function handleChangeName(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const values = event.target.value;
+    set_name(values);
+  }
+  function handleChangeSymbol(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const values = event.target.value;
+    set_symbol(values);
+  }
+  function handleChangeedit(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+
+    if (_edit == 0) {
+      set_edit(1);
+    }
+    else { set_edit(0); }
+  }
+  function handleChangeMod(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    if (_mod == 0) {
+      set_mod(1);
+    }
+    else { set_mod(0) }
+  }
+
+  //notify
+  const [sendMessage, setSendMessage] = useState("");
+  const [_name, set_name] = useState("LOL");
+  const [_symbol, set_symbol] = useState("LOL");
+  const [_edit, set_edit] = useState(0);
+  const [_mod, set_mod] = useState(0);
+  const [unlocktext, set_unlocktext] = useState("Please Unlock Wallet");
+  // notify function call
+
+  // await // MetaMask requires requesting permission to connect users accounts
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const [open, setOpen] = useState(false);
+  const [wallAddrs, setWall] = useState('0x91fc82f5c588c00985aa264fc7b45ee680110703');
+  const createWallT = async () => {
+    // A Web3Provider wraps a standard Web3 provider, which is
+    // what MetaMask injects as window.ethereum into each page
+    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    // Setup
+
+
+    await provider2.send("eth_requestAccounts", []);
+    try {
+      Router.pathname
+
+      // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
+      const signer = provider2.getSigner()
+      let myAddress = await signer.getAddress()
+      await CreateWall.connect(signer).createWall(_name, _symbol, 0, _mod, _edit)////signer._address, sendMessage)
+      CreateWall.on("newWall", (address, name) => {
+        setTimeout(() => {
+          window.location.replace('./' + '?walladdrs=' + address)
+        }, 3000);
+      });
+    } catch (e) {
+      console.log("LOL")
+      // addToast({body: e.message, type: "error"});
+    }
+  };//}
+  //CreateWall.on("newWall", (address, name) => {
+  //  window.location.replace('./' + '?walladdrs=' + address)
+  //);
+  const callTag = async () => {
+    // A Web3Provider wraps a standard Web3 provider, which is
+    // what MetaMask injects as window.ethereum into each page
+    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
+    // Setup
+    const settings = {
+      apiKey: "ku_puX-vIFhnbZnC3xmpdT3jUico70LY",
+      network: Network.MATIC_MAINNET,
+    };
+
+    await provider2.send("eth_requestAccounts", []);
+    try {
+      // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
+      const signer = provider2.getSigner()
+      let myAddress = await signer.getAddress()
+      await Contract.connect(signer).mint(myAddress, sendMessage)////signer._address, sendMessage)
+    } catch (e) {
+      console.log("LOL")
+      // addToast({body: e.message, type: "error"});
+    }
+  };
+  return (
+
+    <ThemeProvider attribute="class">
+      <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>
+            <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
+              <Grid container spacing={1}>
+                <Grid xs={2} className="left-6 top-10 m-auto">
+                  <FormControl>
+                    <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
+                    <Select
+                      labelId="select-label"
+                      id="simple-select"
+                      value={contractaddrs}
+                      label="Choose wall"
+                      onChange={handleChangeWall}
+                      className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
+                    >
+                      <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>Main</MenuItem>
+                      <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>
+                      <MenuItem value={'0x7526fA323C65cc1F84589BEf10cA27B660Fce137'}>LOL2</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
+                </Grid><Grid xs={8}><Navbar /></Grid></Grid></Box>
+            <Component {...pageProps} />
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto">
+                <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
+                  Create your own wall!
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+                  You can create your own immutable community here.
+                </Typography>
                 <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Send your message here
+                  Wall name
                 </h2>
-                <textarea className="m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 light:text-gray-800 dark:text-black"
-                  onChange={e => handleChangeMessage(e)} />
-
+                <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
+                  onChange={e => handleChangeName(e)} />
+                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                  Wall symbol
+                </h2>
+                <TextField className="m-auto text-center w-3/4 justify-center light:text-gray-800 dark:text-black"
+                  onChange={e => handleChangeSymbol(e)} />
+                <FormControlLabel control={<Switch onChange={handleChangeMod} />} label="Mods can delete messages" />
+                <FormControlLabel control={<Switch onChange={handleChangeedit} />} label="Users can edit messages" />
                 <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                  onClick={callTag}> Send
+                  onClick={createWallT}> Create Wall
                 </button>
 
-                <div>
-                </div>
-                <div>
-
-                </div>
               </div>
-              <div className="flex flex-col  space-y-6 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
+            </Dialog>
+            <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
+              <div>
+                {useT1()}
+              </div>
+              <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
+                Tag the Wall!
+              </h1>
+              <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                Send your message here
+              </h2>
+              <textarea className="m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 light:text-gray-800 dark:text-black"
+                onChange={e => handleChangeMessage(e)} />
 
-                <h1 className="m-auto text-center md:mt-8 text-4xl md:text-4xl font-extrabold rotating-hue">
-                  Chat
-                </h1>
-                <div className="m-auto text-center w-3/4">
+              <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
+                onClick={callTag}> Send
+              </button>
 
-                  {useTtag0()}
-                </div>
+              <div>
+              </div>
+              <div>
 
               </div>
-            </RainbowKitProvider>
-          </WagmiConfig>
-        </div>
-      </ThemeProvider>
-    )
-  }
-  export default App
+            </div>
+            <div className="flex flex-col  space-y-6 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
+
+              <h1 className="m-auto text-center md:mt-8 text-4xl md:text-4xl font-extrabold rotating-hue">
+                Chat
+              </h1>
+              <div className="m-auto text-center w-3/4">
+
+                {useTtag0()}
+              </div>
+
+            </div>
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </div>
+    </ThemeProvider>
+  )
+}
+export default App
