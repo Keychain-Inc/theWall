@@ -109,6 +109,7 @@ let addrs: string[] = []
 //     console.log('in router')
 let ut = 0
 let contracturl = ''
+// @ts-ignore
 let balances = []
 function useT1() {
   const [wallT, setwallT] = useState("");
@@ -157,6 +158,7 @@ function useTtag0() {
       for (let n = 0; n < sup; n++) {
         if (addrs[artistS[n]] == null) {
           let tn = await provider3.lookupAddress(artistS[n])
+          // @ts-ignore
          if (balances[artistS[n]]==null){
           balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]) //}
             )}
@@ -209,9 +211,8 @@ function useTtag0() {
       // times[n] = ethers.utils.formatUnits(ts[n],0);
       if (tags[n] != '') {
         let t2 = 'https://etherscan.io/address/' + artist[n]
-        t0[n] = (<div >
-          <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 ">
-            <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]}
+        // @ts-ignore
+        t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]}
           </h2>
           <div className="text-center light:text-white-600" >
             {tags[n]}
