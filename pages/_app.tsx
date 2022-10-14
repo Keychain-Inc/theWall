@@ -350,8 +350,8 @@ let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
                         className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
                       >
                         <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>Main</MenuItem>
-                        <MenuItem value={'0x23037218ca2c785cdb8cda64c82662cc5d81d441'}>Weebs</MenuItem>
-                        <MenuItem value={'0x0000000000000000000000000000000000000000'}>LOL2</MenuItem>
+                        <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>
+                        <MenuItem value={'0x7526fA323C65cc1F84589BEf10cA27B660Fce137'}>LOL2</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
