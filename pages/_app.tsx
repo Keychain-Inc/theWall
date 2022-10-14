@@ -416,7 +416,7 @@ let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
               <div className="flex flex-col  space-y-6 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
 
                 <h1 className="m-auto text-center md:mt-8 text-4xl md:text-4xl font-extrabold rotating-hue">
-                  Chat{sendMessage}
+                  Chat
                 </h1>
                 <div className="m-auto text-center w-3/4">
 
