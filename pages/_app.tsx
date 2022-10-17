@@ -160,8 +160,10 @@ function useTtag0() {
           let tn = await provider3.lookupAddress(artistS[n])
           // @ts-ignore
          if (balances[artistS[n]]==null){
+          try{
           balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]) //}
             )}
+          catch{}}
           
           if (tn != null) {
             addrs[artistS[n]] = tn
