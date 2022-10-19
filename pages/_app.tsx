@@ -69,7 +69,7 @@ const signerw = wagmiClient.provider;
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
 
-let contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
+let contractaddrs = "0x0696758B5Cd9A4B58BC539BD3fDbc59A31544645";
 let createaddrs = "0x7B89F774D8AC62c1CD3AA2a8F3F7991c7578114e";
 let tokenaddrs = "0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
@@ -119,7 +119,7 @@ function useT1() {
     // update the ui elements
     update()
     async function update() {
-      if (ut == 0 && contractaddrs != '0x91fc82f5c588c00985aa264fc7b45ee680110703') {
+      if (ut == 0 && contractaddrs != '0x0696758B5Cd9A4B58BC539BD3fDbc59A31544645') {
         contracturl = 'https://tagthewall.org/' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
         ut = 1;
@@ -384,7 +384,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                       onChange={handleChangeWall}
                       className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
                     >
-                      <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>Main</MenuItem>
+                      <MenuItem value={'0x0696758B5Cd9A4B58BC539BD3fDbc59A31544645'}>Main</MenuItem>
                       <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>
                       <MenuItem value={'0x503D749c21720E8B0d7A39809AfeC02bdeb014bc'}>Polygon</MenuItem>
                       <MenuItem value={'0x4B233C47dC9C456dBaaa9af138F54b03CFcDED6E'}>ENS</MenuItem>
