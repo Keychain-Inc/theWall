@@ -71,6 +71,7 @@ const signerw = wagmiClient.provider;
 
 let contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 let createaddrs = "0x43032A04711d239662E3F7da69507CfeE699Dd7b";
+let tokenaddrs = "0xdd42d2e5426b682172cCa743375516B38890f9D8";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
 //  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}//
@@ -110,7 +111,8 @@ let addrs: string[] = []
 let ut = 0
 let contracturl = ''
 // @ts-ignore
-let balances = []
+let balances = []// @ts-ignore
+let balancestoken = []// @ts-ignore
 function useT1() {
   const [wallT, setwallT] = useState("");
   useEffect(() => {
@@ -159,12 +161,15 @@ function useTtag0() {
         if (addrs[artistS[n]] == null) {
           let tn = await provider3.lookupAddress(artistS[n])
           // @ts-ignore
-         if (balances[artistS[n]]==null){
-          try{
-          balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]) //}
-            )}
-          catch{}}
-          
+          if (balances[artistS[n]] == null) {
+            try {
+              balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]))
+              balancestoken[artistS[n]] = Number(await Token.balanceOf(artistS[n])/10**18  //}
+              )
+            }
+            catch { }
+          }
+
           if (tn != null) {
             addrs[artistS[n]] = tn
           }
@@ -214,8 +219,8 @@ function useTtag0() {
       if (tags[n] != '') {
         let t2 = 'https://etherscan.io/address/' + artist[n]
         // @ts-ignore
-        t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]}
-          </h2>
+        t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]} 🧱{balancestoken[artist[n]]}
+        </h2>
           <div className="text-center light:text-white-600" >
             {tags[n]}
           </div>
@@ -236,6 +241,7 @@ function useTtag0() {
   )
 }
 let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+let Token = new ethers.Contract(tokenaddrs, Abi, signerw);
 //const Contract = new ethers.Contract(contractaddrs, Abi, signerw);
 const CreateWall = new ethers.Contract(createaddrs, Abi, signerw);
 const App = ({ Component, pageProps }: AppProps) => {
@@ -315,7 +321,25 @@ const App = ({ Component, pageProps }: AppProps) => {
       console.log("LOL")
       // addToast({body: e.message, type: "error"});
     }
-  };//}
+  };//}// @ts-ignore
+ // const sendTip = async (toAddrs, amount) => {// @ts-ignore
+    // A Web3Provider wraps a standard Web3 provider, which is
+    // what MetaMask injects as window.ethereum into each page
+ //   const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    // Setup
+ //   const Token = new ethers.Contract(tokenaddrs, Abi, signerw);
+
+//    await provider2.send("eth_requestAccounts", []);
+//    try {
+//      const signer = provider2.getSigner()
+//      let myAddress = await signer.getAddress()
+//      await Token.connect(signer).transfer(toAddrs, amount)////signer._address, sendMessage)
+
+//    } catch (e) {
+//      console.log("LOL")
+//      // addToast({body: e.message, type: "error"});
+//    }
+//  };
   //CreateWall.on("newWall", (address, name) => {
   //  window.location.replace('./' + '?walladdrs=' + address)
   //);
@@ -362,7 +386,10 @@ const App = ({ Component, pageProps }: AppProps) => {
                     >
                       <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>Main</MenuItem>
                       <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>
-                      <MenuItem value={'0x7526fA323C65cc1F84589BEf10cA27B660Fce137'}>LOL2</MenuItem>
+                      <MenuItem value={'0x503D749c21720E8B0d7A39809AfeC02bdeb014bc'}>Polygon</MenuItem>
+                      <MenuItem value={'0x4B233C47dC9C456dBaaa9af138F54b03CFcDED6E'}>ENS</MenuItem>
+                      <MenuItem value={'0x6A98F6F6F27E53089857333fc036Ab98719fAe75'}>Sushiswap</MenuItem>
+                      
                     </Select>
                   </FormControl>
                 </Grid>
