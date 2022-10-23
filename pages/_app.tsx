@@ -119,7 +119,7 @@ function useT1() {
     // update the ui elements
     update()
     async function update() {
-      if (ut == 0 && contractaddrs != '0x0696758B5Cd9A4B58BC539BD3fDbc59A31544645') {
+      if (ut == 0 && contractaddrs != '0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79') {
         contracturl = 'https://tagthewall.org/' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
         ut = 1;
@@ -384,7 +384,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                       onChange={handleChangeWall}
                       className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
                     >
-                      <MenuItem value={'0x0696758B5Cd9A4B58BC539BD3fDbc59A31544645'}>Main</MenuItem>
+                      <MenuItem value={'0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'}>Main</MenuItem>
                       <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>
                       <MenuItem value={'0x503D749c21720E8B0d7A39809AfeC02bdeb014bc'}>Polygon</MenuItem>
                       <MenuItem value={'0x4B233C47dC9C456dBaaa9af138F54b03CFcDED6E'}>ENS</MenuItem>
