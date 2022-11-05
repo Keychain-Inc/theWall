@@ -443,11 +443,11 @@ function useTtag0() {
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         // update the ui elements
         async function updateUIStates() {
-            const provider2 = new ethers__WEBPACK_IMPORTED_MODULE_21__.ethers.providers.Web3Provider(window.ethereum);
-            await provider2.send("eth_requestAccounts", []);
-            const signer = provider2.getSigner();
+            const provider2 = new ethers__WEBPACK_IMPORTED_MODULE_21__.ethers.providers.JsonRpcProvider("https://rpc.ftm.tools/");
+            // await provider2.send("eth_requestAccounts", []);
+            //const signer = provider2.getSigner()connect(signer).
             Contract = new ethers__WEBPACK_IMPORTED_MODULE_21__.ethers.Contract(contractaddrs, Abi, signer);
-            const [tagS, artistS, timeS] = await Contract.connect(signer).latest(await Contract.totalSupply());
+            const [tagS, artistS, timeS] = await Contract.latest(await Contract.totalSupply());
             if (wallT == "LOL") {
                 setwallT(await Contract.name() + "LOLOL");
             }
