@@ -42,7 +42,6 @@ import Custom from '.';
 import AddressPill from '../components/addressPill';
 import { ChangeEvent } from 'react';
 import { Provider } from 'web3/providers';
-import { givenProvider } from 'web3';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
 
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
