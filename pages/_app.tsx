@@ -28,25 +28,51 @@ import Grid from '@mui/material/Unstable_Grid2';
 import DarkModeToggle from '../components/darkModeToggle';
 import Router, { useRouter } from 'next/router'
 import { Network, Alchemy } from 'alchemy-sdk';
+import { Chain } from '@rainbow-me/rainbowkit';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { chain, configureChains, createClient, WagmiConfig, useContractWrite } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 import config from '../config/env-vars'
-import { BigNumber, ethers } from 'ethers'
+import { BigNumber, ethers, getDefaultProvider } from 'ethers'
 import { RainbowKitChainProvider } from '@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitChainContext'
 import Home from '.';
 import Custom from '.';
 import AddressPill from '../components/addressPill';
 import { ChangeEvent } from 'react';
+import { Provider } from 'web3/providers';
+import { givenProvider } from 'web3';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
 
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
-
+const FTMChain: Chain = {
+  id: 250,
+  name: 'Fantom',
+  network: 'fantom',
+  iconUrl: 'https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=023',
+  iconBackground: '#fff',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Fantom',
+    symbol: 'FTM',
+  },
+  rpcUrls: {
+    default: 'https://api.avax.network/ext/bc/C/rpc',
+  },
+  blockExplorers: {
+    default: { name: 'SnowTrace', url: 'https://snowtrace.io' },
+    etherscan: { name: 'SnowTrace', url: 'https://snowtrace.io' },
+  },
+  testnet: false,
+};
 const { chains, provider } = configureChains(
-  [chain.polygon],//, chain.arbitrum],//, //chain.optimism, chain.arbitrum, chain.localhost],
-  [alchemyProvider({ apiKey: alchemyId })],//,// alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
+  [FTMChain],//, , chain.polygonchain.fantom,chain.arbitrum],//, //chain.optimism, chain.arbitrum, chain.localhost],
+ [jsonRpcProvider({
+  rpc: (FTMChain) => ({
+    http: `https://rpc.ftm.tools/`,
+  })})],//,//,alchemyProvider({ apiKey: alchemyId }) alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
 )
 const { connectors } = getDefaultWallets({
   appName: 'the Wall',
@@ -64,13 +90,13 @@ const wagmiClient = createClient({
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
 const signerw = wagmiClient.provider;
-
+const signer = wagmiClient.provider;
 // The MetaMask plugin also allows signing transactions to
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
 
-let contractaddrs = "0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79";
-let createaddrs = "0xd2defb1cf1d649b8253c85834a9b9571337166fe";
+let contractaddrs = "0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC";
+let createaddrs = "0xBE153Eb48062ba3892C10389844643d37cedA639";
 let tokenaddrs = "0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
@@ -143,13 +169,18 @@ function useTtag0() {
     // @ts-ignore
     contractaddrs = walladdrs
     Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+    Contract = new ethers.Contract(contractaddrs, Abi, signer);
     addrst = 1
   }
 
   useEffect(() => {
     // update the ui elements
     async function updateUIStates() {
-      const [tagS, artistS, timeS] = await Contract.latest(await Contract.totalSupply());
+      const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+      await provider2.send("eth_requestAccounts", []);
+   const signer = provider2.getSigner()
+   Contract = new ethers.Contract(contractaddrs, Abi, signer);
+      const [tagS, artistS, timeS] = await Contract.connect(signer).latest(await Contract.totalSupply());
       if (wallT == 'LOL') {
         setwallT(await Contract.name() + 'LOLOL')
       }
@@ -240,7 +271,8 @@ function useTtag0() {
     <div>{tag1()}</div>
   )
 }
-let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+//let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+let Contract = new ethers.Contract(contractaddrs, Abi, signer);
 let Token = new ethers.Contract(tokenaddrs, Abi, signerw);
 //const Contract = new ethers.Contract(contractaddrs, Abi, signerw);
 const CreateWall = new ethers.Contract(createaddrs, Abi, signerw);
@@ -349,16 +381,17 @@ const App = ({ Component, pageProps }: AppProps) => {
     const provider2 = new ethers.providers.Web3Provider(window.ethereum)
     const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
     // Setup
-    const settings = {
-      apiKey: "ku_puX-vIFhnbZnC3xmpdT3jUico70LY",
-      network: Network.MATIC_MAINNET,
-    };
+    //const settings = {
+    //  apiKey: "ku_puX-vIFhnbZnC3xmpdT3jUico70LY",
+    //  network: Network.MATIC_MAINNET,
+    //};
 
     await provider2.send("eth_requestAccounts", []);
     try {
       // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
       const signer = provider2.getSigner()
       let myAddress = await signer.getAddress()
+      Contract = new ethers.Contract(contractaddrs, Abi, signer);
       await Contract.connect(signer).mint(myAddress, sendMessage)////signer._address, sendMessage)
     } catch (e) {
       console.log("LOL")
@@ -384,11 +417,8 @@ const App = ({ Component, pageProps }: AppProps) => {
                       onChange={handleChangeWall}
                       className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
                     >
-                      <MenuItem value={'0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'}>Main</MenuItem>
-                      <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>
-                      <MenuItem value={'0x503D749c21720E8B0d7A39809AfeC02bdeb014bc'}>Polygon</MenuItem>
-                      <MenuItem value={'0x4B233C47dC9C456dBaaa9af138F54b03CFcDED6E'}>ENS</MenuItem>
-                      <MenuItem value={'0x6A98F6F6F27E53089857333fc036Ab98719fAe75'}>Sushiswap</MenuItem>
+                      <MenuItem value={'0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC'}>Main</MenuItem>
+
                       
                     </Select>
                   </FormControl>
