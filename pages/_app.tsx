@@ -120,7 +120,7 @@ function useT1() {
     update()
     async function update() {
       if (ut == 0 && contractaddrs != '0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79') {
-        contracturl = 'https://tagthewall.org/' + contractaddrs
+        contracturl = 'https://tagthewall.org/?walladdrs=' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
         ut = 1;
       }
