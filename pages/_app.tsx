@@ -229,7 +229,10 @@ function useTtag0() {
         artists[n] = addrs[artists[n]]
       }//artist[n]
       //  artists = nm
-      times[n] = time[n]
+      times[n] = Number(time[n])
+      let TT = new Date(times[n] * 1000).toLocaleString()
+      times[n] = String(TT)
+  
       //ts[n] = ethers.utils.formatUnits(time[0]);
       // times[n] = ethers.utils.formatUnits(ts[n],0);
       if (tags[n] != '') {
@@ -240,6 +243,8 @@ function useTtag0() {
           <div className="text-center light:text-white-600" >
             {tags[n]}
           </div>
+          <h2 style={{ color: '#cccccc' }}className="text-1xl text-centerjustify-center ">
+          {times[n]}</h2>
           <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
             _____________________________________________________________________________________________
           </a></div>
