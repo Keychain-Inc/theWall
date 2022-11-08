@@ -423,6 +423,10 @@ const App = ({ Component, pageProps }: AppProps) => {
                     <a href='https://FTM.tagthewall.org/'>
                   <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{width:42}}>
                     </img></a>
+                    </Grid><Grid xs={2}>
+                    <a href='https://BSC.tagthewall.org/'>
+                  <img src='https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=023' style={{width:42}}>
+                    </img></a>
                     </Grid></Grid>
                 </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
             <Component {...pageProps} />
