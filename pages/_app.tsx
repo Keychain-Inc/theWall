@@ -40,7 +40,8 @@ import Custom from '.';
 import AddressPill from '../components/addressPill';
 import { ChangeEvent } from 'react';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
-
+import net from '../config/network'
+const { chainn, rpc,createn,contractn,menun} = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
 
@@ -69,8 +70,8 @@ const signerw = wagmiClient.provider;
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
 
-let contractaddrs = "0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79";
-let createaddrs = "0xd2defb1cf1d649b8253c85834a9b9571337166fe";
+let contractaddrs = contractn;
+let createaddrs = createn;
 let tokenaddrs = "0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
@@ -119,7 +120,7 @@ function useT1() {
     // update the ui elements
     update()
     async function update() {
-      if (ut == 0 && contractaddrs != '0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79') {
+      if (ut == 0 && contractaddrs != contractn) {
         contracturl = 'https://tagthewall.org/?walladdrs=' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
         ut = 1;
