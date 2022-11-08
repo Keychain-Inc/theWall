@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Modal from '@mui/material/Modal'
+import Snackbar from '@mui/material/Snackbar'
 import Card from '@mui/material/Card'
 import Dialog from '@mui/material/Dialog'
 import TextField from '@mui/material/TextField'
@@ -40,13 +41,19 @@ import Custom from '.';
 import AddressPill from '../components/addressPill';
 import { ChangeEvent } from 'react';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
-
+import net from '../config/network'
+import toast, { Toaster } from 'react-hot-toast';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
+const { chainn, rpc,createn,contractn,menun} = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
 
 const { chains, provider } = configureChains(
-  [chain.polygon],//, chain.arbitrum],//, //chain.optimism, chain.arbitrum, chain.localhost],
-  [alchemyProvider({ apiKey: alchemyId })],//,// alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
+  [chainn],//, chain.arbitrum],//, //chain.optimism, chain.arbitrum, chain.localhost],
+  [jsonRpcProvider({
+    rpc: (chainn) => ({
+      http: rpc,
+    })})],//,// alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
 )
 const { connectors } = getDefaultWallets({
   appName: 'the Wall',
@@ -69,8 +76,9 @@ const signerw = wagmiClient.provider;
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
 
-let contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
-let createaddrs = "0x723CdDd68125FF45D18F0cCf38a02497e06a9562";
+let contractaddrs = contractn;
+let createaddrs = createn;
+let tokenaddrs = "0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
 //  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}//
@@ -89,7 +97,9 @@ const Abi = [
   "function mint2(address to, string _tag) payable",
   "function mint(address to, string _tag)",
   "function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)",
-  "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange)",
+  "event newWall(address,string)",
+  "function balanceOf(address) view returns (uint256)",
+  "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange) returns (address)",
 
 ];
 //format addresses in ui
@@ -105,7 +115,26 @@ let addrs: string[] = []
 //  console.log(router) 
 //  if (router.query && router.query.new_nft_address) {
 //     console.log('in router')
-//      contractaddrs = (router.query.new_nft_address);
+let ut = 0
+let contracturl = ''
+// @ts-ignore
+let balances = []// @ts-ignore
+let balancestoken = []// @ts-ignore
+let loaded = 0
+function useT1() {
+  const [wallT, setwallT] = useState("");
+  useEffect(() => {
+    // update the ui elements/
+    update()
+    async function update() {
+      if (ut == 0 && contractaddrs != contractn) {
+        contracturl = 'https://tagthewall.org/?walladdrs=' + contractaddrs
+        setwallT('Welcome to ' + await Contract.name())
+        ut = 1;
+      }
+    }
+  },); return (<><h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue" >{wallT}</h1><div className="m-auto text-center" style={{ color: '#4f86f7' }}>{contracturl}</div></>)
+}//      contractaddrs = (router.query.new_nft_address);
 function useTtag0() {
 
   const [tag, setTag] = useState("LOL");
@@ -113,26 +142,46 @@ function useTtag0() {
   const [time, setTime] = useState("");
   const [sup, setSup] = useState(2);
   // let addrs = []
+  const [wallT, setwallT] = useState("");
+  const [symbol, setSymbol] = useState("LOL");
   let addrst = 0
-    const router = useRouter()
-    const { walladdrs } = router.query
-    if (walladdrs != null && addrst == 0) {
-      contractaddrs = walladdrs
-      Contract = new ethers.Contract(contractaddrs, Abi, signerw);
-      addrst = 1
-    }
+  const router = useRouter()
+  const { walladdrs } = router.query
+  if (walladdrs != null && addrst == 0) {
+    // @ts-ignore
+    contractaddrs = walladdrs
+    Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+    addrst = 1
+  }
 
   useEffect(() => {
     // update the ui elements
     async function updateUIStates() {
       const [tagS, artistS, timeS] = await Contract.latest(await Contract.totalSupply());
+      if (wallT == 'LOL') {
+        setwallT(await Contract.name() + 'LOLOL')
+      }
       setTag(tagS);
       setArtist(artistS);
       setTime(timeS);
       const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
+      const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
+      if (loaded == 0){
+        toast('Loading wall')
+      }
       for (let n = 0; n < sup; n++) {
         if (addrs[artistS[n]] == null) {
           let tn = await provider3.lookupAddress(artistS[n])
+          // @ts-ignore
+          if (balances[artistS[n]] == null) {
+            try {
+              balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]))
+              balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n])/10**18  //}
+              )
+            }
+            catch { }
+          }
+
           if (tn != null) {
             addrs[artistS[n]] = tn
           }
@@ -144,6 +193,10 @@ function useTtag0() {
       let s = (await Contract.totalSupply());
       s = ethers.utils.formatUnits(s, 0);
       setSup(s)
+      if (loaded == 0){
+      toast.success('Successfully loaded wall!')
+      loaded = 1
+    }
     };
     // fix for updatix1ng after wallet login
     //updateUIStates();
@@ -176,18 +229,22 @@ function useTtag0() {
         artists[n] = addrs[artists[n]]
       }//artist[n]
       //  artists = nm
-      times[n] = time[n]
+      times[n] = Number(time[n])
+      let TT = new Date(times[n] * 1000).toLocaleString()
+      times[n] = String(TT)
+  
       //ts[n] = ethers.utils.formatUnits(time[0]);
       // times[n] = ethers.utils.formatUnits(ts[n],0);
       if (tags[n] != '') {
         let t2 = 'https://etherscan.io/address/' + artist[n]
-        t0[n] = (<div >
-          <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 ">
-            <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a>
-          </h2>
+        // @ts-ignore
+        t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]} 🧱{balancestoken[artist[n]]}
+        </h2>
           <div className="text-center light:text-white-600" >
             {tags[n]}
           </div>
+          <h2 style={{ color: '#cccccc' }}className="text-1xl text-centerjustify-center ">
+          {times[n]}</h2>
           <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
             _____________________________________________________________________________________________
           </a></div>
@@ -205,6 +262,7 @@ function useTtag0() {
   )
 }
 let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
+let Token = new ethers.Contract(tokenaddrs, Abi, signerw);
 //const Contract = new ethers.Contract(contractaddrs, Abi, signerw);
 const CreateWall = new ethers.Contract(createaddrs, Abi, signerw);
 const App = ({ Component, pageProps }: AppProps) => {
@@ -212,11 +270,12 @@ const App = ({ Component, pageProps }: AppProps) => {
     const values = event.target.value;
     setSendMessage(values);
   }
-
   function handleChangeWall(event: SelectChangeEvent<string>) {
     const values = event.target.value;
     setWall(values);
+
     window.location.replace('./' + '?walladdrs=' + values)
+
   }
   function handleChangeName(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const values = event.target.value;
@@ -274,11 +333,37 @@ const App = ({ Component, pageProps }: AppProps) => {
       const signer = provider2.getSigner()
       let myAddress = await signer.getAddress()
       await CreateWall.connect(signer).createWall(_name, _symbol, 0, _mod, _edit)////signer._address, sendMessage)
+      CreateWall.on("newWall", (address, name) => {
+        setTimeout(() => {
+          window.location.replace('./' + '?walladdrs=' + address)
+        }, 3000);
+      });
     } catch (e) {
       console.log("LOL")
       // addToast({body: e.message, type: "error"});
     }
-  };
+  };//}// @ts-ignore
+ // const sendTip = async (toAddrs, amount) => {// @ts-ignore
+    // A Web3Provider wraps a standard Web3 provider, which is
+    // what MetaMask injects as window.ethereum into each page
+ //   const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    // Setup
+ //   const Token = new ethers.Contract(tokenaddrs, Abi, signerw);
+
+//    await provider2.send("eth_requestAccounts", []);
+//    try {
+//      const signer = provider2.getSigner()
+//      let myAddress = await signer.getAddress()
+//      await Token.connect(signer).transfer(toAddrs, amount)////signer._address, sendMessage)
+
+//    } catch (e) {
+//      console.log("LOL")
+//      // addToast({body: e.message, type: "error"});
+//    }
+//  };
+  //CreateWall.on("newWall", (address, name) => {
+  //  window.location.replace('./' + '?walladdrs=' + address)
+  //);
   const callTag = async () => {
     // A Web3Provider wraps a standard Web3 provider, which is
     // what MetaMask injects as window.ethereum into each page
@@ -307,28 +392,38 @@ const App = ({ Component, pageProps }: AppProps) => {
       <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
-          <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
-      <Grid container spacing={1}>
-        <Grid xs={2} className="left-6 top-10 m-auto">
-            <FormControl>
-                <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
-                <Select
-                  labelId="select-label"
-                  id="simple-select"
-                  value={contractaddrs}
-                  label="Choose wall"
-                  onChange={handleChangeWall}
-                  className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
-                >
-                  <MenuItem value={'0x91fc82f5c588c00985aa264fc7b45ee680110703'}>Main</MenuItem>
-                  <MenuItem value={'0x23037218ca2c785cdb8cda64c82662cc5d81d441'}>Weebs</MenuItem>
-                  <MenuItem value={'0x0000000000000000000000000000000000000000'}>LOL2</MenuItem>
-                </Select>
-              </FormControl>
-              </Grid>
-              
-              <Grid  xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
-              </Grid><Grid  xs={8}><Navbar /></Grid></Grid></Box>
+            <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
+              <Grid container spacing={1}>
+                <Grid xs={2} className="left-6 top-10 m-auto">
+                  <FormControl>
+                    <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
+                    <Select
+                      labelId="select-label"
+                      id="simple-select"
+                      value={contractaddrs}
+                      label="Choose wall"
+                      onChange={handleChangeWall}
+                      className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
+                    >
+                     {menun}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
+                </Grid><Grid xs={3}>
+                <Grid container spacing={0}>
+                <Grid xs={2}>
+                  <a href='https://tagthewall.org/'>
+                  <img src='https://cryptologos.cc/logos/polygon-matic-logo.png?v=023' style={{width:42}}>
+                    </img></a>
+                    </Grid>
+                    <Grid xs={2}>
+                    <a href='https://FTM.tagthewall.org/'>
+                  <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{width:42}}>
+                    </img></a>
+                    </Grid></Grid>
+                </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
             <Component {...pageProps} />
             <Dialog
               open={open}
@@ -362,7 +457,9 @@ const App = ({ Component, pageProps }: AppProps) => {
               </div>
             </Dialog>
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
-
+              <div>
+                {useT1()}
+              </div>
               <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
                 Tag the Wall!
               </h1>
@@ -385,7 +482,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             <div className="flex flex-col  space-y-6 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
 
               <h1 className="m-auto text-center md:mt-8 text-4xl md:text-4xl font-extrabold rotating-hue">
-                Chat{sendMessage}
+                Chat
               </h1>
               <div className="m-auto text-center w-3/4">
 
