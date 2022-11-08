@@ -318,7 +318,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     setOpen(false);
   };
   const [open, setOpen] = useState(false);
-  const [wallAddrs, setWall] = useState('0x91fc82f5c588c00985aa264fc7b45ee680110703');
+  const [wallAddrs, setWall] = useState('0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC');
   const createWallT = async () => {
     // A Web3Provider wraps a standard Web3 provider, which is
     // what MetaMask injects as window.ethereum into each page
@@ -422,6 +422,11 @@ const App = ({ Component, pageProps }: AppProps) => {
                     <Grid xs={2}>
                     <a href='https://FTM.tagthewall.org/'>
                   <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{width:42}}>
+                    </img></a>
+                    </Grid>
+                    <Grid xs={2}>
+                    <a href='https://BSC.tagthewall.org/'>
+                  <img src='https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=023' style={{width:42}}>
                     </img></a>
                     </Grid></Grid>
                 </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
