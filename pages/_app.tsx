@@ -230,6 +230,7 @@ function useTtag0() {
       }//artist[n]
       //  artists = nm
       times[n] = Number(time[n])
+       // @ts-ignore
       let TT = new Date(times[n] * 1000).toLocaleString()
       times[n] = String(TT)
   
