@@ -406,7 +406,19 @@ const App = ({ Component, pageProps }: AppProps) => {
                 </Grid>
 
                 <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
-                </Grid><Grid xs={8}><Navbar /></Grid></Grid></Box>
+                </Grid><Grid xs={3}>
+                <Grid container spacing={0}>
+                <Grid xs={2}>
+                  <a href='https://tagthewall.org/'>
+                  <img src='https://cryptologos.cc/logos/polygon-matic-logo.png?v=023' style={{width:42}}>
+                    </img></a>
+                    </Grid>
+                    <Grid xs={2}>
+                    <a href='https://FTM.tagthewall.org/'>
+                  <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{width:42}}>
+                    </img></a>
+                    </Grid></Grid>
+                </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
             <Component {...pageProps} />
             <Dialog
               open={open}
