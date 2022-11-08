@@ -229,7 +229,10 @@ function useTtag0() {
         artists[n] = addrs[artists[n]]
       }//artist[n]
       //  artists = nm
-      times[n] = time[n]
+      times[n] = Number(time[n])
+      let TT = new Date(times[n] * 1000).toLocaleString()
+      times[n] = String(TT)
+  
       //ts[n] = ethers.utils.formatUnits(time[0]);
       // times[n] = ethers.utils.formatUnits(ts[n],0);
       if (tags[n] != '') {
@@ -240,6 +243,8 @@ function useTtag0() {
           <div className="text-center light:text-white-600" >
             {tags[n]}
           </div>
+          <h2 style={{ color: '#cccccc' }}className="text-1xl text-centerjustify-center ">
+          {times[n]}</h2>
           <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
             _____________________________________________________________________________________________
           </a></div>
@@ -406,7 +411,19 @@ const App = ({ Component, pageProps }: AppProps) => {
                 </Grid>
 
                 <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
-                </Grid><Grid xs={8}><Navbar /></Grid></Grid></Box>
+                </Grid><Grid xs={3}>
+                <Grid container spacing={0}>
+                <Grid xs={2}>
+                  <a href='https://tagthewall.org/'>
+                  <img src='https://cryptologos.cc/logos/polygon-matic-logo.png?v=023' style={{width:42}}>
+                    </img></a>
+                    </Grid>
+                    <Grid xs={2}>
+                    <a href='https://FTM.tagthewall.org/'>
+                  <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{width:42}}>
+                    </img></a>
+                    </Grid></Grid>
+                </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
             <Component {...pageProps} />
             <Dialog
               open={open}
