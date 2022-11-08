@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Modal from '@mui/material/Modal'
+import Snackbar from '@mui/material/Snackbar'
 import Card from '@mui/material/Card'
 import Dialog from '@mui/material/Dialog'
 import TextField from '@mui/material/TextField'
@@ -40,13 +41,19 @@ import Custom from '.';
 import AddressPill from '../components/addressPill';
 import { ChangeEvent } from 'react';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
-
+import net from '../config/network'
+import toast, { Toaster } from 'react-hot-toast';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
+const { chainn, rpc,createn,contractn,menun} = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
 
 const { chains, provider } = configureChains(
-  [chain.polygon],//, chain.arbitrum],//, //chain.optimism, chain.arbitrum, chain.localhost],
-  [alchemyProvider({ apiKey: alchemyId })],//,// alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
+  [chainn],//, chain.arbitrum],//, //chain.optimism, chain.arbitrum, chain.localhost],
+  [jsonRpcProvider({
+    rpc: (chainn) => ({
+      http: rpc,
+    })})],//,// alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
 )
 const { connectors } = getDefaultWallets({
   appName: 'the Wall',
@@ -69,8 +76,8 @@ const signerw = wagmiClient.provider;
 // send ether and pay to change state within the blockchain.
 // For this, you need the account signer...
 
-let contractaddrs = "0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79";
-let createaddrs = "0xd2defb1cf1d649b8253c85834a9b9571337166fe";
+let contractaddrs = contractn;
+let createaddrs = createn;
 let tokenaddrs = "0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
@@ -113,13 +120,14 @@ let contracturl = ''
 // @ts-ignore
 let balances = []// @ts-ignore
 let balancestoken = []// @ts-ignore
+let loaded = 0
 function useT1() {
   const [wallT, setwallT] = useState("");
   useEffect(() => {
-    // update the ui elements
+    // update the ui elements/
     update()
     async function update() {
-      if (ut == 0 && contractaddrs != '0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79') {
+      if (ut == 0 && contractaddrs != contractn) {
         contracturl = 'https://tagthewall.org/?walladdrs=' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
         ut = 1;
@@ -157,6 +165,10 @@ function useTtag0() {
       setArtist(artistS);
       setTime(timeS);
       const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
+      const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
+      if (loaded == 0){
+        toast('Loading wall')
+      }
       for (let n = 0; n < sup; n++) {
         if (addrs[artistS[n]] == null) {
           let tn = await provider3.lookupAddress(artistS[n])
@@ -164,7 +176,7 @@ function useTtag0() {
           if (balances[artistS[n]] == null) {
             try {
               balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]))
-              balancestoken[artistS[n]] = Number(await Token.balanceOf(artistS[n])/10**18  //}
+              balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n])/10**18  //}
               )
             }
             catch { }
@@ -181,6 +193,10 @@ function useTtag0() {
       let s = (await Contract.totalSupply());
       s = ethers.utils.formatUnits(s, 0);
       setSup(s)
+      if (loaded == 0){
+      toast.success('Successfully loaded wall!')
+      loaded = 1
+    }
     };
     // fix for updatix1ng after wallet login
     //updateUIStates();
@@ -384,12 +400,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                       onChange={handleChangeWall}
                       className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
                     >
-                      <MenuItem value={'0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'}>Main</MenuItem>
-                      <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>
-                      <MenuItem value={'0x503D749c21720E8B0d7A39809AfeC02bdeb014bc'}>Polygon</MenuItem>
-                      <MenuItem value={'0x4B233C47dC9C456dBaaa9af138F54b03CFcDED6E'}>ENS</MenuItem>
-                      <MenuItem value={'0x6A98F6F6F27E53089857333fc036Ab98719fAe75'}>Sushiswap</MenuItem>
-                      
+                     {menun}
                     </Select>
                   </FormControl>
                 </Grid>
