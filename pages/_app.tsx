@@ -41,13 +41,17 @@ import AddressPill from '../components/addressPill';
 import { ChangeEvent } from 'react';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
 import net from '../config/network'
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 const { chainn, rpc,createn,contractn,menun} = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
 
 const { chains, provider } = configureChains(
-  [chain.polygon],//, chain.arbitrum],//, //chain.optimism, chain.arbitrum, chain.localhost],
-  [alchemyProvider({ apiKey: alchemyId })],//,// alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
+  [chainn],//, chain.arbitrum],//, //chain.optimism, chain.arbitrum, chain.localhost],
+  [jsonRpcProvider({
+    rpc: (chainn) => ({
+      http: rpc,
+    })})],//,// alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
 )
 const { connectors } = getDefaultWallets({
   appName: 'the Wall',
@@ -385,12 +389,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                       onChange={handleChangeWall}
                       className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
                     >
-                      <MenuItem value={'0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'}>Main</MenuItem>
-                      <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>
-                      <MenuItem value={'0x503D749c21720E8B0d7A39809AfeC02bdeb014bc'}>Polygon</MenuItem>
-                      <MenuItem value={'0x4B233C47dC9C456dBaaa9af138F54b03CFcDED6E'}>ENS</MenuItem>
-                      <MenuItem value={'0x6A98F6F6F27E53089857333fc036Ab98719fAe75'}>Sushiswap</MenuItem>
-                      
+                     {menun}
                     </Select>
                   </FormControl>
                 </Grid>

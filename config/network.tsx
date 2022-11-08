@@ -30,11 +30,11 @@ const FTM: Chain = {
 };
 
 const envVars = {
-  chainn:chain.polygon,
+  chainn:FTM,//chainn,
   rpc: 'https://rpc.ftm.tools/',
     createn: '0xBE153Eb48062ba3892C10389844643d37cedA639',
     contractn: '0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC',
     menun:[<MenuItem value={'0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC'}>Main</MenuItem>]
-  }
+ }
 
 export default envVars
