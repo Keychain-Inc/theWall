@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Modal from '@mui/material/Modal'
+import Snackbar from '@mui/material/Snackbar'
 import Card from '@mui/material/Card'
 import Dialog from '@mui/material/Dialog'
 import TextField from '@mui/material/TextField'
@@ -41,6 +42,7 @@ import AddressPill from '../components/addressPill';
 import { ChangeEvent } from 'react';
 const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API_KEY } = config
 import net from '../config/network'
+import toast, { Toaster } from 'react-hot-toast';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 const { chainn, rpc,createn,contractn,menun} = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
@@ -118,6 +120,7 @@ let contracturl = ''
 // @ts-ignore
 let balances = []// @ts-ignore
 let balancestoken = []// @ts-ignore
+let loaded = 0
 function useT1() {
   const [wallT, setwallT] = useState("");
   useEffect(() => {
@@ -162,6 +165,10 @@ function useTtag0() {
       setArtist(artistS);
       setTime(timeS);
       const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
+      const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
+      if (loaded == 0){
+        toast('Loading wall')
+      }
       for (let n = 0; n < sup; n++) {
         if (addrs[artistS[n]] == null) {
           let tn = await provider3.lookupAddress(artistS[n])
@@ -169,7 +176,7 @@ function useTtag0() {
           if (balances[artistS[n]] == null) {
             try {
               balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]))
-              balancestoken[artistS[n]] = Number(await Token.balanceOf(artistS[n])/10**18  //}
+              balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n])/10**18  //}
               )
             }
             catch { }
@@ -186,6 +193,10 @@ function useTtag0() {
       let s = (await Contract.totalSupply());
       s = ethers.utils.formatUnits(s, 0);
       setSup(s)
+      if (loaded == 0){
+      toast.success('Successfully loaded wall!')
+      loaded = 1
+    }
     };
     // fix for updatix1ng after wallet login
     //updateUIStates();
