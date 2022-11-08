@@ -121,7 +121,7 @@ let balancestoken = []// @ts-ignore
 function useT1() {
   const [wallT, setwallT] = useState("");
   useEffect(() => {
-    // update the ui elements
+    // update the ui elements/
     update()
     async function update() {
       if (ut == 0 && contractaddrs != contractn) {
