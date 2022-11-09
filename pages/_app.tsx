@@ -418,7 +418,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
       const signer = provider2.getSigner()
       let myAddress = await signer.getAddress()
+      if ((await provider2.getNetwork()).chainId != chainn.id){
+        toast.error('Wrong Network. Please switch networks')
+      }
+      else{
       await Contract.connect(signer).mint(myAddress, sendMessage)////signer._address, sendMessage)
+    }
     } catch (e) {
       console.log("LOL")
       // addToast({body: e.message, type: "error"});
