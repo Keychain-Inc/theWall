@@ -427,6 +427,10 @@ const App = ({ Component, pageProps }: AppProps) => {
                     <a href='https://BSC.tagthewall.org/'>
                   <img src='https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=023' style={{width:42}}>
                     </img></a>
+                    </Grid><Grid xs={2}>
+                    <a href='https://ARB.tagthewall.org/'>
+                  <img src='https://bridge.arbitrum.io/static/media/ArbitrumOneLogo.abae01ba.svg' style={{width:42}}>
+                    </img></a>
                     </Grid></Grid>
                 </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
             <Component {...pageProps} />
