@@ -44,7 +44,7 @@ const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API
 import net from '../config/network'
 import toast, { Toaster } from 'react-hot-toast';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-const { chainn, rpc,createn,contractn,menun} = net
+const { chainn, rpc,createn,contractn,menun,netn} = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
 
@@ -128,7 +128,7 @@ function useT1() {
     update()
     async function update() {
       if (ut == 0 && contractaddrs != contractn) {
-        contracturl = 'https://tagthewall.org/?walladdrs=' + contractaddrs
+        contracturl = window.location.origin.toString()+'/?walladdrs=' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
         ut = 1;
       }
@@ -337,6 +337,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       CreateWall.on("newWall", (address, name) => {
         setTimeout(() => {
           window.location.replace('./' + '?walladdrs=' + address)
+          
         }, 3000);
       });
     } catch (e) {

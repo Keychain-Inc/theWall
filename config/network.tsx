@@ -48,7 +48,8 @@ const envVars = {
   rpc: PolyRPC,
     createn: PolyN,
     contractn: PolyA,
-    menun:PolyM
+    menun:PolyM,
+    netn:''
  }
 
 export default envVars
