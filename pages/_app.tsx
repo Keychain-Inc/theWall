@@ -44,7 +44,7 @@ const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API
 import net from '../config/network'
 import toast, { Toaster } from 'react-hot-toast';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-const { chainn, rpc, createn, contractn, menun } = net
+const { chainn, rpc, createn, contractn, menun} = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
 
@@ -129,7 +129,7 @@ function useT1() {
     update()
     async function update() {
       if (ut == 0 && contractaddrs != contractn) {
-        contracturl = 'https://tagthewall.org/?walladdrs=' + contractaddrs
+        contracturl = window.location.origin.toString() + '/?walladdrs=' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
         ut = 1;
       }
@@ -338,6 +338,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       CreateWall.on("newWall", (address, name) => {
         setTimeout(() => {
           window.location.replace('./' + '?walladdrs=' + address)
+
         }, 3000);
       });
     } catch (e) {
@@ -424,10 +425,13 @@ const App = ({ Component, pageProps }: AppProps) => {
                       <a href='https://FTM.tagthewall.org/'>
                         <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{ width: 42 }}>
                         </img></a>
-                    </Grid>
-                    <Grid xs={2}>
+                    </Grid><Grid xs={2}>
                       <a href='https://BSC.tagthewall.org/'>
                         <img src='https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=023' style={{ width: 42 }}>
+                        </img></a>
+                    </Grid><Grid xs={2}>
+                      <a href='https://ARB.tagthewall.org/'>
+                        <img src='https://bridge.arbitrum.io/static/media/ArbitrumOneLogo.abae01ba.svg' style={{ width: 42 }}>
                         </img></a>
                     </Grid></Grid>
                 </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
