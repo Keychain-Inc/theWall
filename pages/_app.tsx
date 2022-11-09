@@ -447,7 +447,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto">
+              <div className="flex items-center flex-col space-y-2 justify-center m-auto">
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
                   Create your own wall!
                 </Typography>
@@ -469,7 +469,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                   onClick={createWallT}> Create Wall
                 </button>
-
+                <div></div>
               </div>
             </Dialog>
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
