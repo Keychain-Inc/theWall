@@ -44,11 +44,11 @@ const PolyA = '0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'
 const PolyN = '0xd2defb1cf1d649b8253c85834a9b9571337166fe'
 
 const envVars = {
-  chainn:PolyC,//chainn,
-  rpc: PolyRPC,
-    createn: PolyN,
-    contractn: PolyA,
-    menun:PolyM
+  chainn:FTMC,//chainn,
+  rpc: FTMRPC,
+    createn: FTMN,
+    contractn: FTMA,
+    menun:FTMM
 }
 
 export default envVars
