@@ -29,8 +29,8 @@ const FTMC: Chain = {
   testnet: false,
 };
 const FTMRPC = 'https://rpc.ftm.tools/'
-const FTMA = '0xBE153Eb48062ba3892C10389844643d37cedA639'
-const FTMN = '0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC'
+const FTMA = '0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC'
+const FTMN = '0xBE153Eb48062ba3892C10389844643d37cedA639'
 const FTMM = <MenuItem value={'0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC'}>Main</MenuItem>
 const PolyM = [<MenuItem value={'0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'}>Main</MenuItem>,
 <MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>,
@@ -44,12 +44,11 @@ const PolyA = '0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'
 const PolyN = '0xd2defb1cf1d649b8253c85834a9b9571337166fe'
 
 const envVars = {
-  chainn:PolyC,//chainn,
-  rpc: PolyRPC,
-    createn: PolyN,
-    contractn: PolyA,
-    menun:PolyM,
-    netn:''
+  chainn:FTMC,//chainn,
+  rpc: FTMRPC,
+    createn: FTMN,
+    contractn: FTMA,
+    menun:FTMM
  }
 
 export default envVars
