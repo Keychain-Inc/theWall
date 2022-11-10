@@ -44,7 +44,7 @@ const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API
 import net from '../config/network'
 import toast, { Toaster } from 'react-hot-toast';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-const { chainn, rpc,createn,contractn,menun} = net
+const { chainn, rpc, createn, contractn, menun} = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
 
@@ -53,7 +53,8 @@ const { chains, provider } = configureChains(
   [jsonRpcProvider({
     rpc: (chainn) => ({
       http: rpc,
-    })})],//,// alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
+    })
+  })],//,// alchemyProvider({ apiKey: "l7DBx7tLlR-x_X8_3it8Jpr9u9yiqrn8" })],
 )
 const { connectors } = getDefaultWallets({
   appName: 'the Wall',
@@ -128,7 +129,7 @@ function useT1() {
     update()
     async function update() {
       if (ut == 0 && contractaddrs != contractn) {
-        contracturl = 'https://tagthewall.org/?walladdrs=' + contractaddrs
+        contracturl = window.location.origin.toString() + '/?walladdrs=' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
         ut = 1;
       }
@@ -166,7 +167,7 @@ function useTtag0() {
       setTime(timeS);
       const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
       const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
-      if (loaded == 0){
+      if (loaded == 0) {
         toast('Loading wall')
       }
       for (let n = 0; n < sup; n++) {
@@ -176,7 +177,7 @@ function useTtag0() {
           if (balances[artistS[n]] == null) {
             try {
               balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]))
-              balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n])/10**18  //}
+              balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n]) / 10 ** 18  //}
               )
             }
             catch { }
@@ -193,10 +194,10 @@ function useTtag0() {
       let s = (await Contract.totalSupply());
       s = ethers.utils.formatUnits(s, 0);
       setSup(s)
-      if (loaded == 0){
-      toast.success('Successfully loaded wall!')
-      loaded = 1
-    }
+      if (loaded == 0) {
+        toast.success('Successfully loaded wall!')
+        loaded = 1
+      }
     };
     // fix for updatix1ng after wallet login
     //updateUIStates();
@@ -230,9 +231,10 @@ function useTtag0() {
       }//artist[n]
       //  artists = nm
       times[n] = Number(time[n])
+      // @ts-ignore
       let TT = new Date(times[n] * 1000).toLocaleString()
       times[n] = String(TT)
-  
+
       //ts[n] = ethers.utils.formatUnits(time[0]);
       // times[n] = ethers.utils.formatUnits(ts[n],0);
       if (tags[n] != '') {
@@ -243,8 +245,8 @@ function useTtag0() {
           <div className="text-center light:text-white-600" >
             {tags[n]}
           </div>
-          <h2 style={{ color: '#cccccc' }}className="text-1xl text-centerjustify-center ">
-          {times[n]}</h2>
+          <h2 style={{ color: '#cccccc' }} className="text-1xl text-centerjustify-center ">
+            {times[n]}</h2>
           <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
             _____________________________________________________________________________________________
           </a></div>
@@ -336,6 +338,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       CreateWall.on("newWall", (address, name) => {
         setTimeout(() => {
           window.location.replace('./' + '?walladdrs=' + address)
+
         }, 3000);
       });
     } catch (e) {
@@ -343,24 +346,24 @@ const App = ({ Component, pageProps }: AppProps) => {
       // addToast({body: e.message, type: "error"});
     }
   };//}// @ts-ignore
- // const sendTip = async (toAddrs, amount) => {// @ts-ignore
-    // A Web3Provider wraps a standard Web3 provider, which is
-    // what MetaMask injects as window.ethereum into each page
- //   const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-    // Setup
- //   const Token = new ethers.Contract(tokenaddrs, Abi, signerw);
+  // const sendTip = async (toAddrs, amount) => {// @ts-ignore
+  // A Web3Provider wraps a standard Web3 provider, which is
+  // what MetaMask injects as window.ethereum into each page
+  //   const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+  // Setup
+  //   const Token = new ethers.Contract(tokenaddrs, Abi, signerw);
 
-//    await provider2.send("eth_requestAccounts", []);
-//    try {
-//      const signer = provider2.getSigner()
-//      let myAddress = await signer.getAddress()
-//      await Token.connect(signer).transfer(toAddrs, amount)////signer._address, sendMessage)
+  //    await provider2.send("eth_requestAccounts", []);
+  //    try {
+  //      const signer = provider2.getSigner()
+  //      let myAddress = await signer.getAddress()
+  //      await Token.connect(signer).transfer(toAddrs, amount)////signer._address, sendMessage)
 
-//    } catch (e) {
-//      console.log("LOL")
-//      // addToast({body: e.message, type: "error"});
-//    }
-//  };
+  //    } catch (e) {
+  //      console.log("LOL")
+  //      // addToast({body: e.message, type: "error"});
+  //    }
+  //  };
   //CreateWall.on("newWall", (address, name) => {
   //  window.location.replace('./' + '?walladdrs=' + address)
   //);
@@ -380,7 +383,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
       const signer = provider2.getSigner()
       let myAddress = await signer.getAddress()
+      if ((await provider2.getNetwork()).chainId != chainn.id){
+        toast.error('Wrong Network. Please switch networks')
+      }
+      else{
       await Contract.connect(signer).mint(myAddress, sendMessage)////signer._address, sendMessage)
+    }
     } catch (e) {
       console.log("LOL")
       // addToast({body: e.message, type: "error"});
@@ -405,23 +413,31 @@ const App = ({ Component, pageProps }: AppProps) => {
                       onChange={handleChangeWall}
                       className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
                     >
-                     {menun}
+                      {menun}
                     </Select>
                   </FormControl>
                 </Grid>
 
                 <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
                 </Grid><Grid xs={3}>
-                <Grid container spacing={0}>
-                <Grid xs={2}>
-                  <a href='https://tagthewall.org/'>
-                  <img src='https://cryptologos.cc/logos/polygon-matic-logo.png?v=023' style={{width:42}}>
-                    </img></a>
+                  <Grid container spacing={0}>
+                    <Grid xs={2}>
+                      <a href='https://tagthewall.org/'>
+                        <img src='https://cryptologos.cc/logos/polygon-matic-logo.png?v=023' style={{ width: 42 }}>
+                        </img></a>
                     </Grid>
                     <Grid xs={2}>
-                    <a href='https://FTM.tagthewall.org/'>
-                  <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{width:42}}>
-                    </img></a>
+                      <a href='https://FTM.tagthewall.org/'>
+                        <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{ width: 42 }}>
+                        </img></a>
+                    </Grid><Grid xs={2}>
+                      <a href='https://BSC.tagthewall.org/'>
+                        <img src='https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=023' style={{ width: 42 }}>
+                        </img></a>
+                    </Grid><Grid xs={2}>
+                      <a href='https://ARB.tagthewall.org/'>
+                        <img src='https://bridge.arbitrum.io/static/media/ArbitrumOneLogo.abae01ba.svg' style={{ width: 42 }}>
+                        </img></a>
                     </Grid></Grid>
                 </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
             <Component {...pageProps} />
@@ -431,7 +447,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto">
+              <div className="flex items-center flex-col space-y-2 justify-center m-auto">
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
                   Create your own wall!
                 </Typography>
@@ -453,7 +469,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                   onClick={createWallT}> Create Wall
                 </button>
-
+                <div></div>
               </div>
             </Dialog>
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
