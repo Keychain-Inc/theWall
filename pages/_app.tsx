@@ -44,7 +44,7 @@ const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API
 import net from '../config/network'
 import toast, { Toaster } from 'react-hot-toast';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-const { chainn, rpc, createn, contractn, menun} = net
+const { chainn, rpc, createn, contractn, menun } = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
 
@@ -79,7 +79,7 @@ const signerw = wagmiClient.provider;
 
 let contractaddrs = contractn;
 let createaddrs = createn;
-let tokenaddrs = "0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3";
+let tokenaddrs = "0x7b67595bbfc2c900e1a66a35ab35e762765e062d";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
 //  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}//
@@ -318,6 +318,13 @@ const App = ({ Component, pageProps }: AppProps) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const [openBRK, setOpenBRK] = useState(false);
+  const handleOpenBRK = () => {
+    setOpenBRK(true);
+  };
+  const handleCloseBRK = () => {
+    setOpenBRK(false);
+  };
   const [open, setOpen] = useState(false);
   const [wallAddrs, setWall] = useState('0x91fc82f5c588c00985aa264fc7b45ee680110703');
   const createWallT = async () => {
@@ -346,7 +353,35 @@ const App = ({ Component, pageProps }: AppProps) => {
       // addToast({body: e.message, type: "error"});
     }
   };//}// @ts-ignore
-  // const sendTip = async (toAddrs, amount) => {// @ts-ignore
+  const brkBuy = async () => {
+    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    //d
+    //signerw ethers.js .send("eth_requestAccounts", []);
+
+    if ((await provider2.getNetwork()).chainId == 137) {
+      window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3')
+    }
+    else {
+      toast.error('Polygon Network')
+      await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{
+          chainId: "0x89",
+          rpcUrls: ["https://polygon-rpc.com"],
+          chainName: "Matic Mainnet",
+          nativeCurrency: {
+            name: "MATIC",
+            symbol: "MATIC",
+            decimals: 18
+          },
+          blockExplorerUrls: ["https://polygonscan.com/"]
+        }]
+      });
+      if ((await provider2.getNetwork()).chainId == 137) {
+        window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
+      }
+    }
+  };  // const sendTip = async (toAddrs, amount) => {// @ts-ignore
   // A Web3Provider wraps a standard Web3 provider, which is
   // what MetaMask injects as window.ethereum into each page
   //   const provider2 = new ethers.providers.Web3Provider(window.ethereum)
@@ -402,7 +437,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           <RainbowKitProvider chains={chains}>
             <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
               <Grid container spacing={1}>
-                <Grid xs={2} className="left-6 top-10 m-auto">
+                <Grid xs={2} className="left-6 top-12 m-auto">
                   <FormControl>
                     <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
                     <Select
@@ -416,9 +451,10 @@ const App = ({ Component, pageProps }: AppProps) => {
                       {menun}
                     </Select>
                   </FormControl>
+
                 </Grid>
 
-                <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-10">Create wall</Button>
+                <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-6">Create wall</Button>
                 </Grid><Grid xs={3}>
                   <Grid container spacing={0}>
                     <Grid xs={2}>
@@ -447,7 +483,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <div className="flex items-center flex-col space-y-2 justify-center m-auto">
+              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto">
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
                   Create your own wall!
                 </Typography>
@@ -469,8 +505,32 @@ const App = ({ Component, pageProps }: AppProps) => {
                 <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                   onClick={createWallT}> Create Wall
                 </button>
-                <div></div>
+
               </div>
+            </Dialog>
+            <Dialog
+              open={openBRK}
+              onClose={handleCloseBRK}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Card className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto">
+                <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
+                  Brick Token (BRK)
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+                  Bricks are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon, as well as a stake in the protocol through DAO control and Treasury control.
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+                  These tokens are on the Polygon network. Please make sure to switch from the network you're on to Polygon before opening the uniswap link as you may get the wrong token otherwise!.  </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+                  The tokens are purchasable at 100 tokens for $1 and can be tipped or just used to flex on the Wall! They are primarily a tip token and used for cosmetics in the app. Please dont purchase for speculation. Purchases also help us keep building neat stuff like the Wall and are appreciated.
+                </Typography>
+                <Button style={{ background: "#FF007A", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
+                  onClick={brkBuy}> Buy Bricks!
+                </Button>
+                <div />
+              </Card>
             </Dialog>
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
               <div>
@@ -504,7 +564,12 @@ const App = ({ Component, pageProps }: AppProps) => {
 
                 {useTtag0()}
               </div>
-
+              <button
+                className="btn fixed left-16 bottom-14 flex flex-col text-3xl"
+                type="button"
+                onClick={handleOpenBRK}
+              >🧱
+              </button>
             </div>
           </RainbowKitProvider>
         </WagmiConfig>
