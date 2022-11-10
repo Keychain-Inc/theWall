@@ -359,7 +359,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     //signerw ethers.js .send("eth_requestAccounts", []);
 
     if ((await provider2.getNetwork()).chainId == 137) {
-      window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3')
+      window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
     }
     else {
       toast.error('Polygon Network')
@@ -505,7 +505,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                   onClick={createWallT}> Create Wall
                 </button>
-
+                <div></div>
               </div>
             </Dialog>
             <Dialog
