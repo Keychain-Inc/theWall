@@ -505,7 +505,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                   onClick={createWallT}> Create Wall
                 </button>
-
+                <div></div>
               </div>
             </Dialog>
             <Dialog
