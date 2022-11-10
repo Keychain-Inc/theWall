@@ -522,7 +522,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   Bricks are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon, as well as a stake in the protocol through DAO control and Treasury control.
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  These tokens are on the Polygon network. Please make sure to switch from the network you're on to Polygon before opening the uniswap link as you may get the wrong token otherwise!.  </Typography>
+                  These tokens are on the Polygon network. Please make sure to switch from the network youre on to Polygon before Uniswap link as you may get the wrong token otherwise!.  </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
                   The tokens are purchasable at 100 tokens for $1 and can be tipped or just used to flex on the Wall! They are primarily a tip token and used for cosmetics in the app. Please dont purchase for speculation. Purchases also help us keep building neat stuff like the Wall and are appreciated.
                 </Typography>
