@@ -79,7 +79,7 @@ const signerw = wagmiClient.provider;
 
 let contractaddrs = contractn;
 let createaddrs = createn;
-let tokenaddrs = "0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3";
+let tokenaddrs = "0x7b67595bbfc2c900e1a66a35ab35e762765e062d";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
 //  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}//
@@ -378,7 +378,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         }]
       });
       if ((await provider2.getNetwork()).chainId == 137) {
-        window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3')
+        window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
       }
     }
   };  // const sendTip = async (toAddrs, amount) => {// @ts-ignore
