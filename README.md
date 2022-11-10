@@ -1,65 +1,21 @@
-# Web3 Starter
+# the Wall
 
-Web 3 Starter is a modern web 3 starter template project.
+Tag the Wall allows people to create, control and chat in fully onchain, self-sovereign, permissionless and immutable chats. The messages are wrapped as NFTs allowing them to be used to see activity/reputation/own their messages, with anyone able to create a Wall for their community with a simple button click, each one being unique (like a Reddit sub). Features include ENS support for all networks, multinetwork support (we currently support 5 different chains!), tipping, activity/tip balance, NFT wrapping for messages, unique Wall names with custom symbol for each wall, permissionless creation, support for optional moderation/ability to edit messages, chat to earn mechanic and more!
 
-Here's the full stack of frameworks/libraries used:
+## Contract and source
+https://polygonscan.com/address/0x511131bf688f94d883628348b0eede12fbc61992#code
 
-- Next.js React
-- TailwindCSS for styling
-- [HeadlessUI](https://headlessui.dev/) for Tailwind components
-- [@rainbow-me/rainbowkit](https://github.com/rainbow-me/rainbowkit) to connect to ethereum wallets
-- [react-hot-toast](https://react-hot-toast.com/) for toast messages
-- [unstated-next](https://github.com/jamiebuilds/unstated-next) for state management
-- [next-themes](https://www.npmjs.com/package/next-themes) for dark mode theme
+## Creating your own wall
+1. Go to the desired network on tagthewall.org
+2. Top left, create wall.
+3. Choose the price to post to a wall (can be used for spam prevention), if there will be moderation and if users can edit messages.
+4. Create. :)
 
-## How to Setup Development Environment
+## Moderation and editing
+Currently moderation needs to be done at the contract level. Please let us know if you need these features.
 
-#### A. Start the local hardhat ethereum node
+## dApp
+**[Tag the Wall](https://ftm.tagthewall.org/)**
 
-```bash
-npx hardhat node
-```
-
-#### B. In a seperate shell, start the NextJS Server.
-
-```bash
-yarn && yarn dev
-```
-
-Navigate to `http://localhost:3000` to see your app.
-
-## First Time Project Template Setup
-
-#### 1. Create a `.env` file.
-
-```bash
-# Private key used for testnets (ropsten)
-ETH_PRIVATE_KEY=""
-
-# This is the private key you will used to deploy to mainnet
-ETH_MAINNET_PRIVATE_KEY=""
-
-# This API Key is used for Etherscan contract verifications
-# To obtain the API Key go here -> https://etherscan.io/apis
-ETHERSCAN_API_KEY=""
-
-# This is the address of the contract that will be used in production
-# You'll neeed to set it here, and in Vercel (or wherever you choose
-# to deploy the app.)
-NEXT_PUBLIC_CONTRACT_ADDRESS=""
-
-# Name of the network contract is deployed on
-NEXT_PUBLIC_NETWORK_NAME=""
-
-# This API is needed when you run `npx hardhat test` -- so that
-# you can approximate the cost of deployin your contract on mainnet
-COIN_MARKETCAP_API_KEY=""
-```
-
-## Resources
-
-#### Frontend
-
-- **[Tailwind UI](https://tailwindcss.com/docs)**
-- **[Tailwind UI Components](https://tailwindui.com/)**
-- **[Tailwind Community Components](https://tailwindcomponents.com/)**
+## Socials
+https://twitter.com/tagtheWall
