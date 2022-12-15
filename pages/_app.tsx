@@ -318,6 +318,12 @@ const App = ({ Component, pageProps }: AppProps) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleOpenA = () => {
+    setOpenA(true);
+  };
+  const handleCloseA = () => {
+    setOpenA(false);
+  };
   const [openBRK, setOpenBRK] = useState(false);
   const handleOpenBRK = () => {
     setOpenBRK(true);
@@ -326,6 +332,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     setOpenBRK(false);
   };
   const [open, setOpen] = useState(false);
+  const [openA, setOpenA] = useState(false);
   const [wallAddrs, setWall] = useState('0x91fc82f5c588c00985aa264fc7b45ee680110703');
   const createWallT = async () => {
     // A Web3Provider wraps a standard Web3 provider, which is
@@ -359,7 +366,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     //signerw ethers.js .send("eth_requestAccounts", []);
 
     if ((await provider2.getNetwork()).chainId == 137) {
-      window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x42b54830bcbb0a240aa54cd3f8d1a4db00851fe3')
+      window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
     }
     else {
       toast.error('Polygon Network')
@@ -418,12 +425,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
       const signer = provider2.getSigner()
       let myAddress = await signer.getAddress()
-      if ((await provider2.getNetwork()).chainId != chainn.id){
+      if ((await provider2.getNetwork()).chainId != chainn.id) {
         toast.error('Wrong Network. Please switch networks')
       }
-      else{
-      await Contract.connect(signer).mint(myAddress, sendMessage)////signer._address, sendMessage)
-    }
+      else {
+        await Contract.connect(signer).mint(myAddress, sendMessage)////signer._address, sendMessage)
+      }
     } catch (e) {
       console.log("LOL")
       // addToast({body: e.message, type: "error"});
@@ -455,7 +462,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 </Grid>
 
                 <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-6">Create wall</Button>
-                </Grid><Grid xs={3}>
+                <Button onClick={handleOpenA} variant="outlined" className="left-12 top-7">About</Button></Grid><Grid xs={3}>
                   <Grid container spacing={0}>
                     <Grid xs={2}>
                       <a href='https://tagthewall.org/'>
@@ -483,7 +490,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto">
+              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
                   Create your own wall!
                 </Typography>
@@ -505,8 +512,47 @@ const App = ({ Component, pageProps }: AppProps) => {
                 <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                   onClick={createWallT}> Create Wall
                 </button>
-
+                <div></div>
               </div>
+            </Dialog>
+            <Dialog
+              open={openA}
+              onClose={handleCloseA}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
+                <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
+                  About the Wall
+                </Typography>
+                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                  the Wall
+                </h2>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+                  The wall is a fully onchain, decentralized and permissionless on chain Social Chat Platform. Messages posted to walls are messages wrapped as NFTs which hold the message, creator and timestamp for every message. This allow each wall to be fully self sovereign, with noone able to ban/censor/edit messages unless explicitly stated by that wall at creation by the creator. The wall is the first fully onchain social chat platform and allows for a truely free, decentralized and immutable platform for anyone, anywhere to express any idea. Information is power and we believe people should have free access to any and all information in order for society to be free, open and able to achieve it's best.
+                  </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                  
+                  NFTs as Messages
+                  
+                </h2>
+                  Messages are wrapped as NFTs allowing us to attach metadata onchain to each NFT token, this allows anyone to create a front end to show this information for any wall without any central server. The message, timestamp and creator are all fully onchain, with the actual image for the NFT and URI metadata able to be handled offchain by IPFS, this is not yet implemented as we are in the beta. All messages are NFTs from a specific wall, this allows you to see who is most active by how many NFTs they own for the community, allowing you to reward members by participation.
+                  </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                Moderation</h2>
+                  All NFTs are able to change their data only in the way set at the walls creation for that community. This allows for communities to choose their moderation style and policy or be fully decentralized. Wallls are able to be moderated by specific addresses, edit own messages or be immutable.
+                  </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                Unique</h2>
+                  Walls are all unique and each wall has a name which cannot be shared by any other wall. Walls are fully onchain and decentralized, using the deployment contract to lookup which walls for which community by name allowing for a subreddit style UX. Users are able to also choose the symbol and set a bio for the walls, aswell as able to create their own walls!
+                  </Typography>
+                </div>
+                <Button style={{ background: "#ff50a9", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
+                  onClick={handleCloseA}> Close
+                </Button>
             </Dialog>
             <Dialog
               open={openBRK}
@@ -514,7 +560,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Card className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto">
+              <Card className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
                   Brick Token (BRK)
                 </Typography>
@@ -522,7 +568,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   Bricks are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon, as well as a stake in the protocol through DAO control and Treasury control.
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  These tokens are on the Polygon network. Please make sure to switch from the network you're on to Polygon before opening the uniswap link as you may get the wrong token otherwise!.  </Typography>
+                  These tokens are on the Polygon network. Please make sure to switch from the network youre on to Polygon before Uniswap link as you may get the wrong token otherwise!.  </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
                   The tokens are purchasable at 100 tokens for $1 and can be tipped or just used to flex on the Wall! They are primarily a tip token and used for cosmetics in the app. Please dont purchase for speculation. Purchases also help us keep building neat stuff like the Wall and are appreciated.
                 </Typography>
