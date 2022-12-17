@@ -333,7 +333,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   };
   const [open, setOpen] = useState(false);
   const [openA, setOpenA] = useState(false);
-  const [wallAddrs, setWall] = useState('0x91fc82f5c588c00985aa264fc7b45ee680110703');
+  const [wallAddrs, setWall] = useState('0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC');
   const createWallT = async () => {
     // A Web3Provider wraps a standard Web3 provider, which is
     // what MetaMask injects as window.ethereum into each page
@@ -529,7 +529,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   the Wall
                 </h2>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  The wall is a fully onchain, decentralized and permissionless on chain Social Chat Platform. Messages posted to walls are messages wrapped as NFTs which hold the message, creator and timestamp for every message. This allow each wall to be fully self sovereign, with noone able to ban/censor/edit messages unless explicitly stated by that wall at creation by the creator. The wall is the first fully onchain social chat platform and allows for a truely free, decentralized and immutable platform for anyone, anywhere to express any idea. Information is power and we believe people should have free access to any and all information in order for society to be free, open and able to achieve it's best.
+                  The wall is a fully onchain, decentralized and permissionless on chain Social Chat Platform. Messages posted to walls are messages wrapped as NFTs which hold the message, creator and timestamp for every message. This allow each wall to be fully self sovereign, with noone able to ban/censor/edit messages unless explicitly stated by that wall at creation by the creator. The wall is the first fully onchain social chat platform and allows for a truely free, decentralized and immutable platform for anyone, anywhere to express any idea. Information is power and we believe people should have free access to any and all information in order for society to be free, open and able to achieve its best.
                   </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
                 <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
