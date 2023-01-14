@@ -92,6 +92,8 @@ const Abi = [
   "function name() view returns (string)",
   "function symbol() view returns (string)",
   "function totalSupply() view returns (uint256)",
+  "function subs() view returns (uint256)",
+  "function subWall() view returns (uint8)",
   "function price() view returns (uint256)",
   "function getTag(uint256 id) view returns (string)",
   "function latest(uint256) view returns (string[] tags,address[] addrs,uint256[] times)",
@@ -100,8 +102,8 @@ const Abi = [
   "function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)",
   "event newWall(address,string)",
   "function balanceOf(address) view returns (uint256)",
-  "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange) returns (address)",
-
+  "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange, uint8 sub) returns (address)",
+  "function mintandrenewSub(address to) payable"
 ];
 //format addresses in ui
 function format_address(address: string) {
@@ -122,6 +124,8 @@ let contracturl = ''
 let balances = []// @ts-ignore
 let balancestoken = []// @ts-ignore
 let loaded = 0
+let subWall = 0
+let checkS = 0;
 function useT1() {
   const [wallT, setwallT] = useState("");
   useEffect(() => {
@@ -148,6 +152,10 @@ function useTtag0() {
   let addrst = 0
   const router = useRouter()
   const { walladdrs } = router.query
+  // State to keep track of whether the dialog is open
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  // State to keep track of which image is currently open in the dialog
+  const [currentImage, setCurrentImage] = useState(null);
   if (walladdrs != null && addrst == 0) {
     // @ts-ignore
     contractaddrs = walladdrs
@@ -158,19 +166,62 @@ function useTtag0() {
   useEffect(() => {
     // update the ui elements
     async function updateUIStates() {
-      const [tagS, artistS, timeS] = await Contract.latest(await Contract.totalSupply());
-      if (wallT == 'LOL') {
-        setwallT(await Contract.name() + 'LOLOL')
-      }
-      setTag(tagS);
-      setArtist(artistS);
-      setTime(timeS);
-      const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-      const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
       if (loaded == 0) {
         toast('Loading wall')
+      } 
+      const provider4 = new ethers.providers.JsonRpcProvider(rpc)
+      if (checkS == 0) {
+        console.log('check' + checkS)
+        if (await Contract.connect(provider4).subWall() == 1) {
+          subWall = 1;
+          console.log('subd' + subWall)
+        }
+        checkS = 1;
+        console.log('sub' + subWall)
+      } 
+      
+      const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+      await provider2.send("eth_requestAccounts", []);
+      console.log(subWall)
+
+      if (subWall == 1) {
+        console.log(5)
+
+        Contract = new ethers.Contract(contractaddrs, Abi, provider2);
       }
-      for (let n = 0; n < sup; n++) {
+      console.log(6)
+
+      let s = (await Contract.totalSupply() - await Contract.subs());
+      //   s = ethers.utils.formatUnits(s, 0);
+      setSup(s)
+
+      //while (true) {
+        try {
+          if (subWall == 1) {
+console.log(provider2.getSigner().getAddress())
+            const [tagS, artistS, timeS] = await Contract.connect(provider2).latest(s);
+            console.log(tagS)
+            console.log(provider2.getSigner().getAddress())
+            setTag(tagS);
+            setArtist(artistS);
+            setTime(timeS);
+           // break;
+          }
+
+          else {
+            console.log(3)
+            const [tagS, artistS, timeS] = await Contract.connect(provider2).latest(s);
+            setTag(tagS);
+            setArtist(artistS);
+            setTime(timeS); //break;
+          }
+        }
+        catch { console.log }
+      //}
+      const artistS = artist
+      const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
+
+      for (let n: number = 0; n < sup; n++) {
         if (addrs[artistS[n]] == null) {
           let tn = await provider3.lookupAddress(artistS[n])
           // @ts-ignore
@@ -180,7 +231,7 @@ function useTtag0() {
               balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n]) / 10 ** 18  //}
               )
             }
-            catch { }
+            catch { console.log }
           }
 
           if (tn != null) {
@@ -191,77 +242,156 @@ function useTtag0() {
           }
         }
       }
-      let s = (await Contract.totalSupply());
+
       s = ethers.utils.formatUnits(s, 0);
-      setSup(s)
       if (loaded == 0) {
         toast.success('Successfully loaded wall!')
         loaded = 1
       }
-    };
-    // fix for updatix1ng after wallet login
-    //updateUIStates();
+    //} 
+  }
+    //);
+// fix for updatix1ng after wallet login
+//updateUIStates();
 
-    // schedule every 15 sec refresh
-    const timer = setInterval(() => {
+// schedule every 15 sec refresh
+const timer = setInterval(() => {
 
-      updateUIStates()
+  updateUIStates()
 
-    }, 3000);
-    // clearing interval
-    return () => clearInterval(timer);
+}, 3000);
+// clearing interval
+return () => clearInterval(timer);
   },);
 
-  function tag1() {
-    let tags = []
-    let artists = []
-    let times = []
-    let t0 = []
-    let ts = []
-    let i = "";
-    for (let n = 0; n < sup; n++) {
-      tags[n] = tag[n]
+function tag1() {
+  let tags = []
+  let artists = []
+  let times = []
+  let t0 = []
+  let ts = []
+  let i = "";
+  for (let n = 0; n < sup; n++) {
+    tags[n] = tag[n]
+    artists[n] = artist[n]
+    if (addrs[artists[n]] == null) {
       artists[n] = artist[n]
-      if (addrs[artists[n]] == null) {
-        artists[n] = artist[n]
-      }
-      else {
-        // @ts-ignore
-        artists[n] = addrs[artists[n]]
-      }//artist[n]
-      //  artists = nm
-      times[n] = Number(time[n])
-      // @ts-ignore
-      let TT = new Date(times[n] * 1000).toLocaleString()
-      times[n] = String(TT)
-
-      //ts[n] = ethers.utils.formatUnits(time[0]);
-      // times[n] = ethers.utils.formatUnits(ts[n],0);
-      if (tags[n] != '') {
-        let t2 = 'https://etherscan.io/address/' + artist[n]
-        // @ts-ignore
-        t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]} 🧱{balancestoken[artist[n]]}
-        </h2>
-          <div className="text-center light:text-white-600" >
-            {tags[n]}
-          </div>
-          <h2 style={{ color: '#cccccc' }} className="text-1xl text-centerjustify-center ">
-            {times[n]}</h2>
-          <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
-            _____________________________________________________________________________________________
-          </a></div>
-        </div>
-        )
-      }
     }
-    let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
-    return (
-      <>{t0}{t1}</>);
-  }
+    else {
+      // @ts-ignore
+      artists[n] = addrs[artists[n]]
+    }//artist[n]
+    //  artists = nm
+    times[n] = Number(time[n])
+    // @ts-ignore
+    let TT = new Date(times[n] * 1000).toLocaleString()
+    times[n] = String(TT)
 
+    const MyComponent = ({ message }) => {
+      // Extract all of the URLs from the message
+      let urls = []
+      try {
+        urls = message.match(/(https?:\/\/.*\.(?:png|jpg|jpeg|gif|ipfs)|ipfs:\/\/.*|\/ipfs\/.*)/gi) || [];
+      } catch (e) {
+        console.log("Error: ", e.message);
+        // addToast({body: e.message, type: "error"});
+      }
+
+      // Function to open the dialog when an image is clicked
+      const handleOpenDialog = (image) => {
+        setIsDialogOpen(true);
+        setCurrentImage(image);
+      }
+
+      // Function to close the dialog
+      const handleCloseDialog = () => {
+        setIsDialogOpen(false);
+        setCurrentImage(null);
+      }
+
+      // Map over the array of URLs and return an img element for each
+      return (
+        <div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gridGap: '10px',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            {urls.map((url, index) => {
+              let src = url;
+              // Check if the URL is an IPFS link
+              if (url.startsWith("/ipfs/") || url.startsWith("ipfs://")) {
+                // Resolve the IPFS link using an IPFS gateway
+                src = `https://cloudflare-ipfs.com/ipfs/${url.replace("ipfs://", "/").replace("/ipfs/", "/")}`
+              }
+              return <img src={src} alt={`Image ${index + 1}`} key={index} onClick={() => handleOpenDialog(src)} style={{ width: '400px', height: '200px' }} />;
+            })}
+          </div>
+          {isDialogOpen && (
+            <div style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.8)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <div style={{
+                background: 'white',
+                maxWidth: '90%',
+                maxHeight: '90%',
+                overflow: 'auto',
+                padding: '10px',
+              }}>
+                <img src={currentImage} alt='Large image' onClick={handleCloseDialog} style={{ maxWidth: '100%' }} />
+                <button onClick={handleCloseDialog} style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '10px',
+                  color: 'white',
+                }}>
+                  X
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+
+    //ts[n] = ethers.utils.formatUnits(time[0]);
+    // times[n] = ethers.utils.formatUnits(ts[n],0);
+    if (tags[n] != '') {
+      let t2 = 'https://etherscan.io/address/' + artist[n]
+      // @ts-ignore
+      t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]} 🧱{balancestoken[artist[n]]}
+      </h2>
+        <div className="text-center light:text-white-600" >
+          {tags[n]}
+        </div><MyComponent message={tags[n]} />
+        <h2 style={{ color: '#cccccc' }} className="text-1xl text-centerjustify-center ">
+          {times[n]}</h2>
+        <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
+          _____________________________________________________________________________________________
+        </a></div>
+      </div>
+      )
+    }
+  }
+  let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
   return (
-    <div>{tag1()}</div>
-  )
+    <>{t0}{t1}</>);
+}
+
+return (
+  <div>{tag1()}</div>
+)
 }
 let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
 let Token = new ethers.Contract(tokenaddrs, Abi, signerw);
@@ -287,6 +417,14 @@ const App = ({ Component, pageProps }: AppProps) => {
     const values = event.target.value;
     set_symbol(values);
   }
+  function handleChangeS(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const values = event.target.value;
+    set_s(values);
+  }
+  function handleChangePrice(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const values = event.target.value;
+    set_Price(values);
+  }
   function handleChangeedit(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
 
     if (_edit == 0) {
@@ -300,11 +438,30 @@ const App = ({ Component, pageProps }: AppProps) => {
     }
     else { set_mod(0) }
   }
+  function handleChangeSub(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    if (_Sub == 0) {
+      set_Sub(1);
+    }
+    else { set_Sub(0) }
+  }
+  function subt() {
+    // if (subWall != 1) {
+    //   return null;
+    //}
 
+    return (
+      <Button onClick={handleOpenSub}>
+        Subscribe
+      </Button>
+    );
+  }
   //notify
   const [sendMessage, setSendMessage] = useState("");
   const [_name, set_name] = useState("LOL");
+  const [_Sub, set_Sub] = useState(0);
   const [_symbol, set_symbol] = useState("LOL");
+  const [_s, set_s] = useState("LOL");
+  const [_Price, set_Price] = useState("0");
   const [_edit, set_edit] = useState(0);
   const [_mod, set_mod] = useState(0);
   const [unlocktext, set_unlocktext] = useState("Please Unlock Wallet");
@@ -324,6 +481,12 @@ const App = ({ Component, pageProps }: AppProps) => {
   const handleCloseA = () => {
     setOpenA(false);
   };
+  const handleOpenSub = () => {
+    setOpenSub(true);
+  };
+  const handleCloseSub = () => {
+    setOpenSub(false);
+  };
   const [openBRK, setOpenBRK] = useState(false);
   const handleOpenBRK = () => {
     setOpenBRK(true);
@@ -333,6 +496,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   };
   const [open, setOpen] = useState(false);
   const [openA, setOpenA] = useState(false);
+  const [openSub, setOpenSub] = useState(false);
   const [wallAddrs, setWall] = useState('0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC');
   const createWallT = async () => {
     // A Web3Provider wraps a standard Web3 provider, which is
@@ -348,7 +512,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
       const signer = provider2.getSigner()
       let myAddress = await signer.getAddress()
-      await CreateWall.connect(signer).createWall(_name, _symbol, 0, _mod, _edit)////signer._address, sendMessage)
+      await CreateWall.connect(signer).createWall(_name, _symbol, '1000000000000000000', _mod, _edit, 1)////signer._address, sendMessage)
       CreateWall.on("newWall", (address, name) => {
         setTimeout(() => {
           window.location.replace('./' + '?walladdrs=' + address)
@@ -388,7 +552,32 @@ const App = ({ Component, pageProps }: AppProps) => {
         window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
       }
     }
-  };  // const sendTip = async (toAddrs, amount) => {// @ts-ignore
+  };
+  // const sendTip = async (toAddrs, amount) => {// @ts-ignore
+  const subWallT = async () => {
+    // A Web3Provider wraps a standard Web3 provider, which is
+    // what MetaMask injects as window.ethereum into each page
+    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    // Setup
+
+
+    await provider2.send("eth_requestAccounts", []);
+    try {
+      Router.pathname
+
+      // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
+      const signer = provider2.getSigner()
+      let myAddress = await signer.getAddress()
+
+      await Contract.connect(signer).mintandrenewSub(myAddress, { value: '1000000000000000000' })
+      // .then((transaction) => {
+      //     console.log(`Transaction successful: ${transaction.hash}`);
+      // })
+    } catch (e) {
+      console.log("LOL")
+      // addToast({body: e.message, type: "error"});
+    }
+  };//}// @ts-ignore
   // A Web3Provider wraps a standard Web3 provider, which is
   // what MetaMask injects as window.ethereum into each page
   //   const provider2 = new ethers.providers.Web3Provider(window.ethereum)
@@ -462,7 +651,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 </Grid>
 
                 <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-6">Create wall</Button>
-                <Button onClick={handleOpenA} variant="outlined" className="left-12 top-7">About</Button></Grid><Grid xs={3}>
+                  <Button onClick={handleOpenA} variant="outlined" className="left-12 top-7">About</Button></Grid><Grid xs={3}>
                   <Grid container spacing={0}>
                     <Grid xs={2}>
                       <a href='https://tagthewall.org/'>
@@ -507,8 +696,14 @@ const App = ({ Component, pageProps }: AppProps) => {
                 </h2>
                 <TextField className="m-auto text-center w-3/4 justify-center light:text-gray-800 dark:text-black"
                   onChange={e => handleChangeSymbol(e)} />
+                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                  Price
+                </h2>
+                <TextField className="m-auto text-center w-3/4 justify-center light:text-gray-800 dark:text-black"
+                  onChange={e => handleChangePrice(e)} />
                 <FormControlLabel control={<Switch onChange={handleChangeMod} />} label="Mods can delete messages" />
                 <FormControlLabel control={<Switch onChange={handleChangeedit} />} label="Users can edit messages" />
+                <FormControlLabel control={<Switch onChange={handleChangeSub} />} label="Subscription wall" />
                 <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                   onClick={createWallT}> Create Wall
                 </button>
@@ -530,29 +725,29 @@ const App = ({ Component, pageProps }: AppProps) => {
                 </h2>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
                   The wall is a fully onchain, decentralized and permissionless on chain Social Chat Platform. Messages posted to walls are messages wrapped as NFTs which hold the message, creator and timestamp for every message. This allow each wall to be fully self sovereign, with noone able to ban/censor/edit messages unless explicitly stated by that wall at creation by the creator. The wall is the first fully onchain social chat platform and allows for a truely free, decentralized and immutable platform for anyone, anywhere to express any idea. Information is power and we believe people should have free access to any and all information in order for society to be free, open and able to achieve its best.
-                  </Typography>
+                </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  
-                  NFTs as Messages
-                  
-                </h2>
+                  <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+
+                    NFTs as Messages
+
+                  </h2>
                   Messages are wrapped as NFTs allowing us to attach metadata onchain to each NFT token, this allows anyone to create a front end to show this information for any wall without any central server. The message, timestamp and creator are all fully onchain, with the actual image for the NFT and URI metadata able to be handled offchain by IPFS, this is not yet implemented as we are in the beta. All messages are NFTs from a specific wall, this allows you to see who is most active by how many NFTs they own for the community, allowing you to reward members by participation.
-                  </Typography>
+                </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                Moderation</h2>
+                  <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                    Moderation</h2>
                   All NFTs are able to change their data only in the way set at the walls creation for that community. This allows for communities to choose their moderation style and policy or be fully decentralized. Wallls are able to be moderated by specific addresses, edit own messages or be immutable.
-                  </Typography>
+                </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                Unique</h2>
+                  <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                    Unique</h2>
                   Walls are all unique and each wall has a name which cannot be shared by any other wall. Walls are fully onchain and decentralized, using the deployment contract to lookup which walls for which community by name allowing for a subreddit style UX. Users are able to also choose the symbol and set a bio for the walls, aswell as able to create their own walls!
-                  </Typography>
-                </div>
-                <Button style={{ background: "#ff50a9", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                  onClick={handleCloseA}> Close
-                </Button>
+                </Typography>
+              </div>
+              <Button style={{ background: "#ff50a9", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
+                onClick={handleCloseA}> Close
+              </Button>
             </Dialog>
             <Dialog
               open={openBRK}
@@ -577,6 +772,29 @@ const App = ({ Component, pageProps }: AppProps) => {
                 </Button>
                 <div />
               </Card>
+            </Dialog><Dialog
+              open={openSub}
+              onClose={handleCloseSub}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
+                <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
+                  Purchase Sub
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
+                  Purchase Sub
+                </Typography>
+                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
+                  Purchase sub for
+                </h2>
+                <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
+                  onChange={e => handleChangeS(e)} />
+                <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
+                  onClick={subWallT}> Create Wall
+                </button>
+                <div></div>
+              </div>
             </Dialog>
             <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
               <div>
@@ -594,7 +812,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                 onClick={callTag}> Send
               </button>
-
+              {subt()}
               <div>
               </div>
               <div>
