@@ -436,7 +436,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   }
   function handleChangePrice(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const values = event.target.value;
-    set_Price(values);
+    set_Price(values + '000000000000000000');
   }
   function handleChangeedit(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
 
