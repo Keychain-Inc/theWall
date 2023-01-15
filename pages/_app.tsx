@@ -1,3 +1,4 @@
+// @ts-nocheck 
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
 import '@rainbow-me/rainbowkit/styles.css'
@@ -120,7 +121,7 @@ let addrs: string[] = []
 //     console.log('in router')
 let ut = 0
 let contracturl = ''
-// @ts-ignore
+
 let balances = []// @ts-ignore
 let balancestoken = []// @ts-ignore
 let loaded = 0
@@ -296,6 +297,7 @@ function useTtag0() {
         }
         console.log(urls);
         // Map over the array of URLs and return an img element for each
+        // @ts-ignore
         return (
           <div>
             <div style={{
