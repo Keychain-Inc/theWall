@@ -174,7 +174,7 @@ function useTtag0() {
           subWall=await Contract.subWall()
           checkS= 1
         }
-        if (loaded == 0||loaded == 1) {
+        if (loaded == 0) {
           if (subWall  == 0) {
           toast('Loading wall')
           } else {
@@ -235,12 +235,12 @@ function useTtag0() {
               addrs[artistS[n]] = artistS[n]
             }
           }
-          
+          if (loaded == 0 && tag[0]!= '') {
+            loaded = 1
+            toast.success('Successfully loaded wall!')
+          } 
          
         }
-        if (loaded == 0) {
-      loaded = 1
-    }
       } catch (error) {
 
       }
