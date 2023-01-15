@@ -99,9 +99,9 @@ const Abi = [
   "function price() view returns (uint256)",
   "function getTag(uint256 id) view returns (string)",
   "function latest(uint256) view returns (string[] tags,address[] addrs,uint256[] times)",
-  "function mint2(address to, string _tag) payable",
+  "function withdraw()",
   "function mint(address to, string _tag)",
-  "function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)",
+  "function owner () view returns (address)",
   "event newWall(address,string)",
   "function balanceOf(address) view returns (uint256)",
   "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange, uint8 sub) returns (address)",
@@ -127,7 +127,7 @@ let balances = []// @ts-ignore
 let balancestoken = []// @ts-ignore
 let loaded = 0
 let subWall = 0
-let checkS = 0;
+let checkS = 0;let own= 0
 function useT1() {
   const [wallT, setwallT] = useState("");
   useEffect(() => {
@@ -137,8 +137,12 @@ function useT1() {
       if (ut == 0 && contractaddrs != contractn) {
         contracturl = window.location.origin.toString() + '/?walladdrs=' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
-        ut = 1;
-      }
+        ut = 1; const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    await provider2.send("eth_requestAccounts", []);
+    if (await Contract.owner() == await provider2.getSigner().getAddress()) {
+      own = 1}
+      } 
+        
     }
   },); return (<><h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue" >{wallT}</h1><div className="m-auto text-center" style={{ color: '#4f86f7' }}>{contracturl}</div></>)
 }//      contractaddrs = (router.query.new_nft_address);
@@ -174,7 +178,7 @@ function useTtag0() {
           subWall=await Contract.subWall()
           checkS= 1
         }
-        if (loaded == 0||loaded == 1) {
+        if (loaded == 0) {
           if (subWall  == 0) {
           toast('Loading wall')
           } else {
@@ -211,7 +215,11 @@ function useTtag0() {
         const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
         const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
        
-        for (let n = 0; n < sup;n++) {
+        for (let T = 0; T < sup;n++) {
+          let n= T
+          if (subWall  == 1) {
+            n = T+1
+          }
           if (addrs[artistS[n]] == null) {
             let tn = await provider3.lookupAddress(artistS[n])
             // @ts-ignore
@@ -231,12 +239,12 @@ function useTtag0() {
               addrs[artistS[n]] = artistS[n]
             }
           }
-          
+          if (loaded == 0 && tag[1]!= '') {
+            loaded = 1
+            toast.success('Successfully loaded wall!')
+          } 
          
         }
-        if (loaded == 0) {
-      loaded = 1
-    }
       } catch (error) {
 
       }
@@ -390,9 +398,7 @@ function useTtag0() {
         </div>
         )
       }
-    }if (loaded == 1) {
-      toast.success('Successfully loaded wall!')
-      loaded = 2
+    
     }
     let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
     return (
@@ -434,7 +440,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   }
   function handleChangePrice(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const values = event.target.value;
-    set_Price(values);
+    set_Price(values + '000000000000000000');
   }
   function handleChangeedit(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
 
@@ -456,16 +462,39 @@ const App = ({ Component, pageProps }: AppProps) => {
     else { set_Sub(0) }
   }
   function subt() {
-    // if (subWall != 1) {
-    //   return null;
-    //}
+     if (subWall != 1) {
+       return null;
+    }if (subWall == 1&&own==1) {
+      return (<div style={{
+       
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',flexDirection: 'column'
+      }}><Button onClick={wd}>
+        withdraw
+      </Button><div></div>
+      <Button onClick={handleOpenSub}>
+      Subscribe
+    </Button></div>);
+   }
 
     return (
       <Button onClick={handleOpenSub}>
         Subscribe
       </Button>
     );
-  }
+  }const wd = async () => {
+    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    await provider2.send("eth_requestAccounts", []);
+    try {
+      const signer = provider2.getSigner()
+      let myAddress = await signer.getAddress()
+      await Contract.connect(signer).withdraw()////signer._address, sendMessage)
+      } catch (e) {
+        console.log("LOL")}
+    
+      // addToast({body: e.message, type: "error"});
+    }
   //notify
   const [sendMessage, setSendMessage] = useState("");
   const [_name, set_name] = useState("LOL");
@@ -797,7 +826,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   Subscribe to the wall to view, chat
                 </Typography>
                 <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Purchase sub for 29d
+                  Purchase sub for 1 MATIC
                 </h2>
                 <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
                   onChange={e => handleChangeS(e)} />
