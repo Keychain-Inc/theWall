@@ -211,7 +211,11 @@ function useTtag0() {
         const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
         const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
        
-        for (let n = 0; n < sup;n++) {
+        for (let T = 0; T < sup;n++) {
+          let n= T
+          if (subWall  == 1) {
+            n = T+1
+          }
           if (addrs[artistS[n]] == null) {
             let tn = await provider3.lookupAddress(artistS[n])
             // @ts-ignore
