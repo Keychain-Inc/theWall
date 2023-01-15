@@ -1,3 +1,4 @@
+//@ts-nocheck
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
 import '@rainbow-me/rainbowkit/styles.css'
@@ -44,6 +45,7 @@ const { NEXT_PUBLIC_ALCHEMY_ID, NEXT_PUBLIC_INFURA_ID, NEXT_PUBLIC_ETHERSCAN_API
 import net from '../config/network'
 import toast, { Toaster } from 'react-hot-toast';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
+import React from 'react';
 const { chainn, rpc, createn, contractn, menun } = net
 const alchemyId = NEXT_PUBLIC_ALCHEMY_ID
 const etherscanApiKey = NEXT_PUBLIC_ETHERSCAN_API_KEY
@@ -120,7 +122,7 @@ let addrs: string[] = []
 //     console.log('in router')
 let ut = 0
 let contracturl = ''
-
+// @ts-ignore
 let balances = []// @ts-ignore
 let balancestoken = []// @ts-ignore
 let loaded = 0
@@ -327,12 +329,10 @@ function useTtag0() {
                   src = `https://cloudflare-ipfs.com/ipfs/${url.replace("ipfs://", "/").replace("/ipfs/", "/")}`
                 }
                 return <div style={{
-                 
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                }}>
-                  <img src={src} alt={`Image ${index + 1}`} key={index} onClick={() => handleOpenDialog(src)} style={{ width: '400px', cursor: 'pointer' }}
+                }} key={index} ><img src={src} alt={`Image ${index + 1}`} onClick={() => handleOpenDialog(src)} style={{ width: '400px', cursor: 'pointer' }}
                 /></div>;
               })}
             </div>

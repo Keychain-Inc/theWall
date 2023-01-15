@@ -4,7 +4,7 @@ const ethers = require("ethers");
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
 
 // The address of the deployed smart contract
-const contractAddress = "0x4e56F252DF0CE3E0aF1FA6E7a75A32592376aE63";
+const contractAddress = "0x5A79c7A1bde8e9baf57EF69aA862f0298760072f";
 
 // The ABI (Application Binary Interface) of the smart contract
 const contractABI = [ 
@@ -17,7 +17,7 @@ const contractABI = [
     "function price() view returns (uint256)",
     "function getTag(uint256 id) view returns (string)",
     "function latest(uint256) view returns (string[] tags,address[] addrs,uint256[] times)",
-    "function mint2(address to, string _tag) payable",
+    "function hasSub(address to) view returns (uint)",
     "function mint(address to, string _tag)",
    "event newWall(address,string)",
     "function balanceOf(address) view returns (uint256)",
@@ -35,7 +35,7 @@ const contract = new ethers.Contract(contractAddress, contractABI, provider);
 
 // Call the "latest" function
 async function callLatest(last) {
-    const result = await contract.latest(2,{ from: '0x9D31e30003f253563Ff108BC60B16Fdf2c93abb5'});
+    const result = await contract.latest(1,{ from: '0x9D31e30003f253563Ff108BC60B16Fdf2c93abb5'});
     console.log(result)
 }
 
