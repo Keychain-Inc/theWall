@@ -235,7 +235,7 @@ function useTtag0() {
               addrs[artistS[n]] = artistS[n]
             }
           }
-          if (loaded == 0 && tag[0]!= '') {
+          if (loaded == 0 && tag[1]!= '') {
             loaded = 1
             toast.success('Successfully loaded wall!')
           } 
@@ -394,9 +394,7 @@ function useTtag0() {
         </div>
         )
       }
-    }if (loaded == 1) {
-      toast.success('Successfully loaded wall!')
-      loaded = 2
+    }
     }
     let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
     return (
