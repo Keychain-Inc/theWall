@@ -142,13 +142,13 @@ function useT1() {
 }//      contractaddrs = (router.query.new_nft_address);
 function useTtag0() {
 
-  const [tag, setTag] = useState("LOL");
-  const [artist, setArtist] = useState("LOL");
+  const [tag, setTag] = useState("L");
+  const [artist, setArtist] = useState("L");
   const [time, setTime] = useState("");
-  const [sup, setSup] = useState(2);
+  const [sup, setSup] = useState(1);
   // let addrs = []
   const [wallT, setwallT] = useState("");
-  const [symbol, setSymbol] = useState("LOL");
+  const [symbol, setSymbol] = useState("L");
   let addrst = 0
   const router = useRouter()
   const { walladdrs } = router.query
@@ -162,237 +162,228 @@ function useTtag0() {
     Contract = new ethers.Contract(contractaddrs, Abi, signerw);
     addrst = 1
   }
-
-  useEffect(() => {
+  
+    useEffect(() => {
     // update the ui elements
     async function updateUIStates() {
-      if (loaded == 0) {
-        toast('Loading wall')
-      } 
-      const provider4 = new ethers.providers.JsonRpcProvider(rpc)
-      if (checkS == 0) {
-        console.log('check' + checkS)
-        if (await Contract.connect(provider4).subWall() == 1) {
-          subWall = 1;
-          console.log('subd' + subWall)
+      try {
+        if (checkS == 0) {
+          toast('Loading wall. Please Connect Wallet.')
+          subWall=await Contract.subWall()
+          checkS= 1
         }
-        checkS = 1;
-        console.log('sub' + subWall)
-      } 
-      
-      const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-      await provider2.send("eth_requestAccounts", []);
-      console.log(subWall)
-
-      if (subWall == 1) {
-        console.log(5)
-
+        if (loaded == 0||loaded == 1) {
+          if (subWall  == 0) {
+          toast('Loading wall' + subWall)
+          } else {
+            toast('Loading wall. Please Connect Wallet.')
+          } 
+        }
+        const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+        
+        let pro2  = await provider2.send("eth_requestAccounts", []);
+        // Setup
+        if ((await provider2.getNetwork()).chainId != chainn.id) {
+          toast.error('Wrong Network. Please switch networks')
+        }
+       
         Contract = new ethers.Contract(contractaddrs, Abi, provider2);
-      }
-      console.log(6)
-
-      let s = (await Contract.totalSupply() - await Contract.subs());
-      //   s = ethers.utils.formatUnits(s, 0);
-      setSup(s)
-
-      //while (true) {
-        try {
-          if (subWall == 1) {
-console.log(provider2.getSigner().getAddress())
-            const [tagS, artistS, timeS] = await Contract.connect(provider2).latest(s);
-            console.log(tagS)
-            console.log(provider2.getSigner().getAddress())
-            setTag(tagS);
-            setArtist(artistS);
-            setTime(timeS);
-           // break;
-          }
-
-          else {
-            console.log(3)
-            const [tagS, artistS, timeS] = await Contract.connect(provider2).latest(s);
-            setTag(tagS);
-            setArtist(artistS);
-            setTime(timeS); //break;
-          }
+        let s = (await Contract.totalSupply() - await Contract.subs() );
+        s = ethers.utils.formatUnits(s, 0);
+        setSup(s)
+        const [tagS, artistS, timeS] = await Contract.latest(sup, { from: await provider2.getSigner().getAddress() });
+        console.log(await Contract.latest(3, { from: await provider2.getSigner().getAddress() }))
+        if (wallT == 'LOL') {
+          setwallT(await Contract.name() + 'LOLOL')
         }
-        catch { console.log }
-      //}
-      const artistS = artist
-      const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-
-      for (let n: number = 0; n < sup; n++) {
-        if (addrs[artistS[n]] == null) {
-          let tn = await provider3.lookupAddress(artistS[n])
-          // @ts-ignore
-          if (balances[artistS[n]] == null) {
-            try {
-              balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]))
-              balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n]) / 10 ** 18  //}
-              )
+        setTag(tagS);
+        setArtist(artistS);
+        setTime(timeS);
+        const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
+        const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
+       
+        for (let n = 0; n < sup;n++) {
+          if (addrs[artistS[n]] == null) {
+            let tn = await provider3.lookupAddress(artistS[n])
+            // @ts-ignore
+            if (balances[artistS[n]] == null) {
+              try {
+                balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]))
+                balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n]) / 10 ** 18  //}
+                )
+              }
+              catch { }
             }
-            catch { console.log }
-          }
 
-          if (tn != null) {
-            addrs[artistS[n]] = tn
+            if (tn != null) {
+              addrs[artistS[n]] = tn
+            }
+            else {
+              addrs[artistS[n]] = artistS[n]
+            }
           }
-          else {
-            addrs[artistS[n]] = artistS[n]
-          }
+          
+         
         }
+        if (loaded == 0) {
+      loaded = 1
+    }
+      } catch (error) {
+
       }
+    };
+    // fix for updatix1ng after wallet login
+    //updateUIStates();
 
-      s = ethers.utils.formatUnits(s, 0);
-      if (loaded == 0) {
-        toast.success('Successfully loaded wall!')
-        loaded = 1
-      }
-    //} 
-  }
-    //);
-// fix for updatix1ng after wallet login
-//updateUIStates();
+    // schedule every 15 sec refresh
+    const timer = setInterval(() => {
 
-// schedule every 15 sec refresh
-const timer = setInterval(() => {
+        updateUIStates()
 
-  updateUIStates()
-
-}, 3000);
-// clearing interval
-return () => clearInterval(timer);
+      }, 3000);
+    // clearing interval
+    return () => clearInterval(timer);
   },);
 
-function tag1() {
-  let tags = []
-  let artists = []
-  let times = []
-  let t0 = []
-  let ts = []
-  let i = "";
-  for (let n = 0; n < sup; n++) {
-    tags[n] = tag[n]
-    artists[n] = artist[n]
-    if (addrs[artists[n]] == null) {
-      artists[n] = artist[n]
-    }
-    else {
+  function tag1() {
+    let tags = []
+    let artists = []
+    let times = []
+    let t0 = []
+    let ts = []
+    let i = "";
+    for (let n = 0; n< sup;n++) {
+      
+      tags[n] = tag[n+1]
+      console.log(tag[n+1])
+      artists[n] = artist[n+1]
+      if (addrs[artists[n]] == null) {
+        artists[n] = artist[n]
+      }
+      else {
+        // @ts-ignore
+        artists[n] = addrs[artists[n]]
+      }//artist[n]
+      //  artists = nm
+      times[n] = Number(time[n])
       // @ts-ignore
-      artists[n] = addrs[artists[n]]
-    }//artist[n]
-    //  artists = nm
-    times[n] = Number(time[n])
-    // @ts-ignore
-    let TT = new Date(times[n] * 1000).toLocaleString()
-    times[n] = String(TT)
+      let TT = new Date(times[n] * 1000).toLocaleString()
+      times[n] = String(TT)
+      console.log(n)
+      console.log(tag[n])
+      
 
-    const MyComponent = ({ message }) => {
-      // Extract all of the URLs from the message
-      let urls = []
-      try {
-        urls = message.match(/(https?:\/\/.*\.(?:png|jpg|jpeg|gif|ipfs)|ipfs:\/\/.*|\/ipfs\/.*)/gi) || [];
-      } catch (e) {
-        console.log("Error: ", e.message);
-        // addToast({body: e.message, type: "error"});
-      }
+      const MyComponent = ({ message }) => {
+        // Extract all of the URLs from the message
+        let urls = []
+        try {
+          urls = message.match(/(https?:\/\/[^\s]+\.(?:png|jpg|jpeg|gif)|ipfs:\/\/[^\s]+|\/ipfs\/[^\s]+)/gi) || [];
+        } catch (e) {
+          console.log("Error: ", e.message);
+          // addToast({body: e.message, type: "error"});
+        }
 
-      // Function to open the dialog when an image is clicked
-      const handleOpenDialog = (image) => {
-        setIsDialogOpen(true);
-        setCurrentImage(image);
-      }
+        // Function to open the dialog when an image is clicked
+        const handleOpenDialog = (image) => {
+          setIsDialogOpen(true);
+          setCurrentImage(image);
+        }
 
-      // Function to close the dialog
-      const handleCloseDialog = () => {
-        setIsDialogOpen(false);
-        setCurrentImage(null);
-      }
-
-      // Map over the array of URLs and return an img element for each
-      return (
-        <div>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gridGap: '10px',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            {urls.map((url, index) => {
-              let src = url;
-              // Check if the URL is an IPFS link
-              if (url.startsWith("/ipfs/") || url.startsWith("ipfs://")) {
-                // Resolve the IPFS link using an IPFS gateway
-                src = `https://cloudflare-ipfs.com/ipfs/${url.replace("ipfs://", "/").replace("/ipfs/", "/")}`
-              }
-              return <img src={src} alt={`Image ${index + 1}`} key={index} onClick={() => handleOpenDialog(src)} style={{ width: '400px', height: '200px' }} />;
-            })}
-          </div>
-          {isDialogOpen && (
+        // Function to close the dialog
+        const handleCloseDialog = () => {
+          setIsDialogOpen(false);
+          setCurrentImage(null);
+        }
+        console.log(urls);
+        // Map over the array of URLs and return an img element for each
+        return (
+          <div>
             <div style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'rgba(0, 0, 0, 0.8)',
-              display: 'flex',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gridGap: '10px',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <div style={{
-                background: 'white',
-                maxWidth: '90%',
-                maxHeight: '90%',
-                overflow: 'auto',
-                padding: '10px',
-              }}>
-                <img src={currentImage} alt='Large image' onClick={handleCloseDialog} style={{ maxWidth: '100%' }} />
-                <button onClick={handleCloseDialog} style={{
-                  position: 'absolute',
-                  top: '10px',
-                  right: '10px',
-                  color: 'white',
-                }}>
-                  X
-                </button>
-              </div>
+              {urls.map((url, index) => {
+                let src = url;
+                // Check if the URL is an IPFS link
+                if (url.startsWith("/ipfs/") || url.startsWith("ipfs://")) {
+                  // Resolve the IPFS link using an IPFS gateway
+                  src = `https://cloudflare-ipfs.com/ipfs/${url.replace("ipfs://", "/").replace("/ipfs/", "/")}`
+                }
+                return <img src={src} alt={`Image ${index + 1}`} key={index} onClick={() => handleOpenDialog(src)} style={{ width: '400px', height: '200px', cursor: 'pointer' }}
+                />;
+              })}
             </div>
-          )}
+            {isDialogOpen && (
+              <div style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'rgba(0, 0, 0, 0.8)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                <div style={{
+                  background: 'white',
+                  maxWidth: '90%',
+                  maxHeight: '90%',
+                  overflow: 'auto',
+                  padding: '10px',
+                }}>
+                  <img src={currentImage} alt='Large image' onClick={handleCloseDialog} style={{ maxWidth: '100%' }} />
+                  <button onClick={handleCloseDialog} style={{
+                    position: 'absolute',
+                    top: '10px',
+                    right: '10px',
+                    color: 'white',
+                  }}>
+                    X
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      };
+
+
+      //ts[n] = ethers.utils.formatUnits(time[0]);
+      // times[n] = ethers.utils.formatUnits(ts[n],0);
+      if (tags[n] != '') {
+        let t2 = 'https://etherscan.io/address/' + artist[n]
+        // @ts-ignore
+        t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]} 🧱{balancestoken[artist[n]]}
+        </h2>
+          <div className="text-center light:text-white-600" >
+            {tags[n]}
+          </div><MyComponent message={tags[n]} />
+          <h2 style={{ color: '#cccccc' }} className="text-1xl text-centerjustify-center ">
+            {times[n]}</h2>
+          <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
+            _____________________________________________________________________________________________
+          </a></div>
         </div>
-      );
-    };
-
-
-    //ts[n] = ethers.utils.formatUnits(time[0]);
-    // times[n] = ethers.utils.formatUnits(ts[n],0);
-    if (tags[n] != '') {
-      let t2 = 'https://etherscan.io/address/' + artist[n]
-      // @ts-ignore
-      t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]} 🧱{balancestoken[artist[n]]}
-      </h2>
-        <div className="text-center light:text-white-600" >
-          {tags[n]}
-        </div><MyComponent message={tags[n]} />
-        <h2 style={{ color: '#cccccc' }} className="text-1xl text-centerjustify-center ">
-          {times[n]}</h2>
-        <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
-          _____________________________________________________________________________________________
-        </a></div>
-      </div>
-      )
+        )
+      }
+    }if (loaded == 1) {
+      toast.success('Successfully loaded wall!')
+      loaded = 2
     }
+    let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
+    return (
+      <>{t0}{t1}</>);
   }
-  let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
+
   return (
-    <>{t0}{t1}</>);
+    <div>{tag1()}</div>
+  )
 }
 
-return (
-  <div>{tag1()}</div>
-)
-}
 let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
 let Token = new ethers.Contract(tokenaddrs, Abi, signerw);
 //const Contract = new ethers.Contract(contractaddrs, Abi, signerw);
