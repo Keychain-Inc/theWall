@@ -64,14 +64,15 @@ const PolyM = [<MenuItem value={'0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'}>Ma
 const PolyC = chain.polygon
 const PolyRPC = 'https://polygon-rpc.com'
 const PolyA = '0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'
-const PolyN = '0xC6Da5Fee70AA6A606E4FfD748108C52E16C07444'
+const PolyN = '0xB0Ed3A7c5769363cc673C136552812150f5A8552'
 
 const envVars = {
-  chainn:BSCC,//chainn,
-  rpc: BSCRPC,
-    createn: BSCN,
-    contractn: BSCA,
-    menun:BSCM
- }
+
+  chainn:PolyC,//chainn,
+  rpc: PolyRPC,
+    createn: PolyN,
+    contractn: PolyA,
+    menun:PolyM
+}
 
 export default envVars
