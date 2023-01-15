@@ -55,16 +55,13 @@ const BSCRPC = 'https://bsc-dataseed.binance.org/'
 const BSCA = '0x18C519E0dA619d017908aFf504e782E381552620'
 const BSCN = '0xB8112446078378f0998FBf834D4683B6C8Ac08C7'
 const BSCM = [<MenuItem value={'0x18C519E0dA619d017908aFf504e782E381552620'}>Main</MenuItem>]
-const PolyM = [<MenuItem value={'0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'}>Main</MenuItem>,
-<MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>,
-<MenuItem value={'0x503D749c21720E8B0d7A39809AfeC02bdeb014bc'}>Polygon</MenuItem>,
-<MenuItem value={'0x4B233C47dC9C456dBaaa9af138F54b03CFcDED6E'}>ENS</MenuItem>,
-<MenuItem value={'0x6A98F6F6F27E53089857333fc036Ab98719fAe75'}>Sushiswap</MenuItem>
+const PolyM = [<MenuItem value={'0xDa11194290F3C4c814E13d038c1956806D332E7F'}>Main</MenuItem>,
+<MenuItem value={'0x80C331d6fe8C60c2bf7e03D68Eb073404C12f1eC'}>Sub Wall</MenuItem>
 ]
 const PolyC = chain.polygon
 const PolyRPC = 'https://polygon-rpc.com'
-const PolyA = '0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'
-const PolyN = '0xC6Da5Fee70AA6A606E4FfD748108C52E16C07444'
+const PolyA = '0xDa11194290F3C4c814E13d038c1956806D332E7F'
+const PolyN = '0xB0Ed3A7c5769363cc673C136552812150f5A8552'
 
 const envVars = {
   chainn:PolyC,//chainn,
