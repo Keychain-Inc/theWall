@@ -1,4 +1,4 @@
-// @ts-nocheck 
+
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
 import '@rainbow-me/rainbowkit/styles.css'
@@ -175,7 +175,7 @@ function useTtag0() {
         }
         if (loaded == 0||loaded == 1) {
           if (subWall  == 0) {
-          toast('Loading wall' + subWall)
+          toast('Loading wall')
           } else {
             toast('Loading wall. Please Connect Wallet.')
           } 
@@ -189,11 +189,18 @@ function useTtag0() {
         }
        
         Contract = new ethers.Contract(contractaddrs, Abi, provider2);
+        if (subWall  == 1) {
+          
         let s = (await Contract.totalSupply() - await Contract.subs() );
         s = ethers.utils.formatUnits(s, 0);
         setSup(s)
+      }else {
+        let s = (await Contract.totalSupply());
+        s = ethers.utils.formatUnits(s, 0);
+        setSup(s)
+      } 
         const [tagS, artistS, timeS] = await Contract.latest(sup, { from: await provider2.getSigner().getAddress() });
-        console.log(await Contract.latest(3, { from: await provider2.getSigner().getAddress() }))
+        console.log(await Contract.latest(sup, { from: await provider2.getSigner().getAddress() }))
         if (wallT == 'LOL') {
           setwallT(await Contract.name() + 'LOLOL')
         }
@@ -254,10 +261,16 @@ function useTtag0() {
     let ts = []
     let i = "";
     for (let n = 0; n< sup;n++) {
-      
+      if (subWall  == 1) {
       tags[n] = tag[n+1]
       console.log(tag[n+1])
       artists[n] = artist[n+1]
+    }else {
+      tags[n] = tag[n]
+      console.log(tag[n])
+      artists[n] = artist[n]
+     
+    }
       if (addrs[artists[n]] == null) {
         artists[n] = artist[n]
       }
@@ -314,8 +327,14 @@ function useTtag0() {
                   // Resolve the IPFS link using an IPFS gateway
                   src = `https://cloudflare-ipfs.com/ipfs/${url.replace("ipfs://", "/").replace("/ipfs/", "/")}`
                 }
-                return <img src={src} alt={`Image ${index + 1}`} key={index} onClick={() => handleOpenDialog(src)} style={{ width: '400px', height: '200px', cursor: 'pointer' }}
-                />;
+                return <div style={{
+                 
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <img src={src} alt={`Image ${index + 1}`} key={index} onClick={() => handleOpenDialog(src)} style={{ width: '400px', cursor: 'pointer' }}
+                /></div>;
               })}
             </div>
             {isDialogOpen && (
@@ -505,7 +524,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
       const signer = provider2.getSigner()
       let myAddress = await signer.getAddress()
-      await CreateWall.connect(signer).createWall(_name, _symbol, '1000000000000000000', _mod, _edit, 1)////signer._address, sendMessage)
+      await CreateWall.connect(signer).createWall(_name, _symbol, _Price, _mod, _edit, _Sub)////signer._address, sendMessage)
       CreateWall.on("newWall", (address, name) => {
         setTimeout(() => {
           window.location.replace('./' + '?walladdrs=' + address)
@@ -776,15 +795,15 @@ const App = ({ Component, pageProps }: AppProps) => {
                   Purchase Sub
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  Purchase Sub
+                  Subscribe to the wall to view, chat
                 </Typography>
                 <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Purchase sub for
+                  Purchase sub for 29d
                 </h2>
                 <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
                   onChange={e => handleChangeS(e)} />
                 <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                  onClick={subWallT}> Create Wall
+                  onClick={subWallT}> Subscribe
                 </button>
                 <div></div>
               </div>
