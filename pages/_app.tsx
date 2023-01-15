@@ -167,7 +167,6 @@ function useTtag0() {
     useEffect(() => {
     // update the ui elements
     async function updateUIStates() {
-<<<<<<< HEAD
       try {
         if (checkS == 0) {
           toast('Loading wall. Please Connect Wallet.')
@@ -222,34 +221,6 @@ function useTtag0() {
                 )
               }
               catch { }
-=======
-      const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-    // Setup
-
-
-    await provider2.send("eth_requestAccounts", []);
-      const [tagS, artistS, timeS] = await Contract.connect(provider2).latest(await Contract.totalSupply());
-      if (wallT == 'LOL') {
-        setwallT(await Contract.name() + 'LOLOL')
-      }
-      setTag(tagS);
-      setArtist(artistS);
-      setTime(timeS);
-      const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-      const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
-      if (loaded == 0) {
-        toast('Loading wall')
-      }
-      for (let n = 0; n < sup; n++) {
-        if (addrs[artistS[n]] == null) {
-          let tn = await provider3.lookupAddress(artistS[n])
-          // @ts-ignore
-          if (balances[artistS[n]] == null) {
-            try {
-              balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]))
-              balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n]) / 10 ** 18  //}
-              )
->>>>>>> tt
             }
 
             if (tn != null) {
