@@ -4,7 +4,7 @@ const ethers = require("ethers");
 const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");
 
 // The address of the deployed smart contract
-const contractAddress = "0x5A79c7A1bde8e9baf57EF69aA862f0298760072f";
+const contractAddress = "0x3783b8DAf1B14d8e556ec1C681CEB0056157e810";
 
 // The ABI (Application Binary Interface) of the smart contract
 const contractABI = [ 
@@ -16,7 +16,7 @@ const contractABI = [
     "function subWall() view returns (uint8)",
     "function price() view returns (uint256)",
     "function getTag(uint256 id) view returns (string)",
-    "function latest(uint256) view returns (string[] tags,address[] addrs,uint256[] times)",
+    "function owner () view returns (address)",
     "function hasSub(address to) view returns (uint)",
     "function mint(address to, string _tag)",
    "event newWall(address,string)",
@@ -24,18 +24,13 @@ const contractABI = [
     "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange, uint8 sub) returns (address)",
     "function mintandrenewSub(address to) payable"];
 
-// The private key of the account to send the transaction from
-const privateKey = "29ebf1146b7af5d5240b9418bab2c9476cdbfdec29c7e004ede94adc2365e410";
-
-// Create a wallet from the private key
-const wallet = new ethers.Wallet(privateKey, provider);
 
 // Connect to the smart contract
 const contract = new ethers.Contract(contractAddress, contractABI, provider);
 
 // Call the "latest" function
 async function callLatest(last) {
-    const result = await contract.latest(1,{ from: '0x9D31e30003f253563Ff108BC60B16Fdf2c93abb5'});
+    const result = await contract.owner({ from: '0x9D31e30003f253563Ff108BC60B16Fdf2c93abb5'});
     console.log(result)
 }
 

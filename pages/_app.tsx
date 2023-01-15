@@ -99,9 +99,9 @@ const Abi = [
   "function price() view returns (uint256)",
   "function getTag(uint256 id) view returns (string)",
   "function latest(uint256) view returns (string[] tags,address[] addrs,uint256[] times)",
-  "function mint2(address to, string _tag) payable",
+  "function withdraw()",
   "function mint(address to, string _tag)",
-  "function latest(uint256 last) view returns (string[] memory,address[] memory,uint256[] memory)",
+  "function owner () view returns (address)",
   "event newWall(address,string)",
   "function balanceOf(address) view returns (uint256)",
   "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange, uint8 sub) returns (address)",
@@ -127,7 +127,7 @@ let balances = []// @ts-ignore
 let balancestoken = []// @ts-ignore
 let loaded = 0
 let subWall = 0
-let checkS = 0;
+let checkS = 0;let own= 0
 function useT1() {
   const [wallT, setwallT] = useState("");
   useEffect(() => {
@@ -137,8 +137,12 @@ function useT1() {
       if (ut == 0 && contractaddrs != contractn) {
         contracturl = window.location.origin.toString() + '/?walladdrs=' + contractaddrs
         setwallT('Welcome to ' + await Contract.name())
-        ut = 1;
-      }
+        ut = 1; const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    await provider2.send("eth_requestAccounts", []);
+    if (await Contract.owner() == await provider2.getSigner().getAddress()) {
+      own = 1}
+      } 
+        
     }
   },); return (<><h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue" >{wallT}</h1><div className="m-auto text-center" style={{ color: '#4f86f7' }}>{contracturl}</div></>)
 }//      contractaddrs = (router.query.new_nft_address);
@@ -458,16 +462,39 @@ const App = ({ Component, pageProps }: AppProps) => {
     else { set_Sub(0) }
   }
   function subt() {
-    // if (subWall != 1) {
-    //   return null;
-    //}
+     if (subWall != 1) {
+       return null;
+    }if (subWall == 1&&own==1) {
+      return (<div style={{
+       
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',flexDirection: 'column'
+      }}><Button onClick={wd}>
+        withdraw
+      </Button><div></div>
+      <Button onClick={handleOpenSub}>
+      Subscribe
+    </Button></div>);
+   }
 
     return (
       <Button onClick={handleOpenSub}>
         Subscribe
       </Button>
     );
-  }
+  }const wd = async () => {
+    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+    await provider2.send("eth_requestAccounts", []);
+    try {
+      const signer = provider2.getSigner()
+      let myAddress = await signer.getAddress()
+      await Contract.connect(signer).withdraw()////signer._address, sendMessage)
+      } catch (e) {
+        console.log("LOL")}
+    
+      // addToast({body: e.message, type: "error"});
+    }
   //notify
   const [sendMessage, setSendMessage] = useState("");
   const [_name, set_name] = useState("LOL");
