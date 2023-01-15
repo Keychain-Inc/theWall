@@ -797,7 +797,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   Subscribe to the wall to view, chat
                 </Typography>
                 <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Purchase sub for 29d
+                  Purchase sub for 1 MATIC
                 </h2>
                 <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
                   onChange={e => handleChangeS(e)} />
