@@ -1,4 +1,3 @@
-// @ts-nocheck 
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
 import '@rainbow-me/rainbowkit/styles.css'
