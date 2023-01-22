@@ -78,13 +78,13 @@ const signerw = wagmiClient.provider;
 
 let contractaddrs = contractn;
 let createaddrs = createn;
-const Abi = [ 
-"function getHistoricalFeeds(uint256[] memory feedIDs, uint256[] memory timestamps) view returns (uint256[] memory)",
-"function getFeeds(uint256[] memory feedIDs) view returns (uint256[] memory, uint256[] memory, uint256[] memory)",
-"function getFeed(uint256 feedID) view returns (uint256, uint256, uint256)",
-"function getFeedLength() view returns (uint256)",
-"function signers(uint256) view returns (address)",
-"function getFeedList(uint256[] memory feedIDs) view returns(string[] memory, uint256[] memory, uint256[] memory, uint256[] memory, uint256[] memory)",
+const Abi = [
+  "function getHistoricalFeeds(uint256[] memory feedIDs, uint256[] memory timestamps) view returns (uint256[] memory)",
+  "function getFeeds(uint256[] memory feedIDs) view returns (uint256[] memory, uint256[] memory, uint256[] memory)",
+  "function getFeed(uint256 feedID) view returns (uint256, uint256, uint256)",
+  "function getFeedLength() view returns (uint256)",
+  "function signers(uint256) view returns (address)",
+  "function getFeedList(uint256[] memory feedIDs) view returns(string[] memory, uint256[] memory, uint256[] memory, uint256[] memory, uint256[] memory)",
 ];
 let ut = 0
 let contracturl = ''
@@ -94,26 +94,26 @@ let feeds
 
 let last
 let signers
-    // @ts-ignore
-  let FeedID = []
-  
-    // @ts-ignore
-  let FeedName = []
-  
-    // @ts-ignore
-  let FeedValue = []
-  
-    // @ts-ignore
-  let ValueRAW = []
-  
-    // @ts-ignore
-  let LastUpdate = []
-  
-    // @ts-ignore
-  let Decimals = []
-  
-    // @ts-ignore
-  let UpdateInterval = []
+// @ts-ignore
+let FeedID = []
+
+// @ts-ignore
+let FeedName = []
+
+// @ts-ignore
+let FeedValue = []
+
+// @ts-ignore
+let ValueRAW = []
+
+// @ts-ignore
+let LastUpdate = []
+
+// @ts-ignore
+let Decimals = []
+
+// @ts-ignore
+let UpdateInterval = []
 let checkS = 0;
 let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
 function useT1() {
@@ -125,9 +125,9 @@ function useT1() {
       if (ut == 0 && contractaddrs != contractn) {
         contracturl = window.location.origin.toString() + '/?addrs=' + contractaddrs
         setwallT('Welcome to Scry')
-        ut = 1; 
-      } 
-        
+        ut = 1;
+      }
+
     }
   },); return (<><h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue" >{wallT}</h1><div className="m-auto text-center" style={{ color: '#4f86f7' }}>{contracturl}</div></>)
 }//      contractaddrs = (router.query.new_nft_address);
@@ -150,62 +150,63 @@ function useData() {
     Contract = new ethers.Contract(contractaddrs, Abi, signerw);
     addrst = 1
   }
-  
-    useEffect(() => {
+
+  useEffect(() => {
     // update the ui elements
     async function updateUIStates() {
-        if (loaded == 0) {
-         toast("Loading")
-        }
-        const provider2 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
-        
-        Contract = new ethers.Contract(contractaddrs, Abi, provider2);
-        
-async function getData() {
-  let length = await Contract.getFeedLength()
-   FeedID = []
-   FeedName = []
-   FeedValue = []
-   ValueRAW = []
-   LastUpdate = []
-   Decimals = []
-   UpdateInterval = []
-  let nt = [];
-  for (var i = 0; i < 90; i++) {
-    nt.push(i);
-  } let feedData = await Contract.getFeedList(nt)
-  let feedInfo = await Contract.getFeeds(nt)
-  for (var n = 0; n < length.toNumber(); n++) {
-      var d = new Date(0);
-      d.setUTCSeconds(feedInfo[1][n]);
-      FeedID[n] = [n]
-      FeedName[n] = feedData[0][n]
-      FeedValue[n] = feedInfo[0][n] / (10 ** feedData[1][n])
-      ValueRAW[n] = feedInfo[0][n]
-      LastUpdate[n] =  d
-      Decimals[n] = feedData[1][n]
-      UpdateInterval[n]  = feedData[2][n]
-      console.log("ID: " +n + FeedValue[n])
-  }
- if (FeedValue[1] != null) {
-  setID(FeedID);
-  setName(FeedName);
-  setValue(FeedValue);
-  setLastUpdate(LastUpdate);
-  setSup(length.toNumber());
-  signers=await Contract.signers(0)
-  feeds =sup
-  console.log("LOL2")}
-  console.log("LOL")
-  console.log("ID: " + FeedValue[1] + "FeedValue: " + FValue[1])
-  loaded = 1
-}
+      if (loaded == 0) {
+        toast("Loading")
+      }
+      const provider2 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
 
-getData()
-        let s = (await Contract.getFeedLength());
-        s = ethers.utils.formatUnits(s, 0);
-        setSup(s)
-       
+      Contract = new ethers.Contract(contractaddrs, Abi, provider2);
+
+      async function getData() {
+        let length = await Contract.getFeedLength()
+        FeedID = []
+        FeedName = []
+        FeedValue = []
+        ValueRAW = []
+        LastUpdate = []
+        Decimals = []
+        UpdateInterval = []
+        let nt = [];
+        for (var i = 0; i < 90; i++) {
+          nt.push(i);
+        } let feedData = await Contract.getFeedList(nt)
+        let feedInfo = await Contract.getFeeds(nt)
+        for (var n = 0; n < length.toNumber(); n++) {
+          var d = new Date(0);
+          d.setUTCSeconds(feedInfo[1][n]);
+          FeedID[n] = [n]
+          FeedName[n] = feedData[0][n]
+          FeedValue[n] = feedInfo[0][n] / (10 ** feedData[1][n])
+          ValueRAW[n] = feedInfo[0][n]
+          LastUpdate[n] = d
+          Decimals[n] = feedData[1][n]
+          UpdateInterval[n] = feedData[2][n]
+          console.log("ID: " + n + FeedValue[n])
+        }
+        if (FeedValue[1] != null) {
+          setID(FeedID);
+          setName(FeedName);
+          setValue(FeedValue);
+          setLastUpdate(LastUpdate);
+          setSup(length.toNumber());
+          signers = await Contract.signers(0)
+          feeds = sup
+          console.log("LOL2")
+        }
+        console.log("LOL")
+        console.log("ID: " + FeedValue[1] + "FeedValue: " + FValue[1])
+        loaded = 1
+      }
+
+      getData()
+      let s = (await Contract.getFeedLength());
+      s = ethers.utils.formatUnits(s, 0);
+      setSup(s)
+
     };
     // fix for updatix1ng after wallet login
     //updateUIStates();
@@ -213,9 +214,9 @@ getData()
     // schedule every 15 sec refresh
     const timer = setInterval(() => {
 
-        updateUIStates()
+      updateUIStates()
 
-      }, 3000);
+    }, 3000);
     // clearing interval
     return () => clearInterval(timer);
   },);
@@ -223,27 +224,27 @@ getData()
   function data1() {
     let t0 = []
     let upd = []
-    for (let n = 0; n< sup;n++) {
+    for (let n = 0; n < sup; n++) {
       // @ts-ignore
-      
+
       if (FValue[n] != null) {
-     
-    let TT = new Date(Last[n] * 1000).toLocaleString()
-      upd[n] = String(TT)
+
+        let TT = new Date(Last[n] * 1000).toLocaleString()
+        upd[n] = String(TT)
         t0[n] = (<Grid xs={4}><Card><h2 className="text-2xl text-center font-bold justify-center light:text-gray-800 " style={{ color: '#50afff' }}>{FName[n]}
         </h2>
           <div className="text-center text-4xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
             {FValue[n]}
-            </div>
-            <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> Feed ID #{fID[n]} 
-        </h2><div className="text-center light:text-white-600">Last Update: {upd[n]}</div>
+          </div>
+          <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> Feed ID #{fID[n]}
+          </h2><div className="text-center light:text-white-600">Last Update: {upd[n]}</div>
         </Card></Grid>
         )
-        last=upd[1]
+        last = upd[1]
         console.log(FValue[n])
         console.log(n)
       }
-    
+
     }
     let t1
     return (
@@ -339,55 +340,55 @@ const App = ({ Component, pageProps }: AppProps) => {
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
                   docs.dapp.scry.finance
                 </Typography>
-              <Button style={{ background: "#ff50a9", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                onClick={handleCloseA}> Close
-              </Button>
+                <Button style={{ background: "#ff50a9", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
+                  onClick={handleCloseA}> Close
+                </Button>
               </div>
             </Dialog><h1 className="m-auto text-center md:mt-8 text-2xl md:text-3xl font-extrabold rotating-hue w-3/4">
-                Oracle Address
-                </h1>
-                <div className="m-auto text-center text-2xl md:text-2xl font-extrabold"style={{ color: '#519fff' }}>
-                  {Contract.address}
-                </div>
+              Oracle Address
+            </h1>
+            <div className="m-auto text-center text-2xl md:text-2xl font-extrabold" style={{ color: '#519fff' }}>
+              {Contract.address}
+            </div>
             <div className="flex flex-col  space-y-4 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
-              
+
               <h1 className="text-center text-4xl md:text-4xl font-extrabold rotating-hue">
                 Oracle Info
               </h1>
               <div className="m-auto text-center w-3/4">
-                
+
               </div>
               <Grid container spacing={2}>
-                    <Grid xs={12}>
-                    <Card>
+                <Grid xs={12}>
+                  <Card>
                     <h1 className="m-auto text-center text-2xl md:text-3xl font-extrabold rotating-hue">
-                Signers
-              </h1><h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
-              {signers}
-              </h1></Card>
-                    </Grid><Grid xs={6}>
-                    <Card><h1 className="m-auto text-center text-2xl md:text-3xl font-extrabold rotating-hue w-3/4">
-                Last Update
-                </h1>
-                <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
-              {last}
-              </h1>
-              </Card>
-                    </Grid>
-                    <Grid xs={6}>
-                    <Card>
-                    <h1 className="m-auto text-center text-2xl md:text-3xl font-extrabold rotating-hue">
-                Feeds
-              </h1>
-              <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
-              {feeds}
-              </h1>
-              </Card>
-                    </Grid></Grid>
-                        <div style={{ display: "flex", justifyContent: "center" }}><a href='https://docs.scry.finance/'><Button style={{ background: "#519aff", color: 'white', margin: "auto"  }} className="btn m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"> Developer Docs
-              </Button></a></div>
+                      Signers
+                    </h1><h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
+                      {signers}
+                    </h1></Card>
+                </Grid><Grid xs={6}>
+                  <Card><h1 className="m-auto text-center text-2xl md:text-3xl font-extrabold rotating-hue w-3/4">
+                    Last Update
+                  </h1>
                     <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
-               
+                      {last}
+                    </h1>
+                  </Card>
+                </Grid>
+                <Grid xs={6}>
+                  <Card>
+                    <h1 className="m-auto text-center text-2xl md:text-3xl font-extrabold rotating-hue">
+                      Feeds
+                    </h1>
+                    <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
+                      {feeds}
+                    </h1>
+                  </Card>
+                </Grid></Grid>
+              <div style={{ display: "flex", justifyContent: "center" }}><a href='https://docs.scry.finance/'><Button style={{ background: "#519aff", color: 'white', margin: "auto" }} className="btn m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"> Developer Docs
+              </Button></a></div>
+              <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
+
               </h1></div>
             <div className="flex flex-col  space-y-6 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
 
