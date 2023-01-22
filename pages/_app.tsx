@@ -359,13 +359,13 @@ const App = ({ Component, pageProps }: AppProps) => {
               <Grid container spacing={2}>
                     <Grid xs={12}>
                     <Card>
-                    <h1 className="m-auto text-center md:mt-8 text-2xl md:text-3xl font-extrabold rotating-hue">
+                    <h1 className="m-auto text-center text-2xl md:text-3xl font-extrabold rotating-hue">
                 Signers
               </h1><h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
               {signers}
               </h1></Card>
                     </Grid><Grid xs={6}>
-                    <Card><h1 className="m-auto text-center md:mt-8 text-2xl md:text-3xl font-extrabold rotating-hue w-3/4">
+                    <Card><h1 className="m-auto text-center text-2xl md:text-3xl font-extrabold rotating-hue w-3/4">
                 Last Update
                 </h1>
                 <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
@@ -375,7 +375,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                     </Grid>
                     <Grid xs={6}>
                     <Card>
-                    <h1 className="m-auto text-center md:mt-8 text-2xl md:text-3xl font-extrabold rotating-hue">
+                    <h1 className="m-auto text-center text-2xl md:text-3xl font-extrabold rotating-hue">
                 Feeds
               </h1>
               <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>

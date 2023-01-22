@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   return (
     <div className="max-w-screen-xl m-auto pb-4 md:pb-12">
       <Head>
-        <title>the Wall</title>
+        <title>Scry Data</title>
         <meta name="description" content="High Scale, Decentralized Oracles and Data" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
