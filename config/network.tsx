@@ -56,12 +56,12 @@ const BSCRPC = 'https://bsc-dataseed.binance.org/'
 const BSCA = '0x18C519E0dA619d017908aFf504e782E381552620'
 const BSCN = '0xB8112446078378f0998FBf834D4683B6C8Ac08C7'
 const BSCM = [<MenuItem value={'0x18C519E0dA619d017908aFf504e782E381552620'}>Main</MenuItem>]
-const PolyM = [<MenuItem value={'0xD70deA1a28CbaC32ab1B7531DB30d6a178671837'}>Main</MenuItem>,
+const PolyM = [<MenuItem value={'0x00f0feed50dcdf57b4f1b532e8f5e7f291e0c84b'}>Main</MenuItem>,
 <MenuItem value={'0x3783b8DAf1B14d8e556ec1C681CEB0056157e810'}>Sub Wall</MenuItem>,
 ]
 const PolyC = chain.polygon
 const PolyRPC = 'https://polygon-rpc.com'
-const PolyA = '0xD70deA1a28CbaC32ab1B7531DB30d6a178671837'
+const PolyA = '0x00f0feed50dcdf57b4f1b532e8f5e7f291e0c84b'
 const PolyN = '0x99029716DEeE316894DC8ce4f55Ab066222AACe6'
 
 const envVars = {

@@ -1,11 +1,7 @@
-//@ts-nocheck
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
 import '@rainbow-me/rainbowkit/styles.css'
 import { useEffect, useState } from "react";
-import abi from '../contracts/theWall.json'
-import Head from 'next/head'
-import Image from 'next/image'
 import Navbar from '../components/navbar'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
@@ -81,53 +77,44 @@ const signerw = wagmiClient.provider;
 
 let contractaddrs = contractn;
 let createaddrs = createn;
-let tokenaddrs = "0x7b67595bbfc2c900e1a66a35ab35e762765e062d";
-//const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
-//if (signerw._network.chainId == 137){
-//  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}//
-//  else if (signerw._network.chainId == 42161){
-//    contractaddrs = "0x4766d8244d68874ed6499F085e194be3dC4152AA";
-//}
-// The ERC-20 Contract ABI, which is a common contract interface
-// for tokens (this is the Human-Readable ABI format)
-const Abi = [
-  "function name() view returns (string)",
-  "function symbol() view returns (string)",
-  "function totalSupply() view returns (uint256)",
-  "function subs() view returns (uint256)",
-  "function subWall() view returns (uint8)",
-  "function price() view returns (uint256)",
-  "function getTag(uint256 id) view returns (string)",
-  "function latest(uint256) view returns (string[] tags,address[] addrs,uint256[] times)",
-  "function withdraw()",
-  "function mint(address to, string _tag)",
-  "function owner () view returns (address)",
-  "event newWall(address,string)",
-  "function balanceOf(address) view returns (uint256)",
-  "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange, uint8 sub) returns (address)",
-  "function mintandrenewSub(address to) payable"
+const Abi = [ 
+"function getHistoricalFeeds(uint256[] memory feedIDs, uint256[] memory timestamps) view returns (uint256[] memory)",
+"function getFeeds(uint256[] memory feedIDs) view returns (uint256[] memory, uint256[] memory, uint256[] memory)",
+"function getFeed(uint256 feedID) view returns (uint256, uint256, uint256)",
+"function getFeedLength() view returns (uint256)",
+"function signers(uint256) view returns (address)",
+"function getFeedList(uint256[] memory feedIDs) view returns(string[] memory, uint256[] memory, uint256[] memory, uint256[] memory, uint256[] memory)",
 ];
-//format addresses in ui
-function format_address(address: string) {
-  const new_address = address.substring(0, 5) + '...' + address.slice(-3)
-  return new_address;
-}
-let addrs: string[] = []
-
-//if (first_router === 0) {
-//  console.log(router.pathname);
-//  console.log(router.query); 
-//  console.log(router) 
-//  if (router.query && router.query.new_nft_address) {
-//     console.log('in router')
 let ut = 0
 let contracturl = ''
 // @ts-ignore
-let balances = []// @ts-ignore
-let balancestoken = []// @ts-ignore
 let loaded = 0
-let subWall = 0
-let checkS = 0;let own= 0
+let feeds
+
+let last
+let signers
+    // @ts-ignore
+  let FeedID = []
+  
+    // @ts-ignore
+  let FeedName = []
+  
+    // @ts-ignore
+  let FeedValue = []
+  
+    // @ts-ignore
+  let ValueRAW = []
+  
+    // @ts-ignore
+  let LastUpdate = []
+  
+    // @ts-ignore
+  let Decimals = []
+  
+    // @ts-ignore
+  let UpdateInterval = []
+let checkS = 0;
+let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
 function useT1() {
   const [wallT, setwallT] = useState("");
   useEffect(() => {
@@ -135,33 +122,27 @@ function useT1() {
     update()
     async function update() {
       if (ut == 0 && contractaddrs != contractn) {
-        contracturl = window.location.origin.toString() + '/?walladdrs=' + contractaddrs
-        setwallT('Welcome to ' + await Contract.name())
-        ut = 1; const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-    await provider2.send("eth_requestAccounts", []);
-    if (await Contract.owner() == await provider2.getSigner().getAddress()) {
-      own = 1}
+        contracturl = window.location.origin.toString() + '/?addrs=' + contractaddrs
+        setwallT('Welcome to Scry')
+        ut = 1; 
       } 
         
     }
   },); return (<><h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue" >{wallT}</h1><div className="m-auto text-center" style={{ color: '#4f86f7' }}>{contracturl}</div></>)
 }//      contractaddrs = (router.query.new_nft_address);
-function useTtag0() {
-
-  const [tag, setTag] = useState("L");
-  const [artist, setArtist] = useState("L");
-  const [time, setTime] = useState("");
-  const [sup, setSup] = useState(1);
-  // let addrs = []
-  const [wallT, setwallT] = useState("");
-  const [symbol, setSymbol] = useState("L");
+function useData() {
+  const [Data, setData] = useState();
+  const [sup, setSup] = useState(50);
+  const [fID, setID] = useState(0);
+  const [FName, setName] = useState('');
+  const [FValue, setValue] = useState(0);
+  const [Last, setLastUpdate] = useState(0);
+  const [wallT, setwallT] = useState();
   let addrst = 0
   const router = useRouter()
   const { walladdrs } = router.query
   // State to keep track of whether the dialog is open
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  // State to keep track of which image is currently open in the dialog
-  const [currentImage, setCurrentImage] = useState(null);
   if (walladdrs != null && addrst == 0) {
     // @ts-ignore
     contractaddrs = walladdrs
@@ -172,82 +153,58 @@ function useTtag0() {
     useEffect(() => {
     // update the ui elements
     async function updateUIStates() {
-      try {
-        if (checkS == 0) {
-          toast('Loading wall. Please Connect Wallet.')
-          subWall=await Contract.subWall()
-          checkS= 1
-        }
         if (loaded == 0) {
-          if (subWall  == 0) {
-          toast('Loading wall')
-          } else {
-            toast('Loading wall. Please Connect Wallet.')
-          } 
+         toast("Loading")
         }
-        const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+        const provider2 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
         
-        let pro2  = await provider2.send("eth_requestAccounts", []);
-        // Setup
-        if ((await provider2.getNetwork()).chainId != chainn.id) {
-          toast.error('Wrong Network. Please switch networks')
-        }
-       
         Contract = new ethers.Contract(contractaddrs, Abi, provider2);
-        if (subWall  == 1) {
-          
-        let s = (await Contract.totalSupply() - await Contract.subs() );
+        
+async function getData() {
+  let length = await Contract.getFeedLength()
+   FeedID = []
+   FeedName = []
+   FeedValue = []
+   ValueRAW = []
+   LastUpdate = []
+   Decimals = []
+   UpdateInterval = []
+  let nt = [];
+  for (var i = 0; i < 90; i++) {
+    nt.push(i);
+  } let feedData = await Contract.getFeedList(nt)
+  let feedInfo = await Contract.getFeeds(nt)
+  for (var n = 0; n < length.toNumber(); n++) {
+      var d = new Date(0);
+      d.setUTCSeconds(feedInfo[1][n]);
+      FeedID[n] = [n]
+      FeedName[n] = feedData[0][n]
+      FeedValue[n] = feedInfo[0][n] / (10 ** feedData[1][n])
+      ValueRAW[n] = feedInfo[0][n]
+      LastUpdate[n] =  d
+      Decimals[n] = feedData[1][n]
+      UpdateInterval[n]  = feedData[2][n]
+      console.log("ID: " +n + FeedValue[n])
+  }
+ if (FeedValue[1] != null) {
+  setID(FeedID);
+  setName(FeedName);
+  setValue(FeedValue);
+  setLastUpdate(LastUpdate);
+  setSup(length.toNumber());
+  signers=await Contract.signers(0)
+  feeds =sup
+  console.log("LOL2")}
+  console.log("LOL")
+  console.log("ID: " + FeedValue[1] + "FeedValue: " + FValue[1])
+  loaded = 1
+}
+
+getData()
+        let s = (await Contract.getFeedLength());
         s = ethers.utils.formatUnits(s, 0);
         setSup(s)
-      }else {
-        let s = (await Contract.totalSupply());
-        s = ethers.utils.formatUnits(s, 0);
-        setSup(s)
-      } 
-        const [tagS, artistS, timeS] = await Contract.latest(sup, { from: await provider2.getSigner().getAddress() });
-        console.log(await Contract.latest(sup, { from: await provider2.getSigner().getAddress() }))
-        if (wallT == 'LOL') {
-          setwallT(await Contract.name() + 'LOLOL')
-        }
-        setTag(tagS);
-        setArtist(artistS);
-        setTime(timeS);
-        const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-        const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
        
-        for (let T = 0; T < sup;n++) {
-          let n= T
-          if (subWall  == 1) {
-            n = T+1
-          }
-          if (addrs[artistS[n]] == null) {
-            let tn = await provider3.lookupAddress(artistS[n])
-            // @ts-ignore
-            if (balances[artistS[n]] == null) {
-              try {
-                balances[artistS[n]] = Number(await Contract.balanceOf(artistS[n]))
-                balancestoken[artistS[n]] = Number(await Token.connect(provider4).balanceOf(artistS[n]) / 10 ** 18  //}
-                )
-              }
-              catch { }
-            }
-
-            if (tn != null) {
-              addrs[artistS[n]] = tn
-            }
-            else {
-              addrs[artistS[n]] = artistS[n]
-            }
-          }
-          if (loaded == 0 && tag[1]!= '') {
-            loaded = 1
-            toast.success('Successfully loaded wall!')
-          } 
-         
-        }
-      } catch (error) {
-
-      }
     };
     // fix for updatix1ng after wallet login
     //updateUIStates();
@@ -262,409 +219,61 @@ function useTtag0() {
     return () => clearInterval(timer);
   },);
 
-  function tag1() {
-    let tags = []
-    let artists = []
-    let times = []
+  function data1() {
     let t0 = []
-    let ts = []
-    let i = "";
+    let upd = []
     for (let n = 0; n< sup;n++) {
-      if (subWall  == 1) {
-      tags[n] = tag[n+1]
-      console.log(tag[n+1])
-      artists[n] = artist[n+1]
-    }else {
-      tags[n] = tag[n]
-      console.log(tag[n])
-      artists[n] = artist[n]
-     
-    }
-      if (addrs[artists[n]] == null) {
-        artists[n] = artist[n]
-      }
-      else {
-        // @ts-ignore
-        artists[n] = addrs[artists[n]]
-      }//artist[n]
-      //  artists = nm
-      times[n] = Number(time[n])
       // @ts-ignore
-      let TT = new Date(times[n] * 1000).toLocaleString()
-      times[n] = String(TT)
-      console.log(n)
-      console.log(tag[n])
       
-
-      const MyComponent = ({ message }) => {
-        // Extract all of the URLs from the message
-        let urls = []
-        try {
-          urls = message.match(/(https?:\/\/[^\s]+\.(?:png|jpg|jpeg|gif)|ipfs:\/\/[^\s]+|\/ipfs\/[^\s]+)/gi) || [];
-        } catch (e) {
-          console.log("Error: ", e.message);
-          // addToast({body: e.message, type: "error"});
-        }
-
-        // Function to open the dialog when an image is clicked
-        const handleOpenDialog = (image) => {
-          setIsDialogOpen(true);
-          setCurrentImage(image);
-        }
-
-        // Function to close the dialog
-        const handleCloseDialog = () => {
-          setIsDialogOpen(false);
-          setCurrentImage(null);
-        }
-        console.log(urls);
-        // Map over the array of URLs and return an img element for each
-        // @ts-ignore
-        return (
-          <div>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-              gridGap: '10px',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-              {urls.map((url, index) => {
-                let src = url;
-                // Check if the URL is an IPFS link
-                if (url.startsWith("/ipfs/") || url.startsWith("ipfs://")) {
-                  // Resolve the IPFS link using an IPFS gateway
-                  src = `https://cloudflare-ipfs.com/ipfs/${url.replace("ipfs://", "/").replace("/ipfs/", "/")}`
-                }
-                return <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }} key={index} ><img src={src} alt={`Image ${index + 1}`} onClick={() => handleOpenDialog(src)} style={{ width: '400px', cursor: 'pointer' }}
-                /></div>;
-              })}
-            </div>
-            {isDialogOpen && (
-              <div style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: 'rgba(0, 0, 0, 0.8)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <div style={{
-                  background: 'white',
-                  maxWidth: '90%',
-                  maxHeight: '90%',
-                  overflow: 'auto',
-                  padding: '10px',
-                }}>
-                  <img src={currentImage} alt='Large image' onClick={handleCloseDialog} style={{ maxWidth: '100%' }} />
-                  <button onClick={handleCloseDialog} style={{
-                    position: 'absolute',
-                    top: '10px',
-                    right: '10px',
-                    color: 'white',
-                  }}>
-                    X
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-      };
-
-
-      //ts[n] = ethers.utils.formatUnits(time[0]);
-      // times[n] = ethers.utils.formatUnits(ts[n],0);
-      if (tags[n] != '') {
-        let t2 = 'https://etherscan.io/address/' + artist[n]
-        // @ts-ignore
-        t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]} 🧱{balancestoken[artist[n]]}
+      if (FValue[n] != null) {
+      let TT = new Date(Last[n] * 1000).toLocaleString()
+      upd[n] = String(TT)
+        t0[n] = (<Grid xs={4}><Card><h2 className="text-2xl text-center font-bold justify-center light:text-gray-800 " style={{ color: '#50afff' }}>{FName[n]}
         </h2>
-          <div className="text-center light:text-white-600" >
-            {tags[n]}
-          </div><MyComponent message={tags[n]} />
-          <h2 style={{ color: '#cccccc' }} className="text-1xl text-centerjustify-center ">
-            {times[n]}</h2>
-          <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
-            _____________________________________________________________________________________________
-          </a></div>
-        </div>
+          <div className="text-center text-4xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
+            {FValue[n]}
+            </div>
+            <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> Feed ID #{fID[n]} 
+        </h2><div className="text-center light:text-white-600">Last Update: {upd[n]}</div>
+        </Card></Grid>
         )
+        last=upd[1]
+        console.log(FValue[n])
+        console.log(n)
       }
     
     }
-    let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
+    let t1
     return (
-      <>{t0}{t1}</>);
+      <><Grid container spacing={2}>{t0}</Grid>{t1}</>);
   }
 
   return (
-    <div>{tag1()}</div>
+    <div>{data1()}</div>
   )
 }
 
-let Contract = new ethers.Contract(contractaddrs, Abi, signerw);
-let Token = new ethers.Contract(tokenaddrs, Abi, signerw);
-//const Contract = new ethers.Contract(contractaddrs, Abi, signerw);
-const CreateWall = new ethers.Contract(createaddrs, Abi, signerw);
 const App = ({ Component, pageProps }: AppProps) => {
-  function handleChangeMessage(event: ChangeEvent<HTMLTextAreaElement>) {
-    const values = event.target.value;
-    setSendMessage(values);
-  }
   function handleChangeWall(event: SelectChangeEvent<string>) {
     const values = event.target.value;
     setWall(values);
 
-    window.location.replace('./' + '?walladdrs=' + values)
+    window.location.replace('./' + '?addrs=' + values)
 
   }
-  function handleChangeName(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const values = event.target.value;
-    set_name(values);
-  }
-  function handleChangeSymbol(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const values = event.target.value;
-    set_symbol(values);
-  }
-  function handleChangeS(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const values = event.target.value;
-    set_s(values);
-  }
-  function handleChangePrice(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const values = event.target.value;
-    set_Price(values + '000000000000000000');
-  }
-  function handleChangeedit(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-
-    if (_edit == 0) {
-      set_edit(1);
-    }
-    else { set_edit(0); }
-  }
-  function handleChangeMod(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    if (_mod == 0) {
-      set_mod(1);
-    }
-    else { set_mod(0) }
-  }
-  function handleChangeSub(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    if (_Sub == 0) {
-      set_Sub(1);
-    }
-    else { set_Sub(0) }
-  }
-  function subt() {
-     if (subWall != 1) {
-       return null;
-    }if (subWall == 1&&own==1) {
-      return (<div style={{
-       
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',flexDirection: 'column'
-      }}><Button onClick={wd}>
-        withdraw
-      </Button><div></div>
-      <Button onClick={handleOpenSub}>
-      Subscribe
-    </Button></div>);
-   }
-
-    return (
-      <Button onClick={handleOpenSub}>
-        Subscribe
-      </Button>
-    );
-  }const wd = async () => {
-    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-    await provider2.send("eth_requestAccounts", []);
-    try {
-      const signer = provider2.getSigner()
-      let myAddress = await signer.getAddress()
-      await Contract.connect(signer).withdraw()////signer._address, sendMessage)
-      } catch (e) {
-        console.log("LOL")}
-    
-      // addToast({body: e.message, type: "error"});
-    }
-  //notify
-  const [sendMessage, setSendMessage] = useState("");
-  const [_name, set_name] = useState("LOL");
-  const [_Sub, set_Sub] = useState(0);
-  const [_symbol, set_symbol] = useState("LOL");
-  const [_s, set_s] = useState("LOL");
-  const [_Price, set_Price] = useState("0");
-  const [_edit, set_edit] = useState(0);
-  const [_mod, set_mod] = useState(0);
   const [unlocktext, set_unlocktext] = useState("Please Unlock Wallet");
   // notify function call
 
   // await // MetaMask requires requesting permission to connect users accounts
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
   const handleOpenA = () => {
     setOpenA(true);
   };
   const handleCloseA = () => {
     setOpenA(false);
   };
-  const handleOpenSub = () => {
-    setOpenSub(true);
-  };
-  const handleCloseSub = () => {
-    setOpenSub(false);
-  };
-  const [openBRK, setOpenBRK] = useState(false);
-  const handleOpenBRK = () => {
-    setOpenBRK(true);
-  };
-  const handleCloseBRK = () => {
-    setOpenBRK(false);
-  };
-  const [open, setOpen] = useState(false);
   const [openA, setOpenA] = useState(false);
-  const [openSub, setOpenSub] = useState(false);
-  const [wallAddrs, setWall] = useState('0x0947ef8Bf078b8201013c77C39b5f0A5Bb8f58EC');
-  const createWallT = async () => {
-    // A Web3Provider wraps a standard Web3 provider, which is
-    // what MetaMask injects as window.ethereum into each page
-    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-    // Setup
-
-
-    await provider2.send("eth_requestAccounts", []);
-    try {
-      Router.pathname
-
-      // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
-      const signer = provider2.getSigner()
-      let myAddress = await signer.getAddress()
-      await CreateWall.connect(signer).createWall(_name, _symbol, _Price, _mod, _edit, _Sub)////signer._address, sendMessage)
-      CreateWall.on("newWall", (address, name) => {
-        setTimeout(() => {
-          window.location.replace('./' + '?walladdrs=' + address)
-
-        }, 3000);
-      });
-    } catch (e) {
-      console.log("LOL")
-      // addToast({body: e.message, type: "error"});
-    }
-  };//}// @ts-ignore
-  const brkBuy = async () => {
-    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-    //d
-    //signerw ethers.js .send("eth_requestAccounts", []);
-
-    if ((await provider2.getNetwork()).chainId == 137) {
-      window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
-    }
-    else {
-      toast.error('Polygon Network')
-      await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-          chainId: "0x89",
-          rpcUrls: ["https://polygon-rpc.com"],
-          chainName: "Matic Mainnet",
-          nativeCurrency: {
-            name: "MATIC",
-            symbol: "MATIC",
-            decimals: 18
-          },
-          blockExplorerUrls: ["https://polygonscan.com/"]
-        }]
-      });
-      if ((await provider2.getNetwork()).chainId == 137) {
-        window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
-      }
-    }
-  };
-  // const sendTip = async (toAddrs, amount) => {// @ts-ignore
-  const subWallT = async () => {
-    // A Web3Provider wraps a standard Web3 provider, which is
-    // what MetaMask injects as window.ethereum into each page
-    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-    // Setup
-
-
-    await provider2.send("eth_requestAccounts", []);
-    try {
-      Router.pathname
-
-      // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
-      const signer = provider2.getSigner()
-      let myAddress = await signer.getAddress()
-
-      await Contract.connect(signer).mintandrenewSub(myAddress, { value: '1000000000000000000' })
-      // .then((transaction) => {
-      //     console.log(`Transaction successful: ${transaction.hash}`);
-      // })
-    } catch (e) {
-      console.log("LOL")
-      // addToast({body: e.message, type: "error"});
-    }
-  };//}// @ts-ignore
-  // A Web3Provider wraps a standard Web3 provider, which is
-  // what MetaMask injects as window.ethereum into each page
-  //   const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-  // Setup
-  //   const Token = new ethers.Contract(tokenaddrs, Abi, signerw);
-
-  //    await provider2.send("eth_requestAccounts", []);
-  //    try {
-  //      const signer = provider2.getSigner()
-  //      let myAddress = await signer.getAddress()
-  //      await Token.connect(signer).transfer(toAddrs, amount)////signer._address, sendMessage)
-
-  //    } catch (e) {
-  //      console.log("LOL")
-  //      // addToast({body: e.message, type: "error"});
-  //    }
-  //  };
-  //CreateWall.on("newWall", (address, name) => {
-  //  window.location.replace('./' + '?walladdrs=' + address)
-  //);
-  const callTag = async () => {
-    // A Web3Provider wraps a standard Web3 provider, which is
-    // what MetaMask injects as window.ethereum into each page
-    const provider2 = new ethers.providers.Web3Provider(window.ethereum)
-    const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-    // Setup
-    const settings = {
-      apiKey: "ku_puX-vIFhnbZnC3xmpdT3jUico70LY",
-      network: Network.MATIC_MAINNET,
-    };
-
-    await provider2.send("eth_requestAccounts", []);
-    try {
-      // await provider2.send("eth_requestAccounts", []);// await // MetaMask requires requesting permission to connect users accountsSS
-      const signer = provider2.getSigner()
-      let myAddress = await signer.getAddress()
-      if ((await provider2.getNetwork()).chainId != chainn.id) {
-        toast.error('Wrong Network. Please switch networks')
-      }
-      else {
-        await Contract.connect(signer).mint(myAddress, sendMessage)////signer._address, sendMessage)
-      }
-    } catch (e) {
-      console.log("LOL")
-      // addToast({body: e.message, type: "error"});
-    }
-  };
+  const [wallAddrs, setWall] = useState('0x00f0feed50dcdf57b4f1b532e8f5e7f291e0c84b');
   return (
 
     <ThemeProvider attribute="class">
@@ -675,12 +284,12 @@ const App = ({ Component, pageProps }: AppProps) => {
               <Grid container spacing={1}>
                 <Grid xs={2} className="left-6 top-12 m-auto">
                   <FormControl>
-                    <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Choose Oracle</InputLabel>
                     <Select
                       labelId="select-label"
                       id="simple-select"
                       value={contractaddrs}
-                      label="Choose wall"
+                      label="Choose Oracle"
                       onChange={handleChangeWall}
                       className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
                     >
@@ -690,66 +299,28 @@ const App = ({ Component, pageProps }: AppProps) => {
 
                 </Grid>
 
-                <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-6">Create wall</Button>
-                  <Button onClick={handleOpenA} variant="outlined" className="left-12 top-7">About</Button></Grid><Grid xs={3}>
+                <Grid xs={3}>
                   <Grid container spacing={0}>
                     <Grid xs={2}>
-                      <a href='https://tagthewall.org/'>
+                      <a href='https://dapp.scry.finance/'>
                         <img src='https://cryptologos.cc/logos/polygon-matic-logo.png?v=023' style={{ width: 42 }}>
                         </img></a>
                     </Grid>
                     <Grid xs={2}>
-                      <a href='https://FTM.tagthewall.org/'>
+                      <a href='https://FTM.dapp.scry.finance/'>
                         <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{ width: 42 }}>
                         </img></a>
                     </Grid><Grid xs={2}>
-                      <a href='https://BSC.tagthewall.org/'>
+                      <a href='https://BSC.dapp.scry.finance/'>
                         <img src='https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=023' style={{ width: 42 }}>
                         </img></a>
                     </Grid><Grid xs={2}>
-                      <a href='https://ARB.tagthewall.org/'>
+                      <a href='https://ARB.dapp.scry.finance/'>
                         <img src='https://bridge.arbitrum.io/static/media/ArbitrumOneLogo.abae01ba.svg' style={{ width: 42 }}>
                         </img></a>
                     </Grid></Grid>
-                </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
+                </Grid></Grid></Box>
             <Component {...pageProps} />
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
-                <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
-                  Create your own wall!
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  You can create your own immutable community here.
-                </Typography>
-                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Wall name
-                </h2>
-                <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
-                  onChange={e => handleChangeName(e)} />
-                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Wall symbol
-                </h2>
-                <TextField className="m-auto text-center w-3/4 justify-center light:text-gray-800 dark:text-black"
-                  onChange={e => handleChangeSymbol(e)} />
-                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Price
-                </h2>
-                <TextField className="m-auto text-center w-3/4 justify-center light:text-gray-800 dark:text-black"
-                  onChange={e => handleChangePrice(e)} />
-                <FormControlLabel control={<Switch onChange={handleChangeMod} />} label="Mods can delete messages" />
-                <FormControlLabel control={<Switch onChange={handleChangeedit} />} label="Users can edit messages" />
-                <FormControlLabel control={<Switch onChange={handleChangeSub} />} label="Subscription wall" />
-                <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                  onClick={createWallT}> Create Wall
-                </button>
-                <div></div>
-              </div>
-            </Dialog>
             <Dialog
               open={openA}
               onClose={handleCloseA}
@@ -758,122 +329,72 @@ const App = ({ Component, pageProps }: AppProps) => {
             >
               <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
-                  About the Wall
+                  About Scry
                 </Typography>
                 <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  the Wall
+                  Scry Docs
                 </h2>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  The wall is a fully onchain, decentralized and permissionless on chain Social Chat Platform. Messages posted to walls are messages wrapped as NFTs which hold the message, creator and timestamp for every message. This allow each wall to be fully self sovereign, with noone able to ban/censor/edit messages unless explicitly stated by that wall at creation by the creator. The wall is the first fully onchain social chat platform and allows for a truely free, decentralized and immutable platform for anyone, anywhere to express any idea. Information is power and we believe people should have free access to any and all information in order for society to be free, open and able to achieve its best.
+                  docs.dapp.scry.finance
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-
-                    NFTs as Messages
-
-                  </h2>
-                  Messages are wrapped as NFTs allowing us to attach metadata onchain to each NFT token, this allows anyone to create a front end to show this information for any wall without any central server. The message, timestamp and creator are all fully onchain, with the actual image for the NFT and URI metadata able to be handled offchain by IPFS, this is not yet implemented as we are in the beta. All messages are NFTs from a specific wall, this allows you to see who is most active by how many NFTs they own for the community, allowing you to reward members by participation.
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                    Moderation</h2>
-                  All NFTs are able to change their data only in the way set at the walls creation for that community. This allows for communities to choose their moderation style and policy or be fully decentralized. Wallls are able to be moderated by specific addresses, edit own messages or be immutable.
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                    Unique</h2>
-                  Walls are all unique and each wall has a name which cannot be shared by any other wall. Walls are fully onchain and decentralized, using the deployment contract to lookup which walls for which community by name allowing for a subreddit style UX. Users are able to also choose the symbol and set a bio for the walls, aswell as able to create their own walls!
-                </Typography>
-              </div>
               <Button style={{ background: "#ff50a9", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                 onClick={handleCloseA}> Close
               </Button>
-            </Dialog>
-            <Dialog
-              open={openBRK}
-              onClose={handleCloseBRK}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Card className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
-                <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
-                  Brick Token (BRK)
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  Bricks are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon, as well as a stake in the protocol through DAO control and Treasury control.
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  These tokens are on the Polygon network. Please make sure to switch from the network youre on to Polygon before Uniswap link as you may get the wrong token otherwise!.  </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  The tokens are purchasable at 100 tokens for $1 and can be tipped or just used to flex on the Wall! They are primarily a tip token and used for cosmetics in the app. Please dont purchase for speculation. Purchases also help us keep building neat stuff like the Wall and are appreciated.
-                </Typography>
-                <Button style={{ background: "#FF007A", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                  onClick={brkBuy}> Buy Bricks!
-                </Button>
-                <div />
-              </Card>
-            </Dialog><Dialog
-              open={openSub}
-              onClose={handleCloseSub}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
-                <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
-                  Purchase Sub
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  Subscribe to the wall to view, chat
-                </Typography>
-                <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Purchase sub for 1 MATIC
-                </h2>
-                <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
-                  onChange={e => handleChangeS(e)} />
-                <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                  onClick={subWallT}> Subscribe
-                </button>
-                <div></div>
               </div>
-            </Dialog>
-            <div className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
-              <div>
-                {useT1()}
-              </div>
-              <h1 className="m-auto text-center md:mt-8 text-2xl md:text-4xl font-extrabold rotating-hue">
-                Tag the Wall!
+            </Dialog><h1 className="m-auto text-center md:mt-8 text-2xl md:text-3xl font-extrabold rotating-hue w-3/4">
+                Oracle Address
+                </h1>
+                <div className="m-auto text-center text-2xl md:text-2xl font-extrabold"style={{ color: '#519fff' }}>
+                  {Contract.address}
+                </div>
+            <div className="flex flex-col  space-y-4 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
+              
+              <h1 className="text-center text-4xl md:text-4xl font-extrabold rotating-hue">
+                Oracle Info
               </h1>
-              <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                Send your message here
-              </h2>
-              <textarea className="m-auto text-center w-3/4 justify-center rounded-md border border-solid light:border-gray-200 dark:border-gray-500 light:text-gray-800 dark:text-black"
-                onChange={e => handleChangeMessage(e)} />
-
-              <button style={{ background: "#00ffff" }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                onClick={callTag}> Send
-              </button>
-              {subt()}
-              <div>
+              <div className="m-auto text-center w-3/4">
+                
               </div>
-              <div>
-
-              </div>
-            </div>
+              <Grid container spacing={2}>
+                    <Grid xs={12}>
+                    <Card>
+                    <h1 className="m-auto text-center md:mt-8 text-2xl md:text-3xl font-extrabold rotating-hue">
+                Signers
+              </h1><h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
+              {signers}
+              </h1></Card>
+                    </Grid><Grid xs={6}>
+                    <Card><h1 className="m-auto text-center md:mt-8 text-2xl md:text-3xl font-extrabold rotating-hue w-3/4">
+                Last Update
+                </h1>
+                <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
+              {last}
+              </h1>
+              </Card>
+                    </Grid>
+                    <Grid xs={6}>
+                    <Card>
+                    <h1 className="m-auto text-center md:mt-8 text-2xl md:text-3xl font-extrabold rotating-hue">
+                Feeds
+              </h1>
+              <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
+              {feeds}
+              </h1>
+              </Card>
+                    </Grid></Grid>
+                        <div style={{ display: "flex", justifyContent: "center" }}><a href='https://docs.scry.finance/'><Button style={{ background: "#519aff", color: 'white', margin: "auto"  }} className="btn m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"> Developer Docs
+              </Button></a></div>
+                    <h1 className="text-center text-1xl md:text-2xl font-extrabold rotating-hue" style={{ color: '#519fff' }}>
+               
+              </h1></div>
             <div className="flex flex-col  space-y-6 justify-center mt-6 md:mt-12 px-4 xs:px-0 m-auto max-w-4xl min-w-80 shadow-md rounded-md border border-solid light:border-gray-200 dark:border-gray-500 overflow-hidden">
 
               <h1 className="m-auto text-center md:mt-8 text-4xl md:text-4xl font-extrabold rotating-hue">
-                Chat
+                Data
               </h1>
               <div className="m-auto text-center w-3/4">
-
-                {useTtag0()}
+                {useData()}
               </div>
-              <button
-                className="btn fixed left-16 bottom-14 flex flex-col text-3xl"
-                type="button"
-                onClick={handleOpenBRK}
-              >🧱
-              </button>
             </div>
           </RainbowKitProvider>
         </WagmiConfig>
