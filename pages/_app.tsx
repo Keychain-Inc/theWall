@@ -229,7 +229,7 @@ function useData() {
 
       if (FValue[n] != null) {
 
-        let TT = new Date(Last[n] * 1000).toLocaleString()
+        let TT = new Date(Last[n] ).toLocaleString()
         upd[n] = String(TT)
         t0[n] = (<Grid xs={4}><Card><h2 className="text-2xl text-center font-bold justify-center light:text-gray-800 " style={{ color: '#50afff' }}>{FName[n]}
         </h2>
