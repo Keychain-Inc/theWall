@@ -141,12 +141,12 @@ function useData() {
   const [wallT, setwallT] = useState();
   let addrst = 0
   const router = useRouter()
-  const { walladdrs } = router.query
+  const { addrs } = router.query
   // State to keep track of whether the dialog is open
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  if (walladdrs != null && addrst == 0) {
+  if (addrs != null && addrst == 0) {
     // @ts-ignore
-    contractaddrs = walladdrs
+    contractaddrs = addrs
     Contract = new ethers.Contract(contractaddrs, Abi, signerw);
     addrst = 1
   }
@@ -286,7 +286,9 @@ const App = ({ Component, pageProps }: AppProps) => {
             <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
               <Grid container spacing={1}>
                 <Grid xs={2} className="left-6 top-12 m-auto">
-                  <FormControl>
+                  <FormControl style={{ position: 'absolute',
+    top: 10,
+    left: 0}}>
                     <InputLabel id="demo-simple-select-label">Choose Oracle</InputLabel>
                     <Select
                       labelId="select-label"
@@ -295,15 +297,16 @@ const App = ({ Component, pageProps }: AppProps) => {
                       label="Choose Oracle"
                       onChange={handleChangeWall}
                       className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
+                      
                     >
                       {menun}
                     </Select>
                   </FormControl>
 
-                </Grid>
-
+                  
+                  </Grid>
                 <Grid xs={3}>
-                  <Grid container spacing={0}>
+                <Grid container spacing={0}>
                     <Grid xs={2}>
                       <a href='https://dapp.scry.finance/'>
                         <img src='https://cryptologos.cc/logos/polygon-matic-logo.png?v=023' style={{ width: 42 }}>
@@ -322,7 +325,8 @@ const App = ({ Component, pageProps }: AppProps) => {
                         <img src='https://bridge.arbitrum.io/static/media/ArbitrumOneLogo.abae01ba.svg' style={{ width: 42 }}>
                         </img></a>
                     </Grid></Grid>
-                </Grid></Grid></Box>
+                  </Grid>
+                </Grid></Box>
             <Component {...pageProps} />
             <Dialog
               open={openA}
