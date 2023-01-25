@@ -229,7 +229,7 @@ function useData() {
 
       if (FValue[n] != null) {
 
-        let TT = new Date(Last[n] ).toLocaleString()
+        let TT = new Date(Last[n]).toLocaleString()
         upd[n] = String(TT)
         t0[n] = (<Grid xs={4}><Card><h2 className="text-2xl text-center font-bold justify-center light:text-gray-800 " style={{ color: '#50afff' }}>{FName[n]}
         </h2>
@@ -266,7 +266,6 @@ const App = ({ Component, pageProps }: AppProps) => {
   }
   const [unlocktext, set_unlocktext] = useState("Please Unlock Wallet");
   // notify function call
-
   // await // MetaMask requires requesting permission to connect users accounts
 
   const handleOpenA = () => {
@@ -276,7 +275,6 @@ const App = ({ Component, pageProps }: AppProps) => {
     setOpenA(false);
   };
   const [openA, setOpenA] = useState(false);
-  const [wallAddrs, setWall] = useState('0x00f0feed50dcdf57b4f1b532e8f5e7f291e0c84b');
   return (
 
     <ThemeProvider attribute="class">
@@ -286,9 +284,11 @@ const App = ({ Component, pageProps }: AppProps) => {
             <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
               <Grid container spacing={1}>
                 <Grid xs={2} className="left-6 top-12 m-auto">
-                  <FormControl style={{ position: 'absolute',
-    top: 10,
-    left: 0}}>
+                  <FormControl style={{
+                    position: 'absolute',
+                    top: 10,
+                    left: 0
+                  }}>
                     <InputLabel id="demo-simple-select-label">Choose Oracle</InputLabel>
                     <Select
                       labelId="select-label"
@@ -297,16 +297,13 @@ const App = ({ Component, pageProps }: AppProps) => {
                       label="Choose Oracle"
                       onChange={handleChangeWall}
                       className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
-                      
                     >
                       {menun}
                     </Select>
                   </FormControl>
-
-                  
-                  </Grid>
+                </Grid>
                 <Grid xs={3}>
-                <Grid container spacing={0}>
+                  <Grid container spacing={0}>
                     <Grid xs={2}>
                       <a href='https://dapp.scry.finance/'>
                         <img src='https://cryptologos.cc/logos/polygon-matic-logo.png?v=023' style={{ width: 42 }}>
@@ -325,8 +322,8 @@ const App = ({ Component, pageProps }: AppProps) => {
                         <img src='https://bridge.arbitrum.io/static/media/ArbitrumOneLogo.abae01ba.svg' style={{ width: 42 }}>
                         </img></a>
                     </Grid></Grid>
-                  </Grid>
-                </Grid></Box>
+                </Grid>
+              </Grid></Box>
             <Component {...pageProps} />
             <Dialog
               open={openA}
