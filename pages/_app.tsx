@@ -171,7 +171,7 @@ function useData() {
         Decimals = []
         UpdateInterval = []
         let nt = [];
-        for (var i = 0; i < 90; i++) {
+        for (var i = 0; i < length; i++) {
           nt.push(i);
         } let feedData = await Contract.getFeedList(nt)
         let feedInfo = await Contract.getFeeds(nt)
@@ -259,10 +259,14 @@ function useData() {
 const App = ({ Component, pageProps }: AppProps) => {
   function handleChangeWall(event: SelectChangeEvent<string>) {
     const values = event.target.value;
-    setWall(values);
-
     window.location.replace('./' + '?addrs=' + values)
 
+  }
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const values = event.target.value;
+    if (ethers.utils.isAddress(values)) {
+    window.location.replace('./' + '?addrs=' + values)
+  } 
   }
   const [unlocktext, set_unlocktext] = useState("Please Unlock Wallet");
   // notify function call
@@ -301,7 +305,16 @@ const App = ({ Component, pageProps }: AppProps) => {
                       {menun}
                     </Select>
                   </FormControl>
-                </Grid>
+                </Grid><Grid xs={6}>
+                <TextField style={{
+                    position: 'absolute',
+                    top: 10,
+                    left: '50%',
+  transform: 'translateX(-50%)'
+                  }}     className="w-200"
+                  id="outlined-basic" label="Search Oracle Address" variant="outlined" onChange={handleChange}/>
+
+                    </Grid>
                 <Grid xs={3}>
                   <Grid container spacing={0}>
                     <Grid xs={2}>
