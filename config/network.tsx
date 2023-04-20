@@ -10,19 +10,19 @@ import MenuItem from '@mui/material/MenuItem';
 import { useEffect, useState } from "react";
 import React from 'react';
 
-const FTMC: Chain = {
-  id: 250,
-  name: 'Fantom',
-  network: 'fantom',
+const Sep: Chain = {
+  id: 11155111,
+  name: 'Sepolia',
+  network: 'Sepolia',
   iconUrl: 'https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=023',
   iconBackground: '#fff',
   nativeCurrency: {
     decimals: 18,
-    name: 'Fantom',
-    symbol: 'FTM',
+    name: '',
+    symbol: '',
   },
   rpcUrls: {
-    default: 'https://rpc.ftm.tools'//'https://rpc.ftm.tools/',
+    default: 'https://rpc.sepolia.org'//'https://rpc.ftm.tools/',
   },
   blockExplorers: {
     default: { name: 'FTM', url: '	https://ftmscan.com/' },
@@ -60,12 +60,12 @@ const PolyM = [<MenuItem value={'0xD70deA1a28CbaC32ab1B7531DB30d6a178671837'}>Ma
 <MenuItem value={'0x3783b8DAf1B14d8e556ec1C681CEB0056157e810'}>Sub Wall</MenuItem>,
 ]
 const PolyC = chain.polygon
-const PolyRPC = 'https://polygon-rpc.com'
-const PolyA = '0xD70deA1a28CbaC32ab1B7531DB30d6a178671837'
+const PolyRPC = 'https://rpc.sepolia.org'
+const PolyA = '0x9B7F8BFFc979479D887BDbbbDA5e57272a6871f8'
 const PolyN = '0x99029716DEeE316894DC8ce4f55Ab066222AACe6'
 
 const envVars = {
-  chainn:PolyC,//chainn,
+  chainn:Sep,//chainn,
   rpc: PolyRPC,
     createn: PolyN,
     contractn: PolyA,
