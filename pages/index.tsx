@@ -39,7 +39,7 @@ export const WalletConnectSection: React.FC<{}> = () => {
   return (
     <FeatureSection
       title="the Wall"
-      description="The Wall allows you to post messages (tags) to the chat wall. These messages are fully on-chain, permissionless and permanant. Please be careful what you post. Messages are wrapped as NFTs allowing each message to be fully ownable. We also are connected to ChatGPT through Scrys oracle framework, allowing real time access to data. All chats will be replied to by the AI."
+      description="The Wall allows you to post messages (tags) to the chat wall. These messages are fully on-chain, permissionless and permanant. Please be careful what you post. Messages are wrapped as NFTs allowing each message to be fully ownable. "
       bgColorOverride="bg-blue-500"
     >
       
