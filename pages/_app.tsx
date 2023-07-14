@@ -90,8 +90,23 @@ let tokenaddrs = "0x7b67595bbfc2c900e1a66a35ab35e762765e062d";
 //}
 // The ERC-20 Contract ABI, which is a common contract interface
 // for tokens (this is the Human-Readable ABI format)
-const Abi = [{"inputs":[{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_symbol","type":"string"},{"internalType":"uint256","name":"_price","type":"uint256"},{"internalType":"uint8","name":"_canMod","type":"uint8"},{"internalType":"uint8","name":"_canChange","type":"uint8"},{"internalType":"address","name":"ora","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"ApprovalCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"ApprovalQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"BalanceQueryForZeroAddress","type":"error"},{"inputs":[],"name":"MintERC2309QuantityExceedsLimit","type":"error"},{"inputs":[],"name":"MintToZeroAddress","type":"error"},{"inputs":[],"name":"MintZeroQuantity","type":"error"},{"inputs":[],"name":"OwnerQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"OwnershipNotInitializedForExtraData","type":"error"},{"inputs":[],"name":"TransferCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"TransferFromIncorrectOwner","type":"error"},{"inputs":[],"name":"TransferToNonERC721ReceiverImplementer","type":"error"},{"inputs":[],"name":"TransferToZeroAddress","type":"error"},{"inputs":[],"name":"URIQueryForNonexistentToken","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"fromTokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"toTokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"ConsecutiveTransfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"AI","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"architect","outputs":[{"internalType":"contract arch","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"artist","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"artistT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"artistTags","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"uint8","name":"bs","type":"uint8"}],"name":"banState","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"banstate","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"canChange","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"canMod","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"nc","type":"uint256"},{"internalType":"string","name":"desc","type":"string"},{"internalType":"address","name":"target","type":"address"},{"internalType":"uint8","name":"st","type":"uint8"}],"name":"changepriceDesc","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"deleteTag","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"description","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint8","name":"id","type":"uint8"},{"internalType":"string","name":"_tag","type":"string"}],"name":"edit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_artist","type":"address"},{"internalType":"uint256","name":"last","type":"uint256"}],"name":"getArtistTagsLast","outputs":[{"internalType":"string[]","name":"tags","type":"string[]"},{"internalType":"address[]","name":"artists","type":"address[]"},{"internalType":"uint256[]","name":"times","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"getTag","outputs":[{"internalType":"string","name":"","type":"string"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"last","type":"uint256"}],"name":"latest","outputs":[{"internalType":"string[]","name":"","type":"string[]"},{"internalType":"address[]","name":"","type":"address[]"},{"internalType":"uint256[]","name":"","type":"uint256[]"},{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"string","name":"_tag","type":"string"}],"name":"mint","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"mod","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"oracle","outputs":[{"internalType":"contract morpheus","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"newURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"tag","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"time","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
-;
+const Abi = [
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
+  "function totalSupply() view returns (uint256)",
+  "function subs() view returns (uint256)",
+  "function subWall() view returns (uint8)",
+  "function price() view returns (uint256)",
+  "function getTag(uint256 id) view returns (string)",
+  "function latest(uint256) view returns (string[] tags,address[] addrs,uint256[] times)",
+  "function withdraw()",
+  "function mint(address to, string _tag)",
+  "function owner () view returns (address)",
+  "event newWall(address,string)",
+  "function balanceOf(address) view returns (uint256)",
+  "function createWall(string _name,string _symbol,uint256 _price,uint8 _canMod,uint8 _canChange, uint8 sub) returns (address)",
+  "function mintandrenewSub(address to) payable"
+];
 //format addresses in ui
 function format_address(address: string) {
   const new_address = address.substring(0, 5) + '...' + address.slice(-3)
@@ -133,7 +148,7 @@ function useT1() {
 }//      contractaddrs = (router.query.new_nft_address);
 function useTtag0() {
 
-  const [tag, setTag] = useState("L");const [AI, setAI] = useState("L");
+  const [tag, setTag] = useState("L");
   const [artist, setArtist] = useState("L");
   const [time, setTime] = useState("");
   const [sup, setSup] = useState(1);
@@ -160,12 +175,12 @@ function useTtag0() {
       try {
         if (checkS == 0) {
           toast('Loading wall. Please Connect Wallet.')
-          //subWall=await Contract.subWall()
+          subWall=await Contract.subWall()
           checkS= 1
         }
         if (loaded == 0) {
           if (subWall  == 0) {
-          //toast('Loading wall')
+          toast('Loading wall')
           } else {
             toast('Loading wall. Please Connect Wallet.')
           } 
@@ -189,7 +204,7 @@ function useTtag0() {
         s = ethers.utils.formatUnits(s, 0);
         setSup(s)
       } 
-        const [tagS, artistS, timeS,AIs] = await Contract.latest(sup, { from: await provider2.getSigner().getAddress() });
+        const [tagS, artistS, timeS] = await Contract.latest(sup, { from: await provider2.getSigner().getAddress() });
         console.log(await Contract.latest(sup, { from: await provider2.getSigner().getAddress() }))
         if (wallT == 'LOL') {
           setwallT(await Contract.name() + 'LOLOL')
@@ -197,10 +212,6 @@ function useTtag0() {
         setTag(tagS);
         setArtist(artistS);
         setTime(timeS);
-        setAI(AIs);
-        let A =(arr.reverse(AIs))
-        setAI(A)
-        console.log('L',AI)
         const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
         const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
        
@@ -253,7 +264,6 @@ function useTtag0() {
 
   function tag1() {
     let tags = []
-    let AIs = []
     let artists = []
     let times = []
     let t0 = []
@@ -266,7 +276,6 @@ function useTtag0() {
       artists[n] = artist[n+1]
     }else {
       tags[n] = tag[n]
-      AIs[n] = AI[n]
       console.log(tag[n])
       artists[n] = artist[n]
      
@@ -385,11 +394,7 @@ function useTtag0() {
             {times[n]}</h2>
           <div className="text-center light:text-white-600"><a style={{ color: '#32353B' }}>
             _____________________________________________________________________________________________
-            <div className="text-center light:text-white-600" >
-            ScryGPT: {AI[n]}
-          </div> <h2 style={{ color: '#cccccc' }} className="text-1xl text-centerjustify-center ">
-            {times[n]} Scry Oracle: 0xD070bb292bab99eCF3Fdb8804dAec8469E6Eb0c3</h2>_____________________________________________________________________________________________
- </a></div>
+          </a></div>
         </div>
         )
       }
@@ -564,27 +569,27 @@ const App = ({ Component, pageProps }: AppProps) => {
     //d
     //signerw ethers.js .send("eth_requestAccounts", []);
 
-    if ((await provider2.getNetwork()).chainId == 1) {
+    if ((await provider2.getNetwork()).chainId == 137) {
       window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
     }
     else {
-      toast.error('Connect to Mainnet')
+      toast.error('Polygon Network')
       await window.ethereum.request({
         method: "wallet_addEthereumChain",
         params: [{
-          chainId: "0x1",
+          chainId: "0x89",
           rpcUrls: ["https://polygon-rpc.com"],
-          chainName: "Mainnet",
+          chainName: "Matic Mainnet",
           nativeCurrency: {
-            name: "",
-            symbol: "",
+            name: "MATIC",
+            symbol: "MATIC",
             decimals: 18
           },
           blockExplorerUrls: ["https://polygonscan.com/"]
         }]
       });
       if ((await provider2.getNetwork()).chainId == 137) {
-        window.location.assign('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x0000000000071821e8033345A7Be174647bE0706')
+        window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
       }
     }
   };
@@ -653,7 +658,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         toast.error('Wrong Network. Please switch networks')
       }
       else {
-        await Contract.connect(signer).mint(myAddress, sendMessage,{value:'10000000000000000'})////signer._address, sendMessage)
+        await Contract.connect(signer).mint(myAddress, sendMessage)////signer._address, sendMessage)
       }
     } catch (e) {
       console.log("LOL")
@@ -662,11 +667,51 @@ const App = ({ Component, pageProps }: AppProps) => {
   };
   return (
 
+    <ThemeProvider attribute="class">
       <div className="m-auto bg-white dark:bg-gray-900 dark:text-white">
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
             <Box sx={{ flexGrow: 1 }} className="left-6 top-10 m-auto">
-              <Navbar /></Box>
+              <Grid container spacing={1}>
+                <Grid xs={2} className="left-6 top-12 m-auto">
+                  <FormControl>
+                    <InputLabel id="demo-simple-select-label">Choose wall</InputLabel>
+                    <Select
+                      labelId="select-label"
+                      id="simple-select"
+                      value={contractaddrs}
+                      label="Choose wall"
+                      onChange={handleChangeWall}
+                      className="left-6 m-auto w-40 mt-6 md:mt-2 px-4 xs:px-0 items-center"
+                    >
+                      {menun}
+                    </Select>
+                  </FormControl>
+
+                </Grid>
+
+                <Grid xs={2}><Button onClick={handleOpen} variant="outlined" className="left-6 top-6">Create wall</Button>
+                  <Button onClick={handleOpenA} variant="outlined" className="left-12 top-7">About</Button></Grid><Grid xs={3}>
+                  <Grid container spacing={0}>
+                    <Grid xs={2}>
+                      <a href='https://tagthewall.org/'>
+                        <img src='https://cryptologos.cc/logos/polygon-matic-logo.png?v=023' style={{ width: 42 }}>
+                        </img></a>
+                    </Grid>
+                    <Grid xs={2}>
+                      <a href='https://FTM.tagthewall.org/'>
+                        <img src='https://cryptologos.cc/logos/fantom-ftm-logo.png?v=023' style={{ width: 42 }}>
+                        </img></a>
+                    </Grid><Grid xs={2}>
+                      <a href='https://BSC.tagthewall.org/'>
+                        <img src='https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=023' style={{ width: 42 }}>
+                        </img></a>
+                    </Grid><Grid xs={2}>
+                      <a href='https://ARB.tagthewall.org/'>
+                        <img src='https://bridge.arbitrum.io/static/media/ArbitrumOneLogo.abae01ba.svg' style={{ width: 42 }}>
+                        </img></a>
+                    </Grid></Grid>
+                </Grid><Grid xs={5}><Navbar /></Grid></Grid></Box>
             <Component {...pageProps} />
             <Dialog
               open={open}
@@ -752,14 +797,15 @@ const App = ({ Component, pageProps }: AppProps) => {
             >
               <Card className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
-                  Scry
+                  Brick Token (BRK)
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                Scry is an open source, permissionless, flexible and robust framework for Oracle deployment with multifeed support, subscriptions and instant deployment. We have developed the Open Oracle Framework for high scale and flexible oracles.</Typography>
+                  Bricks are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon, as well as a stake in the protocol through DAO control and Treasury control.
+                </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                Morpheus is a framework that allows developers to request any API from web2, directly onchain for their web3 apps. This tool enables real-time data requests, any API and data to be used, and can be used on any EVM network. Morpheus has been designed to make it easier for developers to build decentralized applications that can interact with the real world, thereby bridging the gap between web2 and web3.  </Typography>
+                  These tokens are on the Polygon network. Please make sure to switch from the network youre on to Polygon before Uniswap link as you may get the wrong token otherwise!.  </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  The tokens are purchasable at 10 tokens for $1 and can be tipped or just used to flex on the Wall! They are primarily a tip token and used for cosmetics in the app. Please dont purchase for speculation. Purchases also help us keep building neat stuff like the Wall and are appreciated. You get 5 free messages excluding gas, after which each costs 10 SCRY tokens for requests.
+                  The tokens are purchasable at 100 tokens for $1 and can be tipped or just used to flex on the Wall! They are primarily a tip token and used for cosmetics in the app. Please dont purchase for speculation. Purchases also help us keep building neat stuff like the Wall and are appreciated.
                 </Typography>
                 <Button style={{ background: "#FF007A", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
                   onClick={brkBuy}> Buy Bricks!
@@ -832,6 +878,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           </RainbowKitProvider>
         </WagmiConfig>
       </div>
+    </ThemeProvider>
   )
 }
 export default App
