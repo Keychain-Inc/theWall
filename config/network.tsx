@@ -11,18 +11,18 @@ import { useEffect, useState } from "react";
 import React from 'react';
 
 const Sep: Chain = {
-  id: 11155111,
-  name: 'Sepolia',
-  network: 'Sepolia',
-  iconUrl: 'https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=023',
+  id: 8453,
+  name: 'Base',
+  network: 'Base',
+  iconUrl: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=023',
   iconBackground: '#fff',
   nativeCurrency: {
     decimals: 18,
-    name: '',
-    symbol: '',
+    name: 'ETH',
+    symbol: 'ETH',
   },
   rpcUrls: {
-    default: 'https://rpc.sepolia.org'//'https://rpc.ftm.tools/',
+    default: 'https://developer-access-mainnet.base.org/',
   },
   blockExplorers: {
     default: { name: 'FTM', url: '	https://ftmscan.com/' },
@@ -56,13 +56,13 @@ const BSCRPC = 'https://bsc-dataseed.binance.org/'
 const BSCA = '0x18C519E0dA619d017908aFf504e782E381552620'
 const BSCN = '0xB8112446078378f0998FBf834D4683B6C8Ac08C7'
 const BSCM = [<MenuItem value={'0x18C519E0dA619d017908aFf504e782E381552620'}>Main</MenuItem>]
-const PolyM = [<MenuItem value={'0xD70deA1a28CbaC32ab1B7531DB30d6a178671837'}>Main</MenuItem>,
-<MenuItem value={'0x3783b8DAf1B14d8e556ec1C681CEB0056157e810'}>Sub Wall</MenuItem>,
+const PolyM = [<MenuItem value={'0x2287BAF672879935cB944a2C050971515E73da65'}>Main</MenuItem>,
+<MenuItem value={'0xbbb06bDcf221Ae565f458b990DE83Cbb3D27C2aA'}>Sub Wall</MenuItem>,
 ]
 const PolyC = chain.polygon
-const PolyRPC = 'https://rpc.sepolia.org'
-const PolyA = '0x9B7F8BFFc979479D887BDbbbDA5e57272a6871f8'
-const PolyN = '0x99029716DEeE316894DC8ce4f55Ab066222AACe6'
+const PolyRPC = 'https://developer-access-mainnet.base.org/'
+const PolyA = '0x2287BAF672879935cB944a2C050971515E73da65'
+const PolyN = '0x52C990AA70dD004bfC6f0a7F452a179b146ffee7'
 
 const envVars = {
   chainn:Sep,//chainn,
