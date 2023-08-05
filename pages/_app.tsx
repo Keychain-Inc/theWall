@@ -800,7 +800,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   Brick Token (BRK)
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  Bricks are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon, as well as a stake in the protocol through DAO control and Treasury control.
+                  Bricks are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon.
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
                   These tokens are on the Polygon network. Please make sure to switch from the network youre on to Polygon before Uniswap link as you may get the wrong token otherwise!.  </Typography>
