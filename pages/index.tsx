@@ -39,10 +39,10 @@ export const WalletConnectSection: React.FC<{}> = () => {
   return (
     <FeatureSection
       title="the Wall"
-      description="The Wall allows you to post messages (tags) to the chat wall. These messages are fully on-chain, permissionless and permanant. Please be careful what you post. Messages are wrapped as NFTs allowing each message to be fully ownable. To celebrate Base Onchain Summer, this wall can only be interacted with by being a holder for the <a href="https://onchainsummer.xyz/" target="_blank" rel="noopener noreferrer">Onchain Summer NFT linked here.</a>"
+      description="The Wall allows you to post messages (tags) to the chat wall. These messages are fully on-chain, permissionless and permanant. Please be careful what you post. Messages are wrapped as NFTs allowing each message to be fully ownable. To celebrate Base Onchain Summer, this wall can only be interacted with by being a holder for the Onchain Summer NFT linked here."
       bgColorOverride="bg-blue-500"
     >
-      
+      <a href="https://onchainsummer.xyz/" target="_blank" rel="noopener noreferrer">Onchain Summer NFT linked here.</a>
       <div className="p-4 md:px-8 shadow-md bg-white rounded-md light:text-gray-800 dark:text-black">
         <h2 className="text-1xl text-center font-bold mb-2 justify-center light:text-gray-800"> 
       0x9D31e30...2c93abb5 @ 21:21 9/2</h2>
