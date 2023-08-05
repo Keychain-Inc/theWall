@@ -61,7 +61,7 @@ const PolyM = [<MenuItem value={'0x2287BAF672879935cB944a2C050971515E73da65'}>Ma
 ]
 const PolyC = chain.polygon
 const PolyRPC = 'https://developer-access-mainnet.base.org/'
-const PolyA = '0x2287BAF672879935cB944a2C050971515E73da65'
+const PolyA = '0xd8f043847D41898959EDd5ba2abcCc242Db30809'
 const PolyN = '0x52C990AA70dD004bfC6f0a7F452a179b146ffee7'
 
 const envVars = {
