@@ -213,7 +213,7 @@ function useTtag0() {
         setArtist(artistS);
         setTime(timeS);
         const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-        const provider4 = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
+        const provider4 = new ethers.providers.JsonRpcProvider('https://base.meowrpc.com	')
        
         for (let T = 0; T < sup;n++) {
           let n= T
