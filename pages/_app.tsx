@@ -569,26 +569,13 @@ const App = ({ Component, pageProps }: AppProps) => {
     //d
     //signerw ethers.js .send("eth_requestAccounts", []);
 
-    if ((await provider2.getNetwork()).chainId == 137) {
-      window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
+    if ((await provider2.getNetwork()).chainId == 8453) {
+      window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency='+tokenaddrs)
     }
     else {
-      toast.error('Polygon Network')
-      await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-          chainId: "0x89",
-          rpcUrls: ["https://polygon-rpc.com"],
-          chainName: "Matic Mainnet",
-          nativeCurrency: {
-            name: "MATIC",
-            symbol: "MATIC",
-            decimals: 18
-          },
-          blockExplorerUrls: ["https://polygonscan.com/"]
-        }]
-      });
-      if ((await provider2.getNetwork()).chainId == 137) {
+      toast.error('Network')
+     
+      if ((await provider2.getNetwork()).chainId == 8453) {
         window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
       }
     }
