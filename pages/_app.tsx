@@ -81,7 +81,7 @@ const signerw = wagmiClient.provider;
 
 let contractaddrs = contractn;
 let createaddrs = createn;
-let tokenaddrs = "0x7b67595bbfc2c900e1a66a35ab35e762765e062d";
+let tokenaddrs = "0x070fb3fdc41c16f8601da0eb157c826490c2eadc";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
 //  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}//
@@ -802,8 +802,6 @@ const App = ({ Component, pageProps }: AppProps) => {
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
                   Bricks are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon.
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  These tokens are on the Polygon network. Please make sure to switch from the network youre on to Polygon before Uniswap link as you may get the wrong token otherwise!.  </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
                   The tokens are purchasable at 100 tokens for $1 and can be tipped or just used to flex on the Wall! They are primarily a tip token and used for cosmetics in the app. Please dont purchase for speculation. Purchases also help us keep building neat stuff like the Wall and are appreciated.
                 </Typography>
