@@ -402,9 +402,10 @@ function useTtag0() {
       }
     
     }
-    let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
+        let t2 = <div className="text-1xl font-bold light:text-gray-800">Price per 4w: {sprice} ETH</div>
+let t1 = <div className="text-1xl font-bold light:text-gray-800">Messages: {sup}</div>
     return (
-      <>{t0}{t1}</>);
+      <>{t2}{t0}{t1}</>);
   }
 
   return (
@@ -813,7 +814,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   Subscribe to the wall to view, chat
                 </Typography>
                 <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Purchase sub for {sprice} ETH per 4w
+                  Purchase sub for as long as possible by spending this much ETH
                 </h2>
                 <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
                   onChange={e => handleChangeS(e)} />
