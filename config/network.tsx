@@ -1,4 +1,4 @@
-0xf25e4B1989f0Dcb992b02b767Aa12C3f9798DF88import { Network, Alchemy } from 'alchemy-sdk';
+import { Network, Alchemy } from 'alchemy-sdk';
 import { Chain } from '@rainbow-me/rainbowkit';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
