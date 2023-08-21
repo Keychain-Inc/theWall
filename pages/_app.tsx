@@ -440,7 +440,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   }
   function handleChangePrice(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const values = event.target.value;
-    set_Price(values + '000000000000000000');
+    set_Price(ethers.utils.parseEther(values));
   }
   function handleChangeedit(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
 
@@ -480,7 +480,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
     return (
       <Button onClick={handleOpenSub}>
-        Subscribe
+        You must Subscribe to access
       </Button>
     );
   }const wd = async () => {
