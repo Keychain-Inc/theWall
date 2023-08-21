@@ -152,7 +152,7 @@ function useTtag0() {
   const [artist, setArtist] = useState("L");
   const [time, setTime] = useState("");
   const [sup, setSup] = useState(1);
-  // let addrs = []
+  const [sprice, setSPrice] = useState("L");// let addrs = []
   const [wallT, setwallT] = useState("");
   const [symbol, setSymbol] = useState("L");
   let addrst = 0
@@ -209,6 +209,8 @@ function useTtag0() {
         if (wallT == 'LOL') {
           setwallT(await Contract.name() + 'LOLOL')
         }
+        let SP = await Contract.price()
+        setSPrice(ethers.utils.formatEther(SP))
         setTag(tagS);
         setArtist(artistS);
         setTime(timeS);
@@ -596,7 +598,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       const signer = provider2.getSigner()
       let myAddress = await signer.getAddress()
 
-      await Contract.connect(signer).mintandrenewSub(myAddress, { value: '1000000000000000000' })
+      await Contract.connect(signer).mintandrenewSub(myAddress, { value: ethers.utils.parseEther(_s) })
       // .then((transaction) => {
       //     console.log(`Transaction successful: ${transaction.hash}`);
       // })
@@ -811,7 +813,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   Subscribe to the wall to view, chat
                 </Typography>
                 <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
-                  Purchase sub for 1 MATIC
+                  Purchase sub for {sprice} ETH per 4w
                 </h2>
                 <TextField className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black"
                   onChange={e => handleChangeS(e)} />
