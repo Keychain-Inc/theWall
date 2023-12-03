@@ -81,7 +81,7 @@ const signerw = wagmiClient.provider;
 
 let contractaddrs = contractn;
 let createaddrs = createn;
-let tokenaddrs = "0x070fb3fdc41c16f8601da0eb157c826490c2eadc";
+let tokenaddrs = "0x000000000075F13bCF2E6652e84821e8b544F6F9";
 //const contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";
 //if (signerw._network.chainId == 137){
 //  contractaddrs = "0x91fc82f5c588c00985aa264fc7b45ee680110703";}//
@@ -215,7 +215,7 @@ function useTtag0() {
         setArtist(artistS);
         setTime(timeS);
         const provider3 = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/Z-ifXLmZ9T3-nfXiA0B8wp5ZUPXTkWlg')
-        const provider4 = new ethers.providers.JsonRpcProvider('https://base.meowrpc.com	')
+        const provider4 = new ethers.providers.JsonRpcProvider('https://eth.llamarpc.com	')
        
         for (let T = 0; T < sup;n++) {
           let n= T
@@ -572,16 +572,8 @@ const App = ({ Component, pageProps }: AppProps) => {
     //d
     //signerw ethers.js .send("eth_requestAccounts", []);
 
-    if ((await provider2.getNetwork()).chainId == 8453) {
-      window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency='+tokenaddrs)
-    }
-    else {
-      toast.error('Network')
-     
-      if ((await provider2.getNetwork()).chainId == 8453) {
-        window.location.replace('https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x7b67595bbfc2c900e1a66a35ab35e762765e062d')
-      }
-    }
+      window.location.assign('https://app.uniswap.org/#/swap?inputCurrency=ETH&chain=mainnet&outputCurrency='+tokenaddrs)
+    
   };
   // const sendTip = async (toAddrs, amount) => {// @ts-ignore
   const subWallT = async () => {
@@ -787,16 +779,16 @@ const App = ({ Component, pageProps }: AppProps) => {
             >
               <Card className="flex flex-col space-y-2 justify-center mt-6 md:mt-2 px-4 xs:px-0 items-center m-auto">
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
-                  Brick Token (BRK)
+                  Signet (SIG)
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  Bricks are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon.
+                SIGs are the native token for the Wall! They are used to show reputation, used for tipping in the app, cosmetics coming soon.
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }} className="m-auto text-center w-3/4 justify-center rounded-mdlight:text-gray-800 dark:text-black">
-                  The tokens are purchasable at 100 tokens for $1 and can be tipped or just used to flex on the Wall! They are primarily a tip token and used for cosmetics in the app. Please dont purchase for speculation. Purchases also help us keep building neat stuff like the Wall and are appreciated.
+                  The tokens are purchasable at 10 tokens for $1 and can be tipped or just used to flex on the Wall! They are primarily a tip token and used for cosmetics in the app. Please dont purchase for speculation. Purchases also help us keep building neat stuff like the Wall and are appreciated.
                 </Typography>
                 <Button style={{ background: "#FF007A", color: 'white' }} className="btn w-6/12 m-auto rounded-md border border-solid light:border-black dark:border-black light:text-gray-800 dark:text-black" type="button"
-                  onClick={brkBuy}> Buy Bricks!
+                  onClick={brkBuy}> Buy Signets!
                 </Button>
                 <div />
               </Card>
