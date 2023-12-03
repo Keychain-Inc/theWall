@@ -387,7 +387,7 @@ function useTtag0() {
       if (tags[n] != '') {
         let t2 = 'https://etherscan.io/address/' + artist[n]
         // @ts-ignore
-        t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]} 🧱{balancestoken[artist[n]]}
+        t0[n] = (<div ><h2 className="text-1xl text-center font-bold justify-center light:text-gray-800 "> <a style={{ color: '#4f86f7' }}> # {sup - n}</a>  From   <a href={t2} target="_blank" rel="noreferrer" className="rotating-hue" style={{ color: '#4f86f7' }}>{artists[n]}</a> ★{balances[artist[n]]}        <Image src="/lol.png" alt="Icon" width="16" height="16" />{balancestoken[artist[n]]}
         </h2>
           <div className="text-center light:text-white-600" >
             {tags[n]}
@@ -742,6 +742,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="m-auto text-center w-3/4 font-bold justify-center rounded-md dark:text-black ">
                   About the Wall
                 </Typography>
+                <Image src="/lol.png" alt="Icon" width="100" height="100" />
                 <h2 className="text-1xl text-center font-bold justify-center light:text-gray-800">
                   the Wall
                 </h2>
@@ -852,7 +853,9 @@ const App = ({ Component, pageProps }: AppProps) => {
                 className="btn fixed left-16 bottom-14 flex flex-col text-3xl"
                 type="button"
                 onClick={handleOpenBRK}
-              >🧱
+              >
+              <Image className="bg-white rounded-full" src="/lol.png" alt="Icon" width="35" height="35" />
+            
               </button>
             </div>
           </RainbowKitProvider>

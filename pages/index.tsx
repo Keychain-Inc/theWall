@@ -59,7 +59,7 @@ const Home: NextPage = () => {
       <Head>
         <title>the Wall</title>
         <meta name="description" content="A Permissionless Wall " />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/lol.png" />
       </Head>
       <Toaster />
 
