@@ -65,11 +65,13 @@ const PolyA = '0x2287BAF672879935cB944a2C050971515E73da65'
 const PolyN = '0xC17985AAe8FA383bd4b73028A1d12B87730e2eAe'
 
 const envVars = {
-  chainn:Sep,//chainn,
-  rpc: PolyRPC,
-    createn: PolyN,
-    contractn: PolyA,
-    menun:PolyM
-}
+
+  chainn:chain.arbitrum,//chainn,
+  rpc: 'https://arb1.arbitrum.io/rpc',
+    createn: '0xC6Da5Fee70AA6A606E4FfD748108C52E16C07444',
+    contractn: '0x4766d8244d68874ed6499F085e194be3dC4152AA',
+    menun:[<MenuItem value={'0x4766d8244d68874ed6499F085e194be3dC4152AA'}>Main</MenuItem>,
+     ]
+ }
 
 export default envVars
