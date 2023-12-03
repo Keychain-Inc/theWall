@@ -39,10 +39,9 @@ export const WalletConnectSection: React.FC<{}> = () => {
   return (
     <FeatureSection
       title="the Wall"
-      description="The Wall allows you to post messages (tags) to the chat wall. These messages are fully on-chain, permissionless and permanant. Please be careful what you post. Messages are wrapped as NFTs allowing each message to be fully ownable."
+      description="The Wall allows you to post messages (tags) to the chat wall. These messages are fully on-chain, permissionless and permanant. Please be careful what you post. Messages are wrapped as NFTs allowing each message to be fully ownable. You will also earn 10 $BRK tokens per message sent!"
       bgColorOverride="bg-blue-500"
-    >
-      
+    > 
       <div className="p-4 md:px-8 shadow-md bg-white rounded-md light:text-gray-800 dark:text-black">
         <h2 className="text-1xl text-center font-bold mb-2 justify-center light:text-gray-800"> 
       0x9D31e30...2c93abb5 @ 21:21 9/2</h2>

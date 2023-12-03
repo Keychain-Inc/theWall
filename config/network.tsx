@@ -8,20 +8,21 @@ import { publicProvider } from 'wagmi/providers/public'
 import { RainbowKitChainProvider } from '@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitChainContext'
 import MenuItem from '@mui/material/MenuItem';
 import { useEffect, useState } from "react";
+import React from 'react';
 
-const FTMC: Chain = {
-  id: 250,
-  name: 'Fantom',
-  network: 'fantom',
-  iconUrl: 'https://cryptologos.cc/logos/fantom-ftm-logo.svg?v=023',
+const Sep: Chain = {
+  id: 8453,
+  name: 'Base',
+  network: 'Base',
+  iconUrl: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=023',
   iconBackground: '#fff',
   nativeCurrency: {
     decimals: 18,
-    name: 'Fantom',
-    symbol: 'FTM',
+    name: 'ETH',
+    symbol: 'ETH',
   },
   rpcUrls: {
-    default: 'https://rpc.ftm.tools'//'https://rpc.ftm.tools/',
+    default: 'https://developer-access-mainnet.base.org/',
   },
   blockExplorers: {
     default: { name: 'FTM', url: '	https://ftmscan.com/' },
@@ -55,18 +56,16 @@ const BSCRPC = 'https://bsc-dataseed.binance.org/'
 const BSCA = '0x18C519E0dA619d017908aFf504e782E381552620'
 const BSCN = '0xB8112446078378f0998FBf834D4683B6C8Ac08C7'
 const BSCM = [<MenuItem value={'0x18C519E0dA619d017908aFf504e782E381552620'}>Main</MenuItem>]
-const PolyM = [<MenuItem value={'0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'}>Main</MenuItem>,
-<MenuItem value={'0x3c82EBe821Fdf1CC734046d1D245eE0FC05F9d58'}>Weebs</MenuItem>,
-<MenuItem value={'0x503D749c21720E8B0d7A39809AfeC02bdeb014bc'}>Polygon</MenuItem>,
-<MenuItem value={'0x4B233C47dC9C456dBaaa9af138F54b03CFcDED6E'}>ENS</MenuItem>,
-<MenuItem value={'0x6A98F6F6F27E53089857333fc036Ab98719fAe75'}>Sushiswap</MenuItem>
+const PolyM = [<MenuItem value={'0x2287BAF672879935cB944a2C050971515E73da65'}>Main</MenuItem>,
+<MenuItem value={'0xf25e4B1989f0Dcb992b02b767Aa12C3f9798DF88'}>Sub Wall</MenuItem>,
 ]
 const PolyC = chain.polygon
-const PolyRPC = 'https://polygon-rpc.com'
-const PolyA = '0x4989314F8cb5b382FEdB339bdF9604fF1fbfdC79'
-const PolyN = '0xC6Da5Fee70AA6A606E4FfD748108C52E16C07444'
+const PolyRPC = 'https://developer-access-mainnet.base.org/'
+const PolyA = '0x2287BAF672879935cB944a2C050971515E73da65'
+const PolyN = '0xC17985AAe8FA383bd4b73028A1d12B87730e2eAe'
 
 const envVars = {
+
   chainn:chain.arbitrum,//chainn,
   rpc: 'https://arb1.arbitrum.io/rpc',
     createn: '0xC6Da5Fee70AA6A606E4FfD748108C52E16C07444',
